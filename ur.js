@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Validate password strength (minimum 8 characters, at least one letter, one number)
         const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
         if (!passwordPattern.test(password.value.trim())) {
-            alert("Password must be at least 8 characters long, including at least one uppercase and one number.");
+            alert("Password must be at least 8 characters long, including uppercase, lowercase , number and special character");
             password.focus();
             return;
         }
