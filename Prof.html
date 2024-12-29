@@ -235,6 +235,7 @@
         <div>
             <a href="#services">Services</a>
             <a href="#services" onclick="showPopup()">Contact</a>
+            
         </div>
     </nav>
 
@@ -291,14 +292,6 @@
         </div>
     </div>
 
-    <!-- Additional Search and Sort Section -->
-    <div>
-        <input type="text" id="search-box" placeholder="Search by name" />
-        <button id="search-btn" class="btn btn-success">Search</button>
-        <button id="sort-btn" class="btn btn-success">Sort by Rating</button>
-    </div>
-    <div id="providers-list"></div>
-    
     <script>
         const services = {
     electrician: [
@@ -359,7 +352,6 @@ function showContact(contactNumber, email) {
 function closePopup() {
     document.getElementById('contactModal').style.display = 'none';
 }
-
 
 
         // Initialize AOS
