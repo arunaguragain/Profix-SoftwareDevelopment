@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="up.css"> 
+    <link rel="stylesheet" href="up.css">
 </head>
 <body>
     <div class="main">
@@ -24,8 +24,8 @@
                 <div class="photo-box">
                     <label for="photo-upload" class="photo-upload-label"></label>
                     <input type="file" id="photo-upload" class="photo-upload-input" accept="image/*">
-                    <img id="photo-preview" src="" alt="Preview" class="photo-preview" style="display:none; max-width: 100px; margin-top: 10px;">
-                    <span id="no-photo-message" class="no-photo-message" style="display: block; text-align: center;">No photo uploaded</span>
+                    <img id="photo-preview" src="" alt="Preview" class="photo-preview" style="display:none;">
+                    <span id="no-photo-message" class="no-photo-message">No photo uploaded</span>
                 </div>
                 <div id="profile-view">
                     <div class="info">
@@ -55,15 +55,38 @@
                     </form>
                 </div>
             </div>
+            <div id="security-questions-box" style="display: none;">
+                <h3>Set Up Security Questions</h3>
+                <form id="security-questions-form">
+                    <label for="security-question">Choose a question:</label>
+                    <select id="security-question" required>
+                        <option value="">Select a question</option>
+                        <option value="pet_name">What is your pet's name?</option>
+                        <option value="mother_maiden_name">What is your mother's maiden name?</option>
+                        <option value="birth_city">In which city were you born?</option>
+                        <option value="favorite_book">What was the name of your favorite book as a child?</option>
+                        <option value="hospital_name">What is the name of the hospital where you were born?</option>
+                        <option value="childhood_teacher">What is the name of your childhood teacher?</option>
+                        <option value="first_school">What is the name of the first school you attended?</option>
+                        <option value="childhood_friend">What is the name of your childhood friend?</option>
+                    </select>
+                    <br><br>
+                    <label for="security-answer">Answer:</label>
+                    <input type="text" id="security-answer" placeholder="Enter your answer" required>
+                    <br><br>
+                    <button type="submit" id="save-security-question">Save</button>
+                    <button type="button" id="cancel-security-question">Cancel</button>
+                </form>
+            </div>
             
             <div class="side-buttons">
                 <button class="history-btn">⏳</button>
                 <button class="appointments-btn">📅</button>
                 <button class="favourite-btn">⭐</button>
+                <button class="security-questions-btn" id="security-questions-btn">❓</button>
             </div>
         </div>
     </div>
-    
     <script src="up.js"></script>
 </body>
 </html>

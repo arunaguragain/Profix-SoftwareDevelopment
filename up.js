@@ -1,82 +1,86 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const editButton = document.getElementById("btnedit");
-    const cancelEditButton = document.getElementById("cancelEdit");
-    const profileView = document.getElementById("profile-view");
-    const profileEdit = document.getElementById("profile-edit");
-    const editForm = document.getElementById("editForm");
+document.addEventListener('DOMContentLoaded', function () {
+    const photoUploadInput = document.getElementById('photo-upload');
+    const photoPreview = document.getElementById('photo-preview');
+    const noPhotoMessage = document.getElementById('no-photo-message');
+    const btnEdit = document.getElementById('btnedit');
+    const profileView = document.getElementById('profile-view');
+    const profileEdit = document.getElementById('profile-edit');
+    const cancelEdit = document.getElementById('cancelEdit');
+    const editForm = document.getElementById('editForm');
+    const securityQuestionsBox = document.getElementById('security-questions-box');
+    const securityQuestionsBtn = document.getElementById('security-questions-btn');
+    const cancelSecurityQuestion = document.getElementById('cancel-security-question');
+    const saveSecurityQuestion = document.getElementById('save-security-question');
 
-    const fullNameSpan = document.getElementById("fullName");
-    const addressSpan = document.getElementById("address");
-    const emailSpan = document.getElementById("email");
-    const contactSpan = document.getElementById("contact");
-
-    const editFullName = document.getElementById("editFullName");
-    const editAddress = document.getElementById("editAddress");
-    const editEmail = document.getElementById("editEmail");
-    const editContact = document.getElementById("editContact");
-
-    const photoUploadInput = document.getElementById("photo-upload");
-    const photoPreview = document.getElementById("photo-preview");
-    const noPhotoMessage = document.getElementById("no-photo-message");
-
-    // Populate the form with existing values
-    const populateForm = () => {
-        editFullName.value = fullNameSpan.textContent;
-        editAddress.value = addressSpan.textContent;
-        editEmail.value = emailSpan.textContent;
-        editContact.value = contactSpan.textContent;
-    };
-
-    // Show edit form
-    editButton.addEventListener("click", () => {
-        populateForm();
-        profileView.style.display = "none";
-        profileEdit.style.display = "block";
-    });
-
-    // Cancel editing
-    cancelEditButton.addEventListener("click", () => {
-        profileEdit.style.display = "none";
-        profileView.style.display = "block";
-    });
-
-    // Save changes
-    editForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        if (!editFullName.value || !editAddress.value || !editEmail.value || !editContact.value) {
-            alert("Please fill in all fields.");
-            return;
-        }
-
-        fullNameSpan.textContent = editFullName.value;
-        addressSpan.textContent = editAddress.value;
-        emailSpan.textContent = editEmail.value;
-        contactSpan.textContent = editContact.value;
-
-        profileEdit.style.display = "none";
-        profileView.style.display = "block";
-    });
-
-    // Handle photo upload
-    photoUploadInput.addEventListener("change", (event) => {
+    // Handle photo upload preview
+    photoUploadInput.addEventListener('change', function (event) {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function (e) {
                 photoPreview.src = e.target.result;
-                photoPreview.style.display = "block";
-                noPhotoMessage.style.display = "none";  // Hide no-photo message
+                photoPreview.style.display = 'block';
+                noPhotoMessage.style.display = 'none';
             };
             reader.readAsDataURL(file);
-        } else {
-            photoPreview.style.display = "none";
-            noPhotoMessage.style.display = "block";  // Show no-photo message
         }
     });
 
-    // Initial check if no photo is uploaded
-    if (!photoPreview.src) {
-        noPhotoMessage.style.display = "block";
-    }
+    // Toggle profile edit form
+    btnEdit.addEventListener('click', function () {
+        profileView.style.display = 'none';
+        profileEdit.style.display = 'block';
+
+        // Populate form fields with current profile data
+        document.getElementById('editFullName').value = document.getElementById('fullName').textContent;
+        document.getElementById('editAddress').value = document.getElementById('address').textContent;
+        document.getElementById('editEmail').value = document.getElementById('email').textContent;
+        document.getElementById('editContact').value = document.getElementById('contact').textContent;
+    });
+
+    // Handle saving edited profile
+    editForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Update profile information
+        document.getElementById('fullName').textContent = document.getElementById('editFullName').value;
+        document.getElementById('address').textContent = document.getElementById('editAddress').value;
+        document.getElementById('email').textContent = document.getElementById('editEmail').value;
+        document.getElementById('contact').textContent = document.getElementById('editContact').value;
+
+        // Hide edit form and show profile view
+        profileEdit.style.display = 'none';
+        profileView.style.display = 'block';
+    });
+
+    // Cancel edit profile
+    cancelEdit.addEventListener('click', function () {
+        profileEdit.style.display = 'none';
+        profileView.style.display = 'block';
+    });
+
+    // Show security questions form
+    securityQuestionsBtn.addEventListener('click', function () {
+        securityQuestionsBox.style.display = 'block';
+    });
+
+    // Cancel security question setup
+    cancelSecurityQuestion.addEventListener('click', function () {
+        securityQuestionsBox.style.display = 'none';
+    });
+
+    // Save security question
+    saveSecurityQuestion.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        const question = document.getElementById('security-question').value;
+        const answer = document.getElementById('security-answer').value;
+
+        if (question && answer) {
+            alert('Security question saved!');
+            securityQuestionsBox.style.display = 'none';
+        } else {
+            alert('Please select a question and provide an answer.');
+        }
+    });
 });
