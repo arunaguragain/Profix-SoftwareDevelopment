@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forget Password</title>
+    <link rel="stylesheet" href="pr.css">
+</head>
+<body>
+    <div class="container">
+        <div class="picture"></div>
+        <h1>Forgot Your Password?</h1>
+        <p>Enter your registered email address and answer the security question to reset your password.</p>
+        <form id="forgetPasswordForm">
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="securityQuestion">Security Question:</label>
+                <select id="securityQuestion" required>
+                    <option value="">Select a question</option>
+                    <option value="pet_name">What is your pet's name?</option>
+                    <option value="mother_maiden_name">What is your mother's maiden name?</option>
+                    <option value="birth_city">In which city were you born?</option>
+                    <option value="favorite_book">What was the name of your favorite book as a child?</option>
+                    <option value="hospital_name">What is the name of the hospital where you were born?</option>
+                    <option value="childhood_teacher">What is the name of your childhood teacher?</option>
+                    <option value="first_school">What is the name of the first school you attended?</option>
+                    <option value="childhood_friend">What is the name of your childhood friend?</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="securityAnswer">Answer:</label>
+                <input type="text" id="securityAnswer" name="securityAnswer" placeholder="Your answer" required>
+            </div>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+        <div id="message" class="hidden"></div>
+    </div>
+    <div id="otpModal" class="modal hidden">
+        <h2>Enter OTP</h2>
+        <input type="text" id="otp" placeholder="Enter OTP" required>
+        <br>
+        <button id="otpSubmit" class="btn">Submit OTP</button>
+    </div>
+    <div id="passwordModal" class="modal hidden">
+        <h2>Reset Password</h2>
+        <input type="password" id="newPassword" placeholder="New Password" required>
+        <br>
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+        <br>
+        <button id="passwordSubmit" class="btn">Reset Password</button>
+    </div>
+     
+    <script src="pr.js"></script>
+</body>
+</html>
