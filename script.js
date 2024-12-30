@@ -61,3 +61,56 @@ function toggleNotificationDropdown() {
 
   dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
+
+
+// Function to toggle "No History Recorded" message
+function toggleHistoryMessage() {
+  const historyMessageContainer = document.getElementById('historyMessageContainer');
+  const historyBtn = document.getElementById('historyBtn');
+
+  // Get button's position to align the message below
+  const rect = historyBtn.getBoundingClientRect();
+  historyMessageContainer.style.position = 'absolute';
+  historyMessageContainer.style.top = `${rect.bottom + window.scrollY}px`;
+  historyMessageContainer.style.left = `${rect.left + window.scrollX}px`;
+
+  // Toggle the display of the message
+  if (historyMessageContainer.style.display === 'block') {
+      historyMessageContainer.style.display = 'none';
+  } else {
+      historyMessageContainer.style.display = 'block';
+      historyMessageContainer.textContent = "No History Recorded";
+      historyMessageContainer.style.color = "gray";
+      historyMessageContainer.style.fontStyle = "italic";
+      historyMessageContainer.style.padding = "10px";
+      historyMessageContainer.style.marginTop = "10px";
+  }
+}
+
+// Function to toggle "No Pending Appointments" message
+function togglePendingMessage() {
+  const pendingMessageContainer = document.getElementById('pendingMessageContainer');
+  const pendingBtn = document.getElementById('pendingBtn');
+
+  // Get button's position to align the message below
+  const rect = pendingBtn.getBoundingClientRect();
+  pendingMessageContainer.style.position = 'absolute';
+  pendingMessageContainer.style.top = `${rect.bottom + window.scrollY}px`;
+  pendingMessageContainer.style.left = `${rect.left + window.scrollX}px`;
+
+  // Toggle the display of the message
+  if (pendingMessageContainer.style.display === 'block') {
+      pendingMessageContainer.style.display = 'none';
+  } else {
+      pendingMessageContainer.style.display = 'block';
+      pendingMessageContainer.textContent = "No Pending Appointments";
+      pendingMessageContainer.style.color = "gray";
+      pendingMessageContainer.style.fontStyle = "italic";
+      pendingMessageContainer.style.padding = "10px";
+      pendingMessageContainer.style.marginTop = "10px";
+  }
+}
+
+// Event listeners for the side buttons
+document.getElementById("historyBtn").addEventListener("click", toggleHistoryMessage);
+document.getElementById("pendingBtn").addEventListener("click", togglePendingMessage);
