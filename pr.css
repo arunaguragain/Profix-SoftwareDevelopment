@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: beige;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(57, 24, 24, 0.829);
+}
+
+
+.container {
+    background: #ffffff;
+    padding: 140px 160px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    flex-direction: column;
+}
+
+.picture{
+    background-image: url(PasswordRecovery.jpeg); 
+    width: 500px;
+    height: 350px;
+    background-size: cover;
+}
+
+h1 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #fff;
+    background: rgba(57, 24, 24, 0.829);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+#message {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: green;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 60%; /* Adjust this to make it wider */
+    max-width: 800px; 
+    padding: 40px; /* Increase padding */
+    text-align: center;
+    
+}
+
+/* Overlay background */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 999;
+}
+
+.modal h2 {
+    margin-bottom: 20px; 
+}
+
+.modal input {
+    margin-bottom: 15px; 
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.modal button {
+    margin-top: 20px; /* Add space above the button */
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #fff;
+    background: rgba(57, 24, 24, 0.829);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
