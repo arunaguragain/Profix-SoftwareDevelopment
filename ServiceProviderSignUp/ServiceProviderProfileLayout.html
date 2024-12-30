@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel = "stylesheet" href= "ServiceProviderProfileLayoutStyle.css">
+</head>
+<body>
+    <div class = "main">
+         <!-- Navigation Bar -->
+      <nav class="navbar">
+      <div class="logo"></div>
+      <h1>Your Profile</h1>
+    
+    <!-- <input type="file" id="logo-upload" class="logo-upload-input" accept="image/*"> -->
+    <div class="nav-buttons">
+      <button class="notification-btn">🔔</button>
+      <div class="notification-dropdown">
+        <p>No new notifications</p>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Layout -->
+  <div class="main-layout">
+    <!-- Photo, Rating, and Description -->
+    <div class="content-section">
+      <div class="photo-box">
+        <label for="photo-upload" class="photo-upload-label">Upload Photo</label>
+        <input type="file" id="photo-upload" class="photo-upload-input" accept="image/*">
+      </div>
+      <div class="rating">
+        <span data-rating="1">★</span>
+        <span data-rating="2">★</span>
+        <span data-rating="3">★</span>
+        <span data-rating="4">★</span>
+        <span data-rating="5">★</span>
+      </div>
+      <div class="description-box">
+        <textarea id="description-input" placeholder="Enter description here..."></textarea>
+      </div>
+    </div>
+
+    <!-- Side Buttons -->
+    <!-- <div class="side-buttons">
+      <button class="history-btn">⏳ </button>
+      <button class="appointments-btn">📅 </button>
+    </div>
+  </div> -->
+
+  <div class="side-buttons">
+    <button id="historyBtn" class="history-btn">⏳</button>
+    <button id="pendingBtn" class="appointments-btn">📅 </button>
+</div>
+
+<!-- Containers for Messages -->
+<div id="historyMessageContainer" class="message-container"></div>
+<div id="pendingMessageContainer" class="message-container"></div>
+</div>
+
+  <script src="script.js"></script>
+    </div>
+       
+</body>
+</html>
