@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel = "stylesheet" href="DashboardStyle.css">
+</head>
+<body>
+   
+    <div class="dashboard">``
+
+        <nav class="navbar">
+            <div class="logo"></div>
+          
+          <!-- <input type="file" id="logo-upload" class="logo-upload-input" accept="image/*"> -->
+          <div class="nav-buttons">
+            <h1>Welcome <span id="welcomeName">Your Name!</span></h1>
+
+            <div class="notification-wrapper">
+                <button class="notification-btn" onclick="toggleNotificationDropdown()">🔔</button>
+                <div class="notification-dropdown" id="notificationDropdown">
+                    <p>No new notifications</p>
+                </div>
+            </div>
+            <!-- <button class="notification-btn">🔔</button>
+            <div class="notification-dropdown">
+              <p>No new notifications</p>
+            </div> -->
+          </div>
+        </nav>
+      
+        <!-- <div class="header">
+            <div class="logo"></div>
+            <h1>Welcome <span id="welcomeName">Your Name!</span></h1>
+            <div class="notification">
+                <img src="bell-icon.png" alt="Notification">
+            </div>
+        </div> -->
+
+        <div class="buttons">
+            <div class="button">
+                <button onclick="location.href='#'">
+                    <img src="Search.png.jpg" alt="Search">
+                    <p>Search</p>
+                </button>
+            </div>
+            <div class="button">
+                <button onclick="location.href='#'">
+                    <img src="Profile.png.jpg" alt="Profile">
+                    <p>Profile</p>
+                </button>
+            </div>
+            <div class="button">
+                <button onclick="location.href='#'">
+                    <img src="Services.png.png" alt="Services">
+                    <p>Services</p>
+                </button>
+            </div>
+        
+            <div class="button">
+                <button onclick="location.href='#'">
+                    <img src="QA.png.png" alt="FAQs">
+                    <p>FAQs</p>
+                </button>
+            </div>
+        </div>
+
+        <div class="search-container" id="searchContainer">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button id="searchButton" onclick="performSearch()">Search</button>
+        </div>
+
+
+    </div>
+   
+
+    
+</body>
+<script src = "DashboardScript.js"></script>
+</html>
