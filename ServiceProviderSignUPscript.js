@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector("form");
   const fullName = document.getElementById("fullName");
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Validate password strength (minimum 8 characters, at least one letter, one number)
-      const passwordPattern = /^(?=.[a-zA-Z])(?=.\d)[A-Za-z\d]{8,}$/;
+      const passwordPattern =  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%*?&]{8,}$/;
       if (!passwordPattern.test(password.value.trim())) {
           alert("Password must be at least 8 characters long, including uppercase, lowercase, special chracters and numbers.");
           password.focus();
@@ -89,3 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
       form.reset();
     });
 });
+
+
+
