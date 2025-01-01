@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profix - Local Services</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        nav {
+            background: linear-gradient(90deg, #ff7f50, #ff6f61);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            height: 90vh;
+            background: url('background-placeholder copy.jpg') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        .hero h1,
+        .hero p {
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+        }
+
+        .hero button {
+            padding: 10px 20px;
+            background: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+
+        .hero button:hover {
+            transform: scale(1.1);
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 30px;
+            z-index: 1;
+        }
+
+        .search-input {
+            padding: 10px;
+            width: 250px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .search-input:focus {
+            border-color: #ff6f61;
+            outline: none;
+        }
+
+        .service-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .service-card {
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card .content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .service-card .content h3 {
+            margin: 10px 0;
+            color: #ff6f61;
+        }
+
+        .service-details {
+            display: none;
+        }
+
+        .service-details.active {
+            display: block;
+        }
+
+        .provider {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .provider button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .provider button:hover {
+            background: #45a049;
+        }
+
+        .popup {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .popup a {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+
+        .popup a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            background: #ff7f50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background: #ff6f61;
+        }
+
+        .contact-us {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .contact-us a {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+
+        .contact-us a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 0;
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="#">Profix</a>
+        <div>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#services">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Welcome to Profix</h1>
+        <p>Your trusted platform for local services</p>
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Try searching 'plumber'">
+            <button onclick="searchProviders()">Search</button>
+        </div>
+        <button onclick="scrollToServices()">Explore Services</button>
+    </header>
+
+    <section id="services">
+        <h2 data-aos="fade-up">Our Services</h2>
+        <div class="service-list" id="serviceList">
+            <div class="service-card" onclick="showService('electrician')">
+                <img src="Electrician copy.jpg" alt="Electrician">
+                <div class="content">
+                    <h3>Electrician</h3>
+                </div>
+            </div>
+            <div class="service-card" onclick="showService('plumber')">
+                <img src="Plumber copy.jpg" alt="Plumber">
+                <div class="content">
+                    <h3>Plumber</h3>
+                </div>
+            </div>
+            <div class="service-card" onclick="showService('carpenter')">
+                <img src="Carpenter copy.jpg" alt="Carpenter">
+                <div class="content">
+                    <h3>Carpenter</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="service-details" class="service-details">
+        <h2 id="service-title" data-aos="fade-up"></h2>
+        <div id="providers-list" data-aos="fade-up"></div>
+        <button class="back-button" onclick="backToServices()">Back to Services</button>
+    </section>
+
+    <div id="contactPopup" class="popup">
+        <span>Contact: <a href="tel:" id="popupContact"></a> | <a href="mailto:" id="popupEmail"></a></span>
+    </div>
+
+    <div class="contact-us">
+        <p>Have a question? <a href="mailto:anirjal08@gmail.com">Email Us</a> | Call: <a href="tel:+1234567890">+1 234-567-890</a></p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Profix. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const services = {
+            electrician: [
+                { name: "John Electric", rating: 4.5, contact: "123-456-7890", email: "john.electric@example.com" },
+                { name: "Electric Pro", rating: 4.8, contact: "987-654-3210", email: "electricpro@example.com" }
+            ],
+            plumber: [
+                { name: "Pipe Masters", rating: 4.2, contact: "456-789-1230", email: "pipemasters@example.com" },
+                { name: "Fix-a-Tap", rating: 4.7, contact: "654-321-9870", email: "fixatap@example.com" }
+            ],
+            carpenter: [
+                { name: "Woodcraft Co.", rating: 4.3, contact: "111-222-3333", email: "woodcraftco@example.com" },
+                { name: "Handy Woodworks", rating: 4.6, contact: "333-444-5555", email: "handywoodworks@example.com" }
+            ]
+        };
+
+        function showService(service) {
+            document.getElementById("services").style.display = "none";
+            const detailsSection = document.getElementById("service-details");
+            const title = document.getElementById("service-title");
+            const providersList = document.getElementById("providers-list");
+
+            title.textContent = `${service.charAt(0).toUpperCase() + service.slice(1)} Services`;
+            providersList.innerHTML = "";
+
+            services[service].forEach(provider => {
+                const div = document.createElement("div");
+                div.classList.add("provider");
+                div.innerHTML = `
+                    <span>${provider.name} - Rating: ${provider.rating}</span>
+                    <button onclick="showContact('${provider.contact}', '${provider.email}')">Contact</button>
+                `;
+                providersList.appendChild(div);
+            });
+
+            detailsSection.classList.add("active");
+        }
+
+        function showContact(contact, email) {
+            const confirmAction = confirm("Are you sure you want to contact this service provider?");
+            if (confirmAction) {
+                const popup = document.getElementById("contactPopup");
+                const popupContact = document.getElementById("popupContact");
+                const popupEmail = document.getElementById("popupEmail");
+
+                popup.style.display = "block";
+                popupContact.textContent = contact;
+                popupContact.href = `tel:${contact}`;
+                popupEmail.textContent = email;
+                popupEmail.href = `mailto:${email}`;
+
+                showNotification(`You are now contacting ${contact}. Email: ${email}`, "info");
+            } else {
+                showNotification("Action canceled.", "warning");
+            }
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement("div");
+            notification.textContent = message;
+            notification.style.position = "fixed";
+            notification.style.bottom = "20px";
+            notification.style.left = "50%";
+            notification.style.transform = "translateX(-50%)";
+            notification.style.padding = "10px 20px";
+            notification.style.borderRadius = "5px";
+            notification.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.2)";
+            notification.style.transition = "opacity 0.5s ease";
+
+            if (type === "info") {
+                notification.style.background = "#4caf50";
+                notification.style.color = "white";
+            } else if (type === "warning") {
+                notification.style.background = "#ff9800";
+                notification.style.color = "white";
+            } else if (type === "error") {
+                notification.style.background = "#f44336";
+                notification.style.color = "white";
+            }
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.opacity = "0";
+                setTimeout(() => document.body.removeChild(notification), 500);
+            }, 3000);
+        }
+
+        function backToServices() {
+            document.getElementById("services").style.display = "block";
+            document.getElementById("service-details").classList.remove("active");
+        }
+
+        function searchProviders() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const serviceNames = Object.keys(services);
+
+            if (serviceNames.includes(searchInput)) {
+                showService(searchInput);
+            } else {
+                showNotification("No providers found for your search. Try another service.", "warning");
+            }
+        }
+
+        function scrollToServices() {
+            document.getElementById("services").scrollIntoView({ behavior: "smooth" });
+        }
+
+        AOS.init();
+    </script>
+</body>
+
+</html>
