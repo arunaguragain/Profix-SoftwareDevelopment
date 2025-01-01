@@ -308,48 +308,63 @@
                 { name: "Handy Woodworks", rating: 4.6, contact: "333-444-5555", email: "handywoodworks@example.com" }
             ]
         };
-
+    
+        let favorites = [];
+        let userPreferences = {
+            emailNotifications: true,
+            inAppNotifications: true
+        };
+    
         function showService(service) {
             document.getElementById("services").style.display = "none";
             const detailsSection = document.getElementById("service-details");
             const title = document.getElementById("service-title");
             const providersList = document.getElementById("providers-list");
-
+    
             title.textContent = `${service.charAt(0).toUpperCase() + service.slice(1)} Services`;
             providersList.innerHTML = "";
-
+    
             services[service].forEach(provider => {
                 const div = document.createElement("div");
                 div.classList.add("provider");
                 div.innerHTML = `
                     <span>${provider.name} - Rating: ${provider.rating}</span>
+                    <button onclick="favoriteProvider('${provider.name}')">Favorite</button>
                     <button onclick="showContact('${provider.contact}', '${provider.email}')">Contact</button>
                 `;
                 providersList.appendChild(div);
             });
-
+    
             detailsSection.classList.add("active");
         }
-
+    
         function showContact(contact, email) {
             const confirmAction = confirm("Are you sure you want to contact this service provider?");
             if (confirmAction) {
                 const popup = document.getElementById("contactPopup");
                 const popupContact = document.getElementById("popupContact");
                 const popupEmail = document.getElementById("popupEmail");
-
+    
                 popup.style.display = "block";
                 popupContact.textContent = contact;
                 popupContact.href = `tel:${contact}`;
                 popupEmail.textContent = email;
                 popupEmail.href = `mailto:${email}`;
-
-                showNotification(`You are now contacting ${contact}. Email: ${email}`, "info");
+    
+                showNotification(`Inquiry sent to ${contact} via email: ${email}`, "info");
             } else {
                 showNotification("Action canceled.", "warning");
             }
         }
-
+    
+        function favoriteProvider(providerId) {
+            if (!favorites.includes(providerId)) {
+                favorites.push(providerId);
+                console.log(`Provider ${providerId} added to favorites.`);
+                showNotification(`${providerId} has been added to your favorites.`, "info");
+            }
+        }
+    
         function showNotification(message, type) {
             const notification = document.createElement("div");
             notification.textContent = message;
@@ -359,50 +374,52 @@
             notification.style.transform = "translateX(-50%)";
             notification.style.padding = "10px 20px";
             notification.style.borderRadius = "5px";
-            notification.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.2)";
-            notification.style.transition = "opacity 0.5s ease";
-
-            if (type === "info") {
-                notification.style.background = "#4caf50";
-                notification.style.color = "white";
-            } else if (type === "warning") {
-                notification.style.background = "#ff9800";
-                notification.style.color = "white";
-            } else if (type === "error") {
-                notification.style.background = "#f44336";
-                notification.style.color = "white";
-            }
-
+            notification.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
+            notification.style.backgroundColor = type === "info" ? "#4CAF50" : "#FF5733";
+            notification.style.color = "white";
             document.body.appendChild(notification);
-
+    
             setTimeout(() => {
-                notification.style.opacity = "0";
-                setTimeout(() => document.body.removeChild(notification), 500);
+                notification.remove();
             }, 3000);
         }
-
+    
         function backToServices() {
             document.getElementById("services").style.display = "block";
             document.getElementById("service-details").classList.remove("active");
         }
-
-        function searchProviders() {
-            const searchInput = document.getElementById("searchInput").value.toLowerCase();
-            const serviceNames = Object.keys(services);
-
-            if (serviceNames.includes(searchInput)) {
-                showService(searchInput);
-            } else {
-                showNotification("No providers found for your search. Try another service.", "warning");
-            }
-        }
-
+    
         function scrollToServices() {
-            document.getElementById("services").scrollIntoView({ behavior: "smooth" });
+            window.scrollTo({
+                top: document.getElementById("services").offsetTop,
+                behavior: "smooth"
+            });
         }
-
+    
+        function searchProviders() {
+            const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+            const filteredServices = Object.keys(services).filter(service => service.includes(searchTerm));
+            const serviceList = document.getElementById("serviceList");
+    
+            serviceList.innerHTML = "";
+    
+            filteredServices.forEach(service => {
+                const div = document.createElement("div");
+                div.classList.add("service-card");
+                div.onclick = () => showService(service);
+                div.innerHTML = `
+                    <img src="${service}.jpg" alt="${service}">
+                    <div class="content">
+                        <h3>${service.charAt(0).toUpperCase() + service.slice(1)}</h3>
+                    </div>
+                `;
+                serviceList.appendChild(div);
+            });
+        }
+    
         AOS.init();
     </script>
+    
 </body>
 
 </html>
