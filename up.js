@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const securityQuestionsBtn = document.getElementById('security-questions-btn');
     const cancelSecurityQuestion = document.getElementById('cancel-security-question');
     const saveSecurityQuestion = document.getElementById('save-security-question');
+    const favouriteBtn = document.querySelector(".favourite-btn");
 
     // Handle photo upload preview
     photoUploadInput.addEventListener('change', function (event) {
@@ -82,5 +83,9 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             alert('Please select a question and provide an answer.');
         }
+    });
+
+    favouriteBtn.addEventListener("click", () => {
+        window.location.href = "fav.html";  // Redirect to favorites page
     });
 });
