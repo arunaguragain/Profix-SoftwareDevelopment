@@ -1,3 +1,4 @@
+// Get references to elements
 const forgetPasswordForm = document.getElementById('forgetPasswordForm');
 const otpModal = document.getElementById('otpModal');
 const passwordModal = document.getElementById('passwordModal');
@@ -16,20 +17,22 @@ forgetPasswordForm.addEventListener('submit', function (e) {
     const securityQuestion = document.getElementById('securityQuestion').value;
     const securityAnswer = document.getElementById('securityAnswer').value.trim();
 
-    // Basic validation
-    if (!emailInput || !securityQuestion || !securityAnswer) {
-        messageDiv.textContent = 'Please fill in all fields.';
+    // Basic validation: Email is mandatory
+    if (!emailInput) {
+        messageDiv.textContent = 'Email is required.';
         messageDiv.classList.remove('hidden');
         messageDiv.style.color = 'red';
         return;
     }
 
-    // Simulated backend check for security answer
-    if (securityAnswer.toLowerCase() !== mockSecurityAnswer) {
-        messageDiv.textContent = 'The security question answer is incorrect.';
-        messageDiv.classList.remove('hidden');
-        messageDiv.style.color = 'red';
-        return;
+    // If the security question is answered, validate it
+    if (securityQuestion && securityAnswer) {
+        if (securityAnswer.toLowerCase() !== mockSecurityAnswer) {
+            messageDiv.textContent = 'The security question answer is incorrect.';
+            messageDiv.classList.remove('hidden');
+            messageDiv.style.color = 'red';
+            return;
+        }
     }
 
     // If validation passes, show OTP modal

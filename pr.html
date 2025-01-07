@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forget Password</title>
+    <title>Forgot Password</title>
     <link rel="stylesheet" href="pr.css">
 </head>
 <body>
     <div class="container">
         <div class="picture"></div>
         <h1>Forgot Your Password?</h1>
-        <p>Enter your registered email address and answer the security question to reset your password.</p>
+        <p>Enter your registered email address to reset your password. Answering the security question is optional.</p>
         <form id="forgetPasswordForm">
             <div class="form-group">
                 <label for="email">Email Address:</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
             </div>
             <div class="form-group">
-                <label for="securityQuestion">Security Question:</label>
-                <select id="securityQuestion" required>
+                <label for="securityQuestion">Security Question (Optional):</label>
+                <select id="securityQuestion">
                     <option value="">Select a question</option>
                     <option value="pet_name">What is your pet's name?</option>
                     <option value="mother_maiden_name">What is your mother's maiden name?</option>
@@ -31,8 +31,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="securityAnswer">Answer:</label>
-                <input type="text" id="securityAnswer" name="securityAnswer" placeholder="Your answer" required>
+                <label for="securityAnswer">Answer (Optional):</label>
+                <input type="text" id="securityAnswer" name="securityAnswer" placeholder="Your answer">
             </div>
             <button type="submit" class="btn">Submit</button>
         </form>
@@ -52,7 +52,6 @@
         <br>
         <button id="passwordSubmit" class="btn">Reset Password</button>
     </div>
-     
     <script src="pr.js"></script>
 </body>
 </html>
