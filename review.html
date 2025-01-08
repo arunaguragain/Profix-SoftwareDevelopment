@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Reviews</title>
+  <link rel="stylesheet" href="review.css">
+</head>
+<body>
+  <div class="main">
+    <div class="nav">
+      <div class="logo"></div>
+      <div class="navbtn">
+        <a class="bt" href="#">Home</a>
+        <a class="bt" href="#">Contact</a>
+        <a class="bt" href="#">About</a>
+      </div>
+    </div>
+    <div class="contents">
+      <h2 class="customer-reviews-header">Customers Review</h2>
+      <div class="customer-reviews" id="reviewsContainer">
+        <p id="noReviewsText">No reviews yet. Be the first to leave a review!</p>
+      </div>
+      <br>
+      <button id="leaveReviewBtn" class="bt">Leave a Review</button>
+    </div>
+    <div class="modal-bg"></div>
+    <div class="review-form">
+      <h2>Leave a Review</h2>
+      <form id="reviewForm">
+        <div>
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" placeholder="Enter your full name" required>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+        <div>
+          <label for="service">Type of Service:</label>
+          <input type="text" id="service" placeholder="Enter type of service" required>
+        </div>
+        <div class="ratings">
+          <label>Rating:</label>
+          <span class="star" data-value="1">★</span>
+          <span class="star" data-value="2">★</span>
+          <span class="star" data-value="3">★</span>
+          <span class="star" data-value="4">★</span>
+          <span class="star" data-value="5">★</span>
+        </div>
+        <div>
+          <textarea id="comment" placeholder="Write your comment here" rows="4" required></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  <script src="review.js"></script>
+</body>
+</html>
