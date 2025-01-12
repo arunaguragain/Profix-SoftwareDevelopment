@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Booking</title>
+    <link rel="stylesheet" href="Appointment.css">
+</head>
+<body>
+    <div class="container">
+        <div id="popupForm" class="popup active">
+            <form id="appointmentForm">
+                <h1>Book Appointment</h1>
+                <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="e.g., (100) 000-0000" required>
+
+                
+
+                <label for="preferred-date">Preferred Appointemt Date:</label>
+                <input type="date" id="preferred-date" name="preferred-date" required>
+
+                <label for="preferred-time">Preferred Appointment Time:</label>
+                <input type="time" id="preferred-time" name="preferred-time" required>
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="problem">Describe Your Problem:</label>
+                <textarea id="problem" name="problem" required></textarea>
+
+                <div class="buttons">
+                    <button type="submit" class="btn">Submit</button>
+                    <button type="button" id="closePopup" class="btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="Appointment.js"></script>
+</body>
+</html>

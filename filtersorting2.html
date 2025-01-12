@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filter and Sort</title>
+  <style>
+    .service-card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h3>Filter by:</h3>
+    <label>
+      <input type="checkbox" class="filter-category" value="carpentry"> Carpentry
+    </label>
+    <label>
+      <input type="checkbox" class="filter-category" value="electrician"> Electricians
+    </label>
+    <label>
+      <input type="checkbox" class="filter-category" value="plumbing"> Plumbing
+    </label>
+    <br><br>
+    <label>
+      Price Range: 
+      <input type="range" id="price-range" min="50" max="500" step="50">
+      <span id="price-value">500</span>
+    </label>
+    <br><br>
+    <label>
+      Sort by: 
+      <select id="sort-options">
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating-desc">Rating: High to Low</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="services"></div>
+
+  <script src="filtersorting.js"></script>
+</body>
+</html>

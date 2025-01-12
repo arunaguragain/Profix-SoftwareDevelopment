@@ -1,0 +1,105 @@
+.main{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    /* flex-direction: column; */
+    background-image: url("main_login_background-removebg-preview.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-attachment: fixed; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    position: relative;
+  
+    /* align-items: center; */
+      /* Animation */
+  /* animation: zoomEffect 15s infinite alternate ease-in-out; */
+
+
+}
+.content {
+    /* position:absolute */  
+    /* text-align: center; */
+    margin-bottom: 20px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+h1{
+    position: absolute;
+    top:100px;
+    color: rgb(236, 71, 34);
+    font-size: 28px;
+    margin-left: 0px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+.btn1{
+    position: absolute;
+    bottom: 20px;
+    top:115px;
+    background-color:  rgb(236, 71, 34);
+    color: white;
+    border-color: white;
+    margin-top: 40px;
+    padding:5px ;
+    border-radius: 5px;
+    height: 25px;
+
+
+}
+
+.bottom-right p {
+    position: absolute;
+    right: 20px;
+    bottom: 50px;
+    color: rgb(236, 71, 34);
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 0px;
+    margin-right: 0%;
+}
+
+.btn{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background-color:  rgb(236, 71, 34);
+    color: white;
+    border-color: white;
+    margin-top: 40px;
+    margin-left: 0px;
+    padding:5px ;
+    border-radius: 5px;
+    height: 25px;
+
+
+}
+/* 
+.f1{
+    color: rgb(236, 71, 34);
+    margin-bottom: 0%;
+    font-size: 16px;
+    margin-left: 1px;
+    font-family: 'Times New Roman', Times, serif;
+} */
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .content {
+        width: 90%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .content {
+        width: 80%;
+    }
+}
+
