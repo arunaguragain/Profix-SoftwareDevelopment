@@ -1,0 +1,57 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  .header {
+    background-color: #0044cc;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem;
+  }
+  .filter-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .filter-section select {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  .service-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .service-card h3 {
+    margin: 0 0 0.5rem 0;
+  }
+  .service-card p {
+    margin: 0.5rem 0;
+  }
+  .service-card .contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .service-card .contact a {
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  .service-card .contact a:hover {
+    background-color: #218838;
+  }
