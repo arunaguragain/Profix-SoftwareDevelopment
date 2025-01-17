@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback</title>
+    <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+  <div class="main">
+    <div class="contents">
+      <h2 class="feedback-header">Customers Review</h2>
+      <div class="customer-feedback" id="feedbackContainer">
+        <p id="nofeedbackText">No feedback yet. Be the first to Write feedback!</p>
+      </div>
+      <br>
+      <button id="writeFeedbackBtn" class="bt">Write a Feedback</button>
+    </div>
+    <div class="modal-bg"></div>
+    <div class="feedback-form">
+      <h2>Leave a Review</h2>
+      <form id="feedbackForm">
+        <div>
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" placeholder="Enter your full name" required>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+        <div class="ratings">
+          <label>Rating:</label>
+          <span class="star" data-value="1">★</span>
+          <span class="star" data-value="2">★</span>
+          <span class="star" data-value="3">★</span>
+          <span class="star" data-value="4">★</span>
+          <span class="star" data-value="5">★</span>
+        </div>
+        <div>
+          <textarea id="comment" placeholder="Write your comment here" rows="4" required></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  <script src="feedback.js"></script>
+</body>
+</html>
