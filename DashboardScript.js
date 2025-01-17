@@ -77,3 +77,24 @@ function performSearch() {
   const query = document.getElementById('searchInput').value;
   alert('Searching for: ' + query);  // Replace with your actual search function
 }
+// Function to toggle the settings dropdown visibility
+function toggleSettingsDropdown() {
+  const dropdown = document.getElementById('settingsDropdown');
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Function to navigate to the Promotions and Discounts form
+function navigateToPromotions() {
+  window.location.href = 'PromoDiscount.html'; // Replace with the actual file path for your form
+}
+
+// Close settings dropdown when clicking outside
+window.addEventListener('click', function (event) {
+  const dropdown = document.getElementById('settingsDropdown');
+  const button = document.querySelector('.settings-btn');
+
+  if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+      dropdown.style.display = 'none';
+  }
+});
+
