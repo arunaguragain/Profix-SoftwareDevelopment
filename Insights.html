@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profix - Home Repair Services</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        header {
+            background-color: #808080;
+            padding: 20px;
+            text-align: center;
+            color: rgb(180, 88, 88);
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .insights {
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #ffffff;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #404040;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Profix</h1>
+        <p>Book plumbing, electricians, and carpentry services easily!</p>
+    </header>
+
+    <div class="content">
+        <h2>Our Services</h2>
+        <!-- Services Section -->
+        <div class="service">
+            <h3>Plumbing</h3>
+            <p>Fix leaky pipes and clogged drains with our expert plumbers.</p>
+            <button onclick="bookService('Plumbing')">Book Now</button>
+        </div>
+        <div class="service">
+            <h3>Electricians</h3>
+            <p>Get help with wiring, appliances, and electrical repairs.</p>
+            <button onclick="bookService('Electricians')">Book Now</button>
+        </div>
+        <div class="service">
+            <h3>Carpentry</h3>
+            <p>Hire skilled carpenters for your furniture and woodwork needs.</p>
+            <button onclick="bookService('Carpentry')">Book Now</button>
+        </div>
+
+        <!-- Business Insights Section -->
+        <h2>Business Insights</h2>
+        <div class="insights">
+            <h3>Most Popular Service:</h3>
+            <p id="popular-service">Loading...</p>
+        </div>
+        <div class="insights">
+            <h3>Total Bookings This Week:</h3>
+            <p id="total-bookings">Loading...</p>
+        </div>
+        <div class="insights">
+            <h3>Busiest Time for Services:</h3>
+            <p id="busiest-time">Loading...</p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        // Mock data for insights
+        const insightsData = {
+            popularService: "Plumbing",
+            totalBookings: 45,
+            busiestTime: "10 AM - 2 PM",
+        };
+
+        // Display business insights on the webpage
+        document.getElementById("popular-service").textContent = insightsData.popularService;
+        document.getElementById("total-bookings").textContent = `${insightsData.totalBookings} bookings`;
+        document.getElementById("busiest-time").textContent = insightsData.busiestTime;
+
+        // Function to simulate booking
+        function bookService(serviceName) {
+            alert(`You have booked ${serviceName} service. Thank you!`);
+        }
+    </script>
+</body>
+</html>
