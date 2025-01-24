@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProFix Admin Page</title>
+  <link rel="stylesheet" href="UserModeration.css">
+</head>
+<body>
+  <div class="main">
+    <div class="header">
+      <div class="logo"></div>
+      <h1>ProFix Admin Dashboard</h1>
+      <button class="adminLogout">Logout</button>
+    </div>
+    <div class="container">
+      <div class="section">
+        <h2>Moderate Reviews</h2>
+        <div class="card">
+          <h3>Review by John Doe</h3>
+          <p>"The plumber was on time and did a fantastic job!"</p>
+          <div class="actions">
+            <a class="btn" onclick="approveReview(this)">Approve</a>
+            <a class="btn" onclick="deleteReview(this)">Delete</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Review by Jane Smith</h3>
+          <p>"The service was delayed, but the electrician was very professional."</p>
+          <div class="actions">
+            <a class="btn" onclick="approveReview(this)">Approve</a>
+            <a class="btn" onclick="deleteReview(this)">Delete</a>
+          </div>
+        </div>
+        <p class="empty-message" id="no-reviews" style="display: none;">
+          No more reviews to moderate!
+        </p>
+      </div>
+      <div class="section">
+        <h2>Monitor Activity</h2>
+        <div class="card">
+          <h3>User: John Doe</h3>
+          <p>Last Activity: Submitted a review for plumbing services</p>
+        </div>
+        <div class="card">
+          <h3>User: Jane Smith</h3>
+          <p>Last Activity: Updated her profile details</p>
+        </div>
+        <div class="card">
+          <h3>User: Alex Brown</h3>
+          <p>Last Activity: Sent an inquiry about electrician services</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="UserModeration.js"></script>
+</body>
+</html>
