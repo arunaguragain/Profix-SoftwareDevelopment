@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import '../style/Review.css'; // Assuming your CSS file is named review.css
+import '../style/ReviewsAndRatings.css'; 
 
 const Review = () => {
   const [reviews, setReviews] = useState([]);
@@ -71,15 +71,9 @@ const Review = () => {
       <div className="nav">
         <div className="logo"></div>
         <div className="navbtn">
-          <button onClick={goToHome} className="bt nav-link" type="button">
-            Home
-          </button>
-          <button onClick={goToContact} className="bt nav-link" type="button">
-            Contact
-          </button>
-          <button onClick={goToAbout} className="bt nav-link" type="button">
-            About
-          </button>
+          <button onClick={goToHome} className="bt nav-link">Home</button>
+          <button onClick={goToContact} className="bt nav-link">Contact</button>
+          <button onClick={goToAbout} className="bt nav-link">About</button>
         </div>
       </div>
       <div className="contents">
@@ -97,9 +91,7 @@ const Review = () => {
             ))
           )}
         </div>
-        <button onClick={() => setIsModalOpen(true)} className="bt" type="button">
-          Leave a Review
-        </button>
+        <button onClick={() => setIsModalOpen(true)} className="bt">Leave a Review</button>
       </div>
 
       {isModalOpen && (

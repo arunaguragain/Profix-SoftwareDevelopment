@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: url('../pictures/background-placeholder\ copy.jpg') center/cover no-repeat;
+    background: url('../pictures/backgroundplaceholdercopy.jpg') center/cover no-repeat;
     background-attachment: fixed;
 }
 
