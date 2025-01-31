@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import '../style/UserRegistration.css'
+
 // Define validation schema using Yup
 const schema = yup.object().shape({
   fullName: yup.string().required("Full Name is required."),

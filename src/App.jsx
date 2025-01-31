@@ -1,7 +1,8 @@
 import React, { Suspense, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-import './public/UserRegistration.css'
+// import './public/UserRegistration.css'
+// import './private/PasswordRecovery.css'
 
 function App() {
   const MainPage = React.lazy(() => import("./public/MainPage.jsx"));
