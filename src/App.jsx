@@ -7,6 +7,7 @@ function App() {
   const UserRegistration = React.lazy(() => import("./public/UserRegistration.jsx"));
   const PasswordRecovery = React.lazy(() => import("./private/PasswordRecovery.jsx"));
   const Favorites = React.lazy(() => import("./private/Favorites.jsx"));
+  const Review = React.lazy(() => import("./private/ReviewsAndRatings.jsx"));
 
   return (
     <Router>
@@ -16,6 +17,7 @@ function App() {
         <Route path="/userregistration" element={<UserRegistration/>}></Route>
         <Route path="/passwordrecovery" element={<PasswordRecovery/>}></Route>
         <Route path="/favorites" element={<Favorites/>}></Route>
+        <Route path="/review" element={<Review/>}></Route>
       </Routes>
       </Suspense>
     </Router>
