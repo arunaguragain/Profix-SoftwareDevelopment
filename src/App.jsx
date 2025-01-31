@@ -8,6 +8,7 @@ function App() {
   const PasswordRecovery = React.lazy(() => import("./private/PasswordRecovery.jsx"));
   const Favorites = React.lazy(() => import("./private/Favorites.jsx"));
   const ReviewsAndRatings = React.lazy(() => import("./private/ReviewsAndRatings.jsx"));
+  const EmergencyServices = React.lazy(() => import("./private/EmergencyContact.jsx"))
 
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
         <Route path="/passwordrecovery" element={<PasswordRecovery/>}></Route>
         <Route path="/favorites" element={<Favorites/>}></Route>
         <Route path="/reviewsandratings" element={<ReviewsAndRatings/>}></Route>
+        <Route path="/emergencyservices" element={<EmergencyServices/>}></Route>
       </Routes>
       </Suspense>
     </Router>
