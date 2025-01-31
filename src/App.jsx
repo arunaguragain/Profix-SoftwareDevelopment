@@ -8,7 +8,8 @@ function App() {
   const PasswordRecovery = React.lazy(() => import("./private/PasswordRecovery.jsx"));
   const Favorites = React.lazy(() => import("./private/Favorites.jsx"));
   const ReviewsAndRatings = React.lazy(() => import("./private/ReviewsAndRatings.jsx"));
-  const EmergencyServices = React.lazy(() => import("./private/EmergencyContact.jsx"))
+  const EmergencyServices = React.lazy(() => import("./private/EmergencyContact.jsx"));
+  const UserProfile = React.lazy(() => import("./private/UserProfile.jsx"));
 
   return (
     <Router>
@@ -20,6 +21,7 @@ function App() {
         <Route path="/favorites" element={<Favorites/>}></Route>
         <Route path="/reviewsandratings" element={<ReviewsAndRatings/>}></Route>
         <Route path="/emergencyservices" element={<EmergencyServices/>}></Route>
+        <Route path="/userprofile" element={<UserProfile/>}></Route>
       </Routes>
       </Suspense>
     </Router>

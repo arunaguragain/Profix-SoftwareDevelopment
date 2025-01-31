@@ -23,23 +23,28 @@ body {
     flex-wrap: wrap;
   }
 
-  .navbtn {
-    display: flex;
-    gap: 10px;
-  }
 
-  .bt {
+.navbtn .bt {
+    background: none;
+    border: none;
+    color: white; 
     font-size: 18px;
-    color: white;
     cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 5px;
     text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
   }
-
-  .bt:hover {
+  
+  .navbtn .bt:hover {
     background-color: #392c2b;
+    border-radius: 5px;
   }
+  
+  /* Optional: Add focus styles */
+  .navbtn .bt:focus {
+    outline: none;
+  }
+  
 
   .logo {
     background-image: url('../pictures/logo.png');

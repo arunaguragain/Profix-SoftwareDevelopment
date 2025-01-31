@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../style/EmergencyContact.css';
 
 const EmergencyServices = () => {
   const [availabilityFilter, setAvailabilityFilter] = useState('all');
+  const navigate = useNavigate();  
 
   const serviceCards = [
     {
@@ -23,6 +25,10 @@ const EmergencyServices = () => {
     setAvailabilityFilter(e.target.value);
   };
 
+  const handleNavigate = (path) => {
+    navigate(path);  // ✅ Use navigate function
+  };
+
   const filteredServices = serviceCards.filter((service) => {
     if (availabilityFilter === 'all') {
       return true;
@@ -35,9 +41,9 @@ const EmergencyServices = () => {
       <div className="nav">
         <div className="logo"></div>
         <div className="navbtn">
-          <a className="bt" href="#">Home</a>
-          <a className="bt" href="#">Contact</a>
-          <a className="bt" href="#">About</a>
+          <button className="bt" onClick={() => handleNavigate('/')}>Home</button>
+          <button className="bt" onClick={() => handleNavigate('/contact')}>Contact</button>
+          <button className="bt" onClick={() => handleNavigate('/about')}>About</button>
         </div>
       </div>
       <div className="contents">
