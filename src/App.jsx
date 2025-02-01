@@ -10,6 +10,7 @@ function App() {
   const ReviewsAndRatings = React.lazy(() => import("./private/ReviewsAndRatings.jsx"));
   const EmergencyServices = React.lazy(() => import("./private/EmergencyContact.jsx"));
   const UserProfile = React.lazy(() => import("./private/UserProfile.jsx"));
+  const ProFixAdminDashboard  = React.lazy(() => import("./private/UserModeration.jsx"));
 
   return (
     <Router>
@@ -22,6 +23,7 @@ function App() {
         <Route path="/reviewsandratings" element={<ReviewsAndRatings/>}></Route>
         <Route path="/emergencyservices" element={<EmergencyServices/>}></Route>
         <Route path="/userprofile" element={<UserProfile/>}></Route>
+        <Route path="/profixadmindashboard" element={<ProFixAdminDashboard/>}></Route>
       </Routes>
       </Suspense>
     </Router>
