@@ -9,6 +9,9 @@ function App() {
   const Favorites = React.lazy(() => import("./private/Favorites.jsx"));
   const AboutUs = React.lazy(() => import("./public/AboutUs.jsx"))
   const Appointment = React.lazy(() => import("./private/Appointment.jsx"))
+  const Dashboard = React.lazy(() => import("./private/Dashboard.jsx"))
+  const DeletePopUp = React.lazy(() => import("./private/DeletePopUp.jsx"))
+  const MainPageS = React.lazy(() =>import("./public/MainPageS.jsx"))
 
   return (
     <Router>
@@ -20,7 +23,9 @@ function App() {
         <Route path="/favorites" element={<Favorites/>}></Route>
         <Route path = "/aboutus" element={<AboutUs/>}></Route>
         <Route path = "/appointment" element ={<Appointment/>}></Route>
-        <Route path = "/dashboard" element ={<Appointment/>}></Route>
+        <Route path = "/dashboard" element ={<Dashboard/>}></Route>
+        <Route path ="/deletepopup" element={<DeletePopUp/>}></Route>
+        <Route path ="/mainpages" element={<MainPageS/>}></Route>
         
       </Routes>
       </Suspense>

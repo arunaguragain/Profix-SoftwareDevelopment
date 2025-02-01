@@ -1,0 +1,116 @@
+.main {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-image: url("main_login_background-removebg-preview.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.content {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: rgb(236, 71, 34);
+    font-size: 28px;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+}
+
+.btn1, .btn {
+    background-color: rgb(236, 71, 34);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn1:hover, .btn:hover {
+    background-color: rgb(220, 55, 22);
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    text-align: center;
+}
+
+.bottom-right p {
+    color: rgb(236, 71, 34);
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+}
+
+.delete-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    z-index: 1000;
+    display: block;
+}
+
+.delete-popup .buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-popup button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#confirmDelete {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+#cancelDelete {
+    background-color: #ccc;
+}
+
+@media (max-width: 768px) {
+    .content {
+        width: 90%;
+    }
+
+    .h1 {
+        font-size: 24px;
+    }
+
+    .btn1, .btn {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .content {
+        width: 70%;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+}

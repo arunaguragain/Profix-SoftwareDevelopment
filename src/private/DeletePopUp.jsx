@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './DeletePopup.css';
+import './DeletePopUp.css';
 
 function DeletePopup() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
