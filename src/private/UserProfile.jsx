@@ -1,26 +1,34 @@
 import React, { useState } from "react";
-import '../style/UserProfile.css'
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import '../style/UserProfile.css';
 
 const UserProfile = () => {
+  const navigate = useNavigate(); 
+
   const [profile, setProfile] = useState({
     fullName: "John Doe",
     address: "123 Main Street",
     email: "john.doe@example.com",
     contact: "123-456-7890",
+    photo: null,  // Store photo here
   });
 
   const [isEditing, setIsEditing] = useState(false);
   const [isSecurityBoxOpen, setIsSecurityBoxOpen] = useState(false);
   const [securityQuestion, setSecurityQuestion] = useState("");
   const [securityAnswer, setSecurityAnswer] = useState("");
-  const [photo, setPhoto] = useState(null);
 
   // Handle file upload
   const handlePhotoUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => setPhoto(e.target.result);
+      reader.onload = (e) => {
+        setProfile((prevProfile) => ({
+          ...prevProfile,
+          photo: e.target.result,  // Save photo in profile state
+        }));
+      };
       reader.readAsDataURL(file);
     }
   };
@@ -36,6 +44,7 @@ const UserProfile = () => {
       address: event.target.address.value,
       email: event.target.email.value,
       contact: event.target.contact.value,
+      photo: profile.photo,  // Keep the existing photo
     });
     setIsEditing(false);
   };
@@ -75,11 +84,13 @@ const UserProfile = () => {
               accept="image/*"
               onChange={handlePhotoUpload}
             />
-            {photo ? (
-              <img src={photo} alt="Preview" className="photo-preview" />
-            ) : (
-              <span className="no-photo-message">No photo uploaded</span>
-            )}
+            <div className="photo-preview-container">
+              {profile.photo ? (
+                <img src={profile.photo} alt="Profile Preview" className="photo-preview" />
+              ) : (
+                <span className="no-photo-message">No photo uploaded</span>
+              )}
+            </div>
           </div>
 
           {isEditing ? (
@@ -96,6 +107,9 @@ const UserProfile = () => {
 
                 <label>Contact:</label>
                 <input type="text" name="contact" defaultValue={profile.contact} required />
+
+                <label>Profile Photo:</label>
+                <input type="file" accept="image/*" onChange={handlePhotoUpload} />
 
                 <button type="submit" className="btnedit">Save</button>
                 <button type="button" className="btnedit" onClick={handleCancelEdit}>
@@ -142,8 +156,8 @@ const UserProfile = () => {
                 required
               />
 
-              <button type="submit">Save</button>
-              <button type="button" onClick={() => setIsSecurityBoxOpen(false)}>Cancel</button>
+              <button type="submit" className="btnedit">Save</button>
+              <button type="button" className="btnedit" onClick={() => setIsSecurityBoxOpen(false)}>Cancel</button>
             </form>
           </div>
         )}
@@ -151,7 +165,7 @@ const UserProfile = () => {
         <div className="side-buttons">
           <button className="history-btn">⏳</button>
           <button className="appointments-btn">📅</button>
-          <button className="favourite-btn" onClick={() => window.location.href = "fav.html"}>⭐</button>
+          <button className="favourite-btn" onClick={() => navigate("/favorites")}>⭐</button>
           <button className="security-questions-btn" onClick={() => setIsSecurityBoxOpen(true)}>❓</button>
         </div>
       </div>
