@@ -8,11 +8,21 @@
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
+      background-image: url(main_login_background-removebg-preview.png);
+      background-size: contain;
+      
     }
     .contact-container {
-      max-width: 800px;
+
+      max-width: 650px;
       margin: auto;
+      mix-blend-mode:auto;
       text-align: center;
+      margin-left: 40px;
+      background-color: #E7E7E7
+      ;
+      height: 100vh;
+    
     }
     .contact-methods, .contact-form {
       margin-bottom: 30px;
@@ -36,7 +46,8 @@
       margin-bottom: 5px;
     }
     .form-group input, .form-group textarea {
-      width: 100%;
+      
+      max-width: fit-content;
       padding: 8px;
       box-sizing: border-box;
     }
@@ -49,6 +60,9 @@
     }
     .form-group button:hover {
       background-color: #0056b3;
+    }
+    .h1{
+      margin-top: 5px;
     }
   </style>
 </head>
@@ -65,9 +79,7 @@
       <div class="contact-method">
         📧 Email: <a href="mailto:support@profix.com">support@profix.com</a>
       </div>
-      <div class="contact-method">
-        💬 WhatsApp: <a href="https://wa.me/123456789" target="_blank">Chat with us</a>
-      </div>
+      
     </div>
 
     <!-- Contact Form -->
