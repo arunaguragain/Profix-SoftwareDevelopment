@@ -1,0 +1,68 @@
+/* Main container */
+.main {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../pictures/LoginSignupbackground.jpg.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    animation: zoomEffect 15s infinite alternate ease-in-out;
+  }
+  
+  /* Keyframes for Zoom Effect */
+  @keyframes zoomEffect {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Form container */
+  .wrap {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  /* Title */
+  h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  /* Form fields */
+  form input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid white;
+    background-color: rgba(57, 24, 24, 0.829);
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  /* Placeholder text color */
+  form input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  /* Button */
+  .btn {
+    background-color: rgba(57, 24, 24, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: ba
+  }  
