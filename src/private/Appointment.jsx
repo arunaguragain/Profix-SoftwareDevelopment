@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Appointment.css";
+import "../style/Appointment.css";
 
 const Appointment = () => {
   const [isOpen, setIsOpen] = useState(false);

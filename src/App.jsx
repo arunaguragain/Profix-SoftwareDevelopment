@@ -16,6 +16,8 @@ function App() {
   const UserProfile = React.lazy(() => import("./private/UserProfile.jsx"));
   const ProFixAdminDashboard  = React.lazy(() => import("./private/UserModeration.jsx"));
   const ServiceProviderLogin = React.lazy(() =>import("./public/ServiceProviderLogin.jsx"))
+  const ServiceProviderRegistration =React.lazy(() => import("./public/ServiceProviderRegistration.jsx"))
+  const ServiceProviderProfile = React.lazy(() => import ("./private/SeviceProviderProfile.jsx"))
 
   return (
     <Router>
@@ -25,12 +27,17 @@ function App() {
         <Route path="/userregistration" element={<UserRegistration/>}></Route>
         <Route path="/passwordrecovery" element={<PasswordRecovery/>}></Route>
         <Route path="/favorites" element={<Favorites/>}></Route>
+
         <Route path = "/aboutus" element={<AboutUs/>}></Route>
         <Route path = "/appointment" element ={<Appointment/>}></Route>
         <Route path = "/dashboard" element ={<Dashboard/>}></Route>
         <Route path ="/deletepopup" element={<DeletePopUp/>}></Route>
         <Route path ="/mainpages" element={<MainPageS/>}></Route>
         <Route path='serviceproviderlogin' element={<ServiceProviderLogin/>}></Route>
+        <Route path = "/serviceproviderregistration" element={<ServiceProviderRegistration/>}></Route>
+        <Route path = "/serviceproviderprofile" element={<ServiceProviderProfile/>}></Route>
+
+
         
         <Route path="/reviewsandratings" element={<ReviewsAndRatings/>}></Route>
         <Route path="/emergencyservices" element={<EmergencyServices/>}></Route>
