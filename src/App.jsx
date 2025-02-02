@@ -16,6 +16,7 @@ function App() {
   const EmergencyServices = React.lazy(() => import("./private/EmergencyContact.jsx"));
   const UserProfile = React.lazy(() => import("./private/UserProfile.jsx"));
   const ProFixAdminDashboard  = React.lazy(() => import("./private/UserModeration.jsx"));
+  const ServiceProviderLogin = React.lazy(() =>import("./public/ServiceProviderLogin.jsx"))
 
   return (
     <Router>
@@ -30,6 +31,7 @@ function App() {
         <Route path = "/dashboard" element ={<Dashboard/>}></Route>
         <Route path ="/deletepopup" element={<DeletePopUp/>}></Route>
         <Route path ="/mainpages" element={<MainPageS/>}></Route>
+        <Route path='serviceproviderlogin' element={<ServiceProviderLogin/>}></Route>
         
         <Route path="/reviewsandratings" element={<ReviewsAndRatings/>}></Route>
         <Route path="/emergencyservices" element={<EmergencyServices/>}></Route>
