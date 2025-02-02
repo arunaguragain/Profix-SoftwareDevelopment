@@ -1,4 +1,20 @@
 {
+<<<<<<< HEAD
+  "name": "clone",
+  "version": "1.0.0",
+  "main": "Appointment.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "react-scripts": "^3.0.1"
+=======
   "name": "profixreact",
   "private": true,
   "version": "0.0.0",
@@ -28,5 +44,6 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "vite": "^6.0.5"
+>>>>>>> main
   }
 }
