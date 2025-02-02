@@ -12,6 +12,7 @@ function App() {
   const Dashboard = React.lazy(() => import("./private/Dashboard.jsx"))
   const DeletePopUp = React.lazy(() => import("./private/DeletePopUp.jsx"))
   const MainPageS = React.lazy(() =>import("./public/MainPageS.jsx"))
+  const ServiceProviderLogin = React.lazy(() =>import("./public/ServiceProviderLogin.jsx"))
 
   return (
     <Router>
@@ -26,6 +27,7 @@ function App() {
         <Route path = "/dashboard" element ={<Dashboard/>}></Route>
         <Route path ="/deletepopup" element={<DeletePopUp/>}></Route>
         <Route path ="/mainpages" element={<MainPageS/>}></Route>
+        <Route path='serviceproviderlogin' element={<ServiceProviderLogin/>}></Route>
         
       </Routes>
       </Suspense>
