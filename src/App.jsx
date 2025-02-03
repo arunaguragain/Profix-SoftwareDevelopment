@@ -16,7 +16,8 @@ function App() {
   const UserLogin = React.lazy(() =>import("./public/UserLogin.jsx"));
   const Contact = React.lazy(() =>import("./public/Contact.jsx"));
   const CommunityBuilding = React.lazy(() => import("./private/CommunityBuilding.jsx"));
-  
+  const RealTimeSupport = React.lazy(() => import("./private/RealTimeSupport.jsx"));
+
 
 
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path='Userlogin' element={<UserLogin/>}></Route>
         <Route path = 'Contact' element={<Contact/>}></Route>
         <Route path = 'CommunityBuilding' element={<CommunityBuilding/>}></Route>
+        <Route path = 'RealTimeSupport' element={<RealTimeSupport/>}></Route>
         
       </Routes>
       </Suspense>
