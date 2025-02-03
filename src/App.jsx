@@ -7,12 +7,17 @@ function App() {
   const UserRegistration = React.lazy(() => import("./public/UserRegistration.jsx"));
   const PasswordRecovery = React.lazy(() => import("./private/PasswordRecovery.jsx"));
   const Favorites = React.lazy(() => import("./private/Favorites.jsx"));
-  const AboutUs = React.lazy(() => import("./public/AboutUs.jsx"))
-  const Appointment = React.lazy(() => import("./private/Appointment.jsx"))
-  const Dashboard = React.lazy(() => import("./private/Dashboard.jsx"))
-  const DeletePopUp = React.lazy(() => import("./private/DeletePopUp.jsx"))
-  const MainPageS = React.lazy(() =>import("./public/MainPageS.jsx"))
-  const ServiceProviderLogin = React.lazy(() =>import("./public/ServiceProviderLogin.jsx"))
+  const AboutUs = React.lazy(() => import("./public/AboutUs.jsx"));
+  const Appointment = React.lazy(() => import("./private/Appointment.jsx"));
+  const Dashboard = React.lazy(() => import("./private/Dashboard.jsx"));
+  const DeletePopUp = React.lazy(() => import("./private/DeletePopUp.jsx"));
+  const MainPageS = React.lazy(() =>import("./public/MainPageS.jsx"));
+  const ServiceProviderLogin = React.lazy(() =>import("./public/ServiceProviderLogin.jsx"));
+  const UserLogin = React.lazy(() =>import("./public/UserLogin.jsx"));
+  const Contact = React.lazy(() =>import("./public/Contact.jsx"));
+  const CommunityBuilding = React.lazy(() => import("./private/CommunityBuilding.jsx"));
+  
+
 
   return (
     <Router>
@@ -27,7 +32,11 @@ function App() {
         <Route path = "/dashboard" element ={<Dashboard/>}></Route>
         <Route path ="/deletepopup" element={<DeletePopUp/>}></Route>
         <Route path ="/mainpages" element={<MainPageS/>}></Route>
+
         <Route path='serviceproviderlogin' element={<ServiceProviderLogin/>}></Route>
+        <Route path='Userlogin' element={<UserLogin/>}></Route>
+        <Route path = 'Contact' element={<Contact/>}></Route>
+        <Route path = 'CommunityBuilding' element={<CommunityBuilding/>}></Route>
         
       </Routes>
       </Suspense>
