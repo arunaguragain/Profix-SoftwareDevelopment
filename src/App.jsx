@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 
 
 function App() {
-  const MainPage = React.lazy(() => import("./public/MainPage.jsx"));
   const UserRegistration = React.lazy(() => import("./public/UserRegistration.jsx"));
   const PasswordRecovery = React.lazy(() => import("./private/PasswordRecovery.jsx"));
   const Favorites = React.lazy(() => import("./private/Favorites.jsx"));
@@ -24,7 +23,7 @@ function App() {
     <Router>
       <Suspense fallback={<div>loading...</div>}>
       <Routes>
-        <Route path="/" element={<Navigate to ="/MainPage"/>}></Route>
+        <Route path="/" element={<Navigate to ="/MainPageS"/>}></Route>
         <Route path="/userregistration" element={<UserRegistration/>}></Route>
         <Route path="/passwordrecovery" element={<PasswordRecovery/>}></Route>
         <Route path="/favorites" element={<Favorites/>}></Route>
