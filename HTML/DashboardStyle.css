@@ -1,0 +1,195 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    background-image: url(main_login_background-removebg-preview.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+
+}
+
+.dashboard {
+    text-align: center;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    color: white;
+    border-bottom: 1px solid #ddd;
+}
+h1{
+    color: white;
+}
+.navbar{
+    width: 100%;
+}
+
+.logo{
+    margin-left: 0dp;
+
+     background-image: url(image__1_-removebg.png) ;
+        background-size: contain;
+        /* font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer; */
+        height: 65px;
+        width: 65px;
+        background-blend-mode: overlay;
+        border-radius: 50%;
+        background-size: contain;
+        background-blend-mode:lighten;
+      
+    
+}
+
+.notification img {
+    width: 24px;
+    height: 24px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.notification-btn{
+    position:absolute;
+    top: 38px;
+    right: 25px;
+
+}
+
+
+
+.button button {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 120px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.button button:hover {
+    transform: scale(1.1);
+}
+
+.button img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.button p {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .content {
+        width: 90%;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .content {
+        width: 80%;
+    }
+  }
+
+
+  .search-container {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#searchInput {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#searchButton {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    background-color: #c64206;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Notification Button */
+.notification-btn {
+    position: absolute;
+    top: 38px; /* Ensures both buttons are aligned */
+    right: 130px; /* Adjusts spacing from the right */
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Settings Button */
+.settings-btn {
+    position: absolute;
+    top: 38px; /* Matches the notification button's position */
+    right: 80px; /* Ensures consistent spacing between buttons */
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Settings Dropdown */
+.settings-dropdown {
+    display: none;
+    position: absolute;
+    top: 70px; /* Dropdown position */
+    right: 50px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+}
+
+.settings-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.settings-dropdown li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.settings-dropdown li:hover {
+    background-color: #f0f0f0;
+}
+
+
+
+

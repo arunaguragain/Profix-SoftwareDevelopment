@@ -1,0 +1,176 @@
+.main {
+    height: 100vh;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+    align-items: center;
+    background-image: url(../pictures/bg.jpg);
+}
+
+.nav {
+    width: 100%;
+    background-color: #563330;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0px;
+    flex-wrap: wrap;
+
+}
+
+.navbtn{
+    display: flex; 
+    gap: 10px; 
+}
+
+.logo {
+    background-image: url('../pictures/logo.png');
+    background-size: cover;
+    width: 60px;
+    height: 60px;
+    margin-left: 20px;
+}
+
+.contents {
+    margin-top: 20px;
+    width: 90%;
+    max-width: 800px;
+    flex:1;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.contents h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 34px;
+    margin-top: 20px;
+    font-style: bold;
+    color: white;
+}
+
+#favorites-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.favorite-card {
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: lightgrey;
+}
+
+.favorite-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.favorite-card .content {
+    padding: 15px;
+    text-align: center;
+}
+
+.favorite-card .content h3 {
+    margin: 10px 0;
+    color: #333;
+}
+
+.favorite-card .content p {
+    font-size: 14px;
+    color: #666;
+}
+
+.navbtn .bt {
+    background: none;
+    border: none;
+    color: white; 
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+  }
+  
+  .navbtn .bt:hover {
+    background-color: #392c2b;
+    border-radius: 5px;
+  }
+  
+  /* Optional: Add focus styles */
+  .navbtn .bt:focus {
+    outline: none;
+  }
+  
+.clear-btn {
+    padding: 10px 20px;
+    background: #563330;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.3s ease;
+}
+
+.clear-btn:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column; 
+        align-items: center;
+    }
+
+    .navbtn {
+        margin-left: 0; 
+        margin-top: 10px;
+    }
+
+    .contents {
+        width: 95%; 
+        padding: 15px;
+    }
+
+    .favorite-card {
+        width: 100%;
+        max-width: 300px; 
+    }
+
+    .bt {
+        font-size: 16px;
+        padding: 8px 15px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .contents h1 {
+        font-size: 24px; 
+    }
+
+    .bt {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px; 
+    }
+}

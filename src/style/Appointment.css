@@ -1,0 +1,90 @@
+.container {    
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    width: 300px; 
+    max-width: 90%; 
+    z-index: 1000;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+input,
+textarea,
+button {
+    padding: 8px; 
+    font-size: 0.9rem; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px; 
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    transition: background-color 0.3s;
+    padding: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button.btn-secondary {
+    background-color: #f44336;
+}
+
+button.btn-secondary:hover {
+    background-color: #d7352b;
+}
+
+.open-popup-btn {
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.open-popup-btn:hover {
+    background-color: #0056b3;
+}

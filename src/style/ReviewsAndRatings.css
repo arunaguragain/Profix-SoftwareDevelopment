@@ -1,0 +1,245 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #563330;
+}
+
+.main {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url('../pictures/backgroundplaceholdercopy.jpg') center/cover no-repeat;
+    background-attachment: fixed;
+}
+
+.nav {
+    width: 100%;
+    background-color: #563330;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.navbtn {
+    display: flex;
+    gap: 10px;
+}
+
+.bt {
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.bt:hover {
+    background-color: #392c2b;
+}
+
+.logo {
+    background-image: url('../pictures/logo.png');
+    background-size: cover;
+    width: 60px;
+    height: 60px;
+}
+
+.contents {
+    width: 90%;
+    max-width: 800px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: 15px;
+    background-color: lightgrey;
+    gap: 10px;
+}
+
+.review-form {
+    width: 90%;
+    max-width: 400px;
+    background-color: lightgrey;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.review-form h2,
+.customer-reviews-header {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 0;
+}
+
+.review-form div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.review-form label {
+    display: inline-block;
+    width: 30%;
+    text-align: left;
+    margin-right: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+.review-form input,
+.review-form textarea {
+    display: inline-block;
+    width: 65%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.review-form textarea {
+    resize: none;
+}
+
+.ratings {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.star {
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    transition: color 0.3s ease;
+}
+
+.star.selected {
+    color: #f39c12;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #563330;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background-color: #392c2b;
+}
+
+.customer-reviews {
+    padding: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.customer-reviews .review {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.customer-reviews .review h4 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.customer-reviews .review p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Modal Background */
+.modal-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Close Button */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #555;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbtn {
+        margin-top: 10px;
+    }
+
+    .contents {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .review-form,
+    .customer-reviews {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bt {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    button {
+        width: 80%;
+    }
+
+    .review-form {
+        width: 90%;
+    }
+}

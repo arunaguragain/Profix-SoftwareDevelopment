@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Promotional Offers</title>
+    <link rel="stylesheet" href="PromoDiscount.css">
+</head>
+<body>
+    <div class="provider-section">
+        <h1>Promotional Offers</h1>
+        <form id="offerForm">
+            <label for="offerTitle">Offer Title:</label>
+            <input type="text" id="offerTitle" required>
+            
+            <label for="offerDescription">Description:</label>
+            <textarea id="offerDescription" rows="3" required></textarea>
+            
+            <label for="offerValidity">Validity:</label>
+            <input type="date" id="offerValidity" required>
+            
+            <label for="offerDiscount">Discount Percentage:</label>
+            <input type="number" id="offerDiscount" min="1" max="100" required>
+            
+            <button type="submit">Add Offer</button>
+        </form>
+        
+        <div id="offerList">
+            <h2>Current Offers</h2>
+            <ul id="offers"></ul>
+        </div>
+    </div>
+    <script src="PromoDiscount.js"></script>
+</body>
+</html>

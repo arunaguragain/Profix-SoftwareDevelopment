@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="DashboardStyle.css">
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="navbar">
+            <div class="logo"></div>
+            <div class="nav-buttons">
+                <h1>Welcome <span id="welcomeName">Your Name!</span></h1>
+
+                <!-- Notification Button -->
+                <div class="notification-wrapper">
+                    <button class="notification-btn" onclick="toggleNotificationDropdown()">🔔</button>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <p>No new notifications</p>
+                    </div>
+                </div>
+
+                <!-- Settings Button -->
+                <div class="settings-wrapper">
+                    <button class="settings-btn" onclick="toggleSettingsDropdown()">⚙️</button>
+                    <div class="settings-dropdown" id="settingsDropdown">
+                        <ul>
+                            <li onclick="navigateToPromotions()">Promotions and Discounts</li>
+                            <!-- Future options can be added here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="buttons">
+            <div class="button">
+                <button onclick="location.href='#'">
+                    <img src="Search.png.jpg" alt="Search">
+                    <p>Search</p>
+                </button>
+            </div>
+            <div class="button">
+                <button onclick="location.href='#'">
+                    <img src="Profile.png.jpg" alt="Profile">
+                    <p>Profile</p>
+                </button>
+            </div>
+            <div class="button">
+                <button onclick="location.href='#'">
+                    <img src="Services.png.png" alt="Services">
+                    <p>Services</p>
+                </button>
+            </div>
+            <div class="button">
+                <button onclick="location.href='#'">
+                    <img src="QA.png.png" alt="FAQs">
+                    <p>FAQs</p>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="DashboardScript.js"></script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+/* General Reset */
+
+.main{
+    /* display: flex; */
+    background-image: url(bg.jpg);
+    height:100vh;
+    width:100%;
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+    align-items: center;
+}
+
+h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    margin-top: 15px;
+    font-style: bold;
+    color: white;
+    
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: rgb(171, 168, 168); */
+    padding: 1rem;
+    /* color: white; */
+    position: relative;
+  }
+  
+  .logo {
+    background-image: url(image__1_-removebg.png) ;
+    background-size: contain;
+    /* font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer; */
+    height: 65px;
+    width: 65px;
+    background-blend-mode: overlay;
+    border-radius: 50%;
+    background-size: contain;
+    background-blend-mode:lighten;
+  }
+  
+ 
+  
+  .navbar .notification-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .notification-dropdown {
+    display: none;
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
+    background-color: white;
+    color: black;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+  }
+  
+  .notification-btn:hover + .notification-dropdown {
+    display: block;
+  }
+  
+  /* Main Layout */
+  .main-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2rem;
+  }
+  
+  /* Content Section */
+  .content-section {
+    width:80%;
+    max-width: 800px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 2rem;
+  }
+  
+  .photo-box {
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .photo-upload-input {
+    display: none;
+  }
+  
+  .photo-upload-label {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .rating {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+    font-size: 1.5rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+    margin-top: 1px;
+    cursor: pointer;
+    
+  }
+  
+  .rating span.active {
+    color: #FFD700;
+  }
+  
+  .description-box {
+    font-family: 'Times New Roman', Times, serif;
+    width: 300px;
+    height: 150px;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #573939d2;
+    color: white;
+  }
+  
+  .description-box textarea {
+    max-width: fit-content;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    resize: none;
+    background: transparent;
+    color: white;
+    cursor:context-menu;
+    
+  }
+  
+  /* Side Buttons */
+  .side-buttons {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: transparent;
+    
+  }
+  
+  .side-buttons button {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+    /* background-color: white; */
+    color: black;
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+  }
+  
+  .side-buttons .history-btn:hover,
+  .side-buttons .appointments-btn:hover {
+    background-color: aliceblue;
+    opacity: 0.9;
+  }
+
+  /* Responsive design */
+@media (max-width: 768px) {
+  .content {
+      width: 90%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .content {
+      width: 60%;
+  }
+}
+
+.message-container {
+    display: none;
+    max-width: fit-content;
+    background-color: #f9f9f9; /* Lighter background */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 5px;
+    width: 90%;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 14px; /* Slightly larger text for better readability */
+    color: black; /* Dark text for better contrast */
+    padding: 15px; /* More padding for the message */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* A bit of shadow to stand out */
+    font-style: normal; /* Normal font style */
+    line-height: 1.5; /* Improved line spacing for readability */
+}
+
+.nav-buttons .delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.nav-buttons .delete-btn:hover {
+  color: red;
+}
+
+
+
+
+
+
+ 
+  
