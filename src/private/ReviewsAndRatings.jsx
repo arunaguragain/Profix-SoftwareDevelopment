@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import '../style/ReviewsAndRatings.css'; 
+import { useNavigate } from 'react-router-dom';
+import '../style/ReviewsAndRatings.css';
 
 const Review = () => {
   const [reviews, setReviews] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRating, setSelectedRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0); // For hover effect
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,69 +14,52 @@ const Review = () => {
     comment: '',
   });
 
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
-  // Function to handle star rating click
-  const handleStarClick = (rating) => {
-    setSelectedRating(rating);
-  };
-
-  // Handle form input changes
+  // Handle input change
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  // Handle star click for rating selection
+  const handleStarClick = (rating) => {
+    setSelectedRating(rating);
   };
 
   // Handle form submit
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
-    const { name, service, comment } = formData;
-
+    
     if (selectedRating === 0) {
-      alert('Please select a star rating!');
+      alert('Please select a rating before submitting.');
       return;
     }
 
-    const newReview = {
-      name,
-      service,
-      rating: selectedRating,
-      comment,
-    };
+    const { name, service, comment } = formData;
+    const newReview = { name, service, rating: selectedRating, comment };
 
-    // Add the new review to the list of reviews
-    setReviews((prevReviews) => [newReview, ...prevReviews]);
-
-    // Reset the form and close modal
-    setFormData({
-      name: '',
-      email: '',
-      service: '',
-      comment: '',
-    });
+    setReviews((prev) => [newReview, ...prev]);
+    
+    // Reset form after submission
+    setFormData({ name: '', email: '', service: '', comment: '' });
     setSelectedRating(0);
     setIsModalOpen(false);
   };
 
-  // Navigate functions for routing
-  const goToHome = () => navigate('/');
-  const goToContact = () => navigate('/contact');
-  const goToAbout = () => navigate('/about');
-
   return (
     <div className="main">
+      {/* Navbar */}
       <div className="nav">
         <div className="logo"></div>
         <div className="navbtn">
-          <button onClick={goToHome} className="bt nav-link">Home</button>
-          <button onClick={goToContact} className="bt nav-link">Contact</button>
-          <button onClick={goToAbout} className="bt nav-link">About</button>
+          <button onClick={() => navigate('/')} className="bt nav-link">Home</button>
+          <button onClick={() => navigate('/contact')} className="bt nav-link">Contact</button>
+          <button onClick={() => navigate('/about')} className="bt nav-link">About</button>
         </div>
       </div>
+
+      {/* Reviews Section */}
       <div className="contents">
         <h2 className="customer-reviews-header">Customers Review</h2>
         <div className="customer-reviews" id="reviewsContainer">
@@ -94,9 +78,11 @@ const Review = () => {
         <button onClick={() => setIsModalOpen(true)} className="bt">Leave a Review</button>
       </div>
 
+      {/* Modal for Review Form */}
       {isModalOpen && (
         <div className="modal-bg" onClick={() => setIsModalOpen(false)}>
           <div className="review-form" onClick={(e) => e.stopPropagation()}>
+            <span className="close-modal" onClick={() => setIsModalOpen(false)}>✖</span>
             <h2>Leave a Review</h2>
             <form id="reviewForm" onSubmit={handleFormSubmit}>
               <div>
@@ -132,19 +118,23 @@ const Review = () => {
                   required
                 />
               </div>
+
+              {/* Star Rating Section */}
               <div className="ratings">
                 <label>Rating:</label>
                 {[1, 2, 3, 4, 5].map((rating) => (
                   <span
                     key={rating}
-                    className={`star ${rating <= selectedRating ? 'selected' : ''}`}
-                    data-value={rating}
+                    className={`star ${rating <= (hoverRating || selectedRating) ? 'selected' : ''}`}
                     onClick={() => handleStarClick(rating)}
+                    onMouseEnter={() => setHoverRating(rating)}
+                    onMouseLeave={() => setHoverRating(0)}
                   >
                     ★
                   </span>
                 ))}
               </div>
+
               <div>
                 <textarea
                   id="comment"

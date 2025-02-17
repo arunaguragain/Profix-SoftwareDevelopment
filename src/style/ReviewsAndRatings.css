@@ -1,9 +1,11 @@
+/* Global Styles */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #563330;
 }
 
+/* Main Layout */
 .main {
     height: 100vh;
     width: 100%;
@@ -14,12 +16,14 @@ body {
     background-attachment: fixed;
 }
 
+/* Navigation Bar */
 .nav {
     width: 100%;
     background-color: #563330;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 10px 20px;
     flex-wrap: wrap;
 }
 
@@ -35,6 +39,7 @@ body {
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
+    border: none;
 }
 
 .bt:hover {
@@ -52,101 +57,17 @@ body {
     width: 90%;
     max-width: 800px;
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
+    margin-right: 500px;
     margin-top: 20px;
-    margin-right: auto;
-    margin-left: 15px;
     background-color: lightgrey;
-    gap: 10px;
 }
 
-.review-form {
-    width: 90%;
-    max-width: 400px;
-    background-color: lightgrey;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 5px;
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-}
-
-.review-form h2,
 .customer-reviews-header {
     font-size: 28px;
     color: #333;
-    margin-bottom: 20px;
     text-align: center;
-    margin-top: 0;
-}
-
-.review-form div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.review-form label {
-    display: inline-block;
-    width: 30%;
-    text-align: left;
-    margin-right: 10px;
-    font-weight: bold;
-    color: #555;
-}
-
-.review-form input,
-.review-form textarea {
-    display: inline-block;
-    width: 65%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-.review-form textarea {
-    resize: none;
-}
-
-.ratings {
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
-}
-
-.star {
-    font-size: 24px;
-    cursor: pointer;
-    color: black;
-    transition: color 0.3s ease;
-}
-
-.star.selected {
-    color: #f39c12;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #563330;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-button:hover {
-    transform: scale(1.05);
-    background-color: #392c2b;
+    margin-bottom: 20px;
 }
 
 .customer-reviews {
@@ -180,9 +101,11 @@ button:hover {
     color: #666;
 }
 
-/* Modal Background */
+
 .modal-bg {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -192,21 +115,96 @@ button:hover {
     z-index: 999;
 }
 
-/* Close Button */
+.review-form {
+    width: 90%;
+    max-width: 400px;
+    background-color: lightgrey;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
 .close-modal {
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 15px;
     cursor: pointer;
     font-size: 20px;
+    font-weight: bold;
     color: #555;
+    transition: color 0.3s ease;
 }
 
-/* Media Queries */
+.close-modal:hover {
+    color: black;
+}
+
+.review-form label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.review-form input,
+.review-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.review-form textarea {
+    resize: none;
+}
+
+
+.ratings {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+    color: #f39c12;
+}
+
+.star {
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    transition: color 0.3s ease;
+}
+
+.star:hover,
+.star.selected {
+    color: #f39c12;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #563330;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background-color: #392c2b;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .nav {
         flex-direction: column;
         align-items: center;
+        padding: 15px;
     }
 
     .navbtn {
@@ -218,9 +216,8 @@ button:hover {
         padding: 15px;
     }
 
-    .review-form,
-    .customer-reviews {
-        padding: 15px;
+    .review-form {
+        padding: 20px;
     }
 }
 
@@ -236,10 +233,10 @@ button:hover {
     }
 
     button {
-        width: 80%;
+        width: 90%;
     }
 
     .review-form {
-        width: 90%;
+        width: 95%;
     }
 }
