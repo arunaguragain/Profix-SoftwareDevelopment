@@ -26,6 +26,7 @@ function App() {
   const Notification = React.lazy(() => import("./private/Notification.jsx"));
   const ProfilesAndListings = React.lazy(() => import("./private/ProfilesAndListings.jsx"));
   const SearchAndDiscovery = React.lazy(() => import("./private/SearchAndDiscovery.jsx"));
+  const PromoDiscount = React.lazy(() => import ("./private/PromoDiscount.jsx"));h
 
 
   return (
@@ -56,9 +57,10 @@ function App() {
           <Route path="/searchanddiscovery" element={<SearchAndDiscovery />} />
           <Route path="/notification" element={<Notification />} />
           <Route path="/profilesandlistings" element={<ProfilesAndListings />} />
+          <Route path = "/promodiscount" element ={<PromoDiscount/>}></Route>
         </Routes>
-      </Suspense>
-    </Router>
+        </Suspense>
+        </Router>
   );
 }
 

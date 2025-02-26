@@ -22,7 +22,7 @@ body {
 
 .logo {
     margin-left: 0dp;
-    background-image: url(image__1_-removebg.png);
+    background-image: url(../pictures/logo.png);
     background-size: contain;
     height: 65px;
     width: 65px;
