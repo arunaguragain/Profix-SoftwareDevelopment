@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const sequelize = require('./Backend/database/db.js');  //importing database
 const userRoute = require('./Backend/routes/userRoutes.js');  //importing user route
+const reviewRoute = require('./Backend/routes/revieweRoutes.js')
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -16,13 +17,14 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', userRoute);  
+app.use('/reviews', reviewRoute);
 app.use('/uploads', express.static('uploads'));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);   
 });
 
-// sequelize.sync({ force: true })
+sequelize.sync({ force: true })
 
 
 
