@@ -1,62 +1,75 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import '../style/UserProfile.css';
 
 const UserProfile = () => {
-  const navigate = useNavigate(); 
-
+  const navigate = useNavigate();
   const [profile, setProfile] = useState({
-    fullName: "John Doe",
-    address: "123 Main Street",
-    email: "john.doe@example.com",
-    contact: "123-456-7890",
-    photo: null,  // Store photo here
+    fullName: "",
+    address: "",
+    email: "",
+    contact: "",
+    photo: null,
   });
-
   const [isEditing, setIsEditing] = useState(false);
-  const [isSecurityBoxOpen, setIsSecurityBoxOpen] = useState(false);
-  const [securityQuestion, setSecurityQuestion] = useState("");
-  const [securityAnswer, setSecurityAnswer] = useState("");
+  const token = localStorage.getItem("token");
 
-  // Handle file upload
-  const handlePhotoUpload = (event) => {
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+    axios
+      .get("http://localhost:5001/users/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setProfile(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching profile:", err);
+      });
+  }, [token, navigate]);
+
+  const handlePhotoUpload = async (event) => {
     const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProfile((prevProfile) => ({
-          ...prevProfile,
-          photo: e.target.result,  // Save photo in profile state
-        }));
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("profilePicture", file);
+    try {
+      const res = await axios.put("http://localhost:5001/users/profile/picture", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      setProfile((prevProfile) => ({ ...prevProfile, photo: res.data.profilePictureUrl }));
+    } catch (err) {
+      console.error("Error uploading photo:", err);
     }
   };
 
-  // Handle profile editing
   const handleEdit = () => setIsEditing(true);
   const handleCancelEdit = () => setIsEditing(false);
 
-  const handleSaveProfile = (event) => {
+  const handleSaveProfile = async (event) => {
     event.preventDefault();
-    setProfile({
-      fullName: event.target.fullName.value,
-      address: event.target.address.value,
-      email: event.target.email.value,
-      contact: event.target.contact.value,
-      photo: profile.photo,  // Keep the existing photo
-    });
-    setIsEditing(false);
-  };
-
-  // Handle security questions
-  const handleSaveSecurityQuestion = (event) => {
-    event.preventDefault();
-    if (securityQuestion && securityAnswer) {
-      alert("Security question saved!");
-      setIsSecurityBoxOpen(false);
-    } else {
-      alert("Please select a question and provide an answer.");
+    try {
+      const updatedData = {
+        fullName: event.target.fullName.value,
+        address: event.target.address.value,
+        email: event.target.email.value,
+        contact: event.target.contact.value,
+      };
+      await axios.put("http://localhost:5001/users/profile", updatedData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setProfile((prevProfile) => ({ ...prevProfile, ...updatedData }));
+      setIsEditing(false);
+    } catch (err) {
+      console.error("Error updating profile:", err);
     }
   };
 
@@ -64,15 +77,7 @@ const UserProfile = () => {
     <div className="main">
       <nav className="navbar">
         <div className="logo"></div>
-        <h1>Your Profile</h1>
-        <div className="nav-buttons">
-          <button className="notification-btn">🔔</button>
-          <div className="notification-dropdown">
-            <p>No new notifications</p>
-          </div>
-        </div>
       </nav>
-
       <div className="main-layout">
         <div className="content-section">
           <div className="photo-box">
@@ -98,23 +103,14 @@ const UserProfile = () => {
               <form onSubmit={handleSaveProfile}>
                 <label>Full Name:</label>
                 <input type="text" name="fullName" defaultValue={profile.fullName} required />
-
                 <label>Address:</label>
                 <input type="text" name="address" defaultValue={profile.address} required />
-
                 <label>Email:</label>
                 <input type="email" name="email" defaultValue={profile.email} required />
-
                 <label>Contact:</label>
                 <input type="text" name="contact" defaultValue={profile.contact} required />
-
-                <label>Profile Photo:</label>
-                <input type="file" accept="image/*" onChange={handlePhotoUpload} />
-
                 <button type="submit" className="btnedit">Save</button>
-                <button type="button" className="btnedit" onClick={handleCancelEdit}>
-                  Cancel
-                </button>
+                <button type="button" className="btnedit" onClick={handleCancelEdit}>Cancel</button>
               </form>
             </div>
           ) : (
@@ -129,44 +125,10 @@ const UserProfile = () => {
             </div>
           )}
         </div>
-
-        {isSecurityBoxOpen && (
-          <div id="security-questions-box">
-            <h3>Set Up Security Questions</h3>
-            <form onSubmit={handleSaveSecurityQuestion}>
-              <label>Choose a question:</label>
-              <select value={securityQuestion} onChange={(e) => setSecurityQuestion(e.target.value)} required>
-                <option value="">Select a question</option>
-                <option value="pet_name">What is your pet's name?</option>
-                <option value="mother_maiden_name">What is your mother's maiden name?</option>
-                <option value="birth_city">In which city were you born?</option>
-                <option value="favorite_book">What was the name of your favorite book as a child?</option>
-                <option value="hospital_name">What is the name of the hospital where you were born?</option>
-                <option value="childhood_teacher">What is the name of your childhood teacher?</option>
-                <option value="first_school">What is the name of the first school you attended?</option>
-                <option value="childhood_friend">What is the name of your childhood friend?</option>
-              </select>
-
-              <label>Answer:</label>
-              <input
-                type="text"
-                value={securityAnswer}
-                onChange={(e) => setSecurityAnswer(e.target.value)}
-                placeholder="Enter your answer"
-                required
-              />
-
-              <button type="submit" className="btnedit">Save</button>
-              <button type="button" className="btnedit" onClick={() => setIsSecurityBoxOpen(false)}>Cancel</button>
-            </form>
-          </div>
-        )}
-
         <div className="side-buttons">
           <button className="history-btn">⏳</button>
           <button className="appointments-btn">📅</button>
           <button className="favourite-btn" onClick={() => navigate("/favorites")}>⭐</button>
-          <button className="security-questions-btn" onClick={() => setIsSecurityBoxOpen(true)}>❓</button>
         </div>
       </div>
     </div>
