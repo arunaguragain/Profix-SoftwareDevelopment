@@ -26,7 +26,7 @@ function App() {
   const Notification = React.lazy(() => import("./private/Notification.jsx"));
   const ProfilesAndListings = React.lazy(() => import("./private/ProfilesAndListings.jsx"));
   const SearchAndDiscovery = React.lazy(() => import("./private/SearchAndDiscovery.jsx"));
-  const PromoDiscount = React.lazy(() => import ("./private/PromoDiscount.jsx"));h
+  const PromoDiscount = React.lazy(() => import ("./private/PromoDiscount.jsx"));
 
 
   return (
