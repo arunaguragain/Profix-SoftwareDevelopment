@@ -13,6 +13,7 @@ function App() {
   const DeletePopUp = React.lazy(() => import("./private/DeletePopUp.jsx"));
   const MainPageS = React.lazy(() =>import("./public/MainPageS.jsx"));
   const ServiceProviderLogin = React.lazy(() =>import("./public/ServiceProviderLogin.jsx"));
+  
   const UserLogin = React.lazy(() =>import("./public/UserLogin.jsx"));
   const Contact = React.lazy(() =>import("./public/Contact.jsx"));
   const CommunityBuilding = React.lazy(() => import("./private/CommunityBuilding.jsx"));
