@@ -2,8 +2,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-import '../style/UserRegistration.css'
+import '../style/UserRegistration.css';
 
 // Define validation schema using Yup
 const schema = yup.object().shape({
@@ -26,22 +28,34 @@ const schema = yup.object().shape({
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], "Passwords must match.")
-    .required("Confirm Password is required.")
+    .required("Confirm Password is required."),
 });
 
 const UserSignUp = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   // Handle form submission
-  const onSubmit = (data) => {
-    console.log('User Data:', data);
-    alert('Signup successful!');
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post('http://localhost:5001/users/register', data);
+
+      if (response.status === 201) {
+        alert('Signup successful!');
+        reset(); // Reset form fields after successful submission
+        navigate('/userlogin'); // Redirect to login page
+      }
+    } catch (error) {
+      alert(error.response?.data?.message || 'Registration failed');
+    }
   };
 
   return (
@@ -49,89 +63,47 @@ const UserSignUp = () => {
       <div className="wrap">
         <div className="content">
           <div id="form" className="content">
-            <h1>SignUp as a User</h1>
+            <h1>Sign Up as a User</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* Full Name */}
               <div className="input-wrapper">
-                <input
-                  type="text"
-                  id="fullName"
-                  placeholder="Full Name"
-                  {...register('fullName')}
-                />
-                {errors.fullName && (
-                  <p className="error-message">{errors.fullName.message}</p>
-                )}
+                <input type="text" placeholder="Full Name" {...register('fullName')} />
+                {errors.fullName && <p className="error-message">{errors.fullName.message}</p>}
               </div>
 
               {/* Address */}
               <div className="input-wrapper">
-                <input
-                  type="text"
-                  id="address"
-                  placeholder="Address"
-                  {...register('address')}
-                />
-                {errors.address && (
-                  <p className="error-message">{errors.address.message}</p>
-                )}
+                <input type="text" placeholder="Address" {...register('address')} />
+                {errors.address && <p className="error-message">{errors.address.message}</p>}
               </div>
 
               {/* Email */}
               <div className="input-wrapper">
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Email"
-                  {...register('email')}
-                />
-                {errors.email && (
-                  <p className="error-message">{errors.email.message}</p>
-                )}
+                <input type="email" placeholder="Email" {...register('email')} />
+                {errors.email && <p className="error-message">{errors.email.message}</p>}
               </div>
 
               {/* Contact */}
               <div className="input-wrapper">
-                <input
-                  type="text"
-                  id="contact"
-                  placeholder="Contact"
-                  {...register('contact')}
-                />
-                {errors.contact && (
-                  <p className="error-message">{errors.contact.message}</p>
-                )}
+                <input type="text" placeholder="Contact" {...register('contact')} />
+                {errors.contact && <p className="error-message">{errors.contact.message}</p>}
               </div>
 
               {/* Password */}
               <div className="input-wrapper">
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="Password"
-                  {...register('password')}
-                />
-                {errors.password && (
-                  <p className="error-message">{errors.password.message}</p>
-                )}
+                <input type="password" placeholder="Password" {...register('password')} />
+                {errors.password && <p className="error-message">{errors.password.message}</p>}
               </div>
 
               {/* Confirm Password */}
               <div className="input-wrapper">
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  placeholder="Confirm Password"
-                  {...register('confirmPassword')}
-                />
-                {errors.confirmPassword && (
-                  <p className="error-message">{errors.confirmPassword.message}</p>
-                )}
+                <input type="password" placeholder="Confirm Password" {...register('confirmPassword')} />
+                {errors.confirmPassword && <p className="error-message">{errors.confirmPassword.message}</p>}
               </div>
 
               {/* Submit Button */}
-              <button type="submit" className="btn" id="button">
-                SignUp
+              <button type="submit" className="btn">
+                Sign Up
               </button>
             </form>
           </div>

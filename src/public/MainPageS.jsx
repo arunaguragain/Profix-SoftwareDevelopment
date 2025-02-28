@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './MainPageS.css'; // Import the CSS file
+import '../style/MainPageS.css'; // Import the CSS file
 
 function MainPage() {
     const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);

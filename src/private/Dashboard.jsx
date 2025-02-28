@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Dashboard.css';
+import '../style/Dashboard.css';
 
 function Dashboard() {
   const [userName, setUserName] = useState('Guest');
