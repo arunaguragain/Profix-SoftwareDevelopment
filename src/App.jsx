@@ -1,9 +1,8 @@
-import React, { Suspense, useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 
 function App() {
-  const MainPage = React.lazy(() => import("./public/MainPage.jsx"));
   const UserRegistration = React.lazy(() => import("./public/UserRegistration.jsx"));
   const PasswordRecovery = React.lazy(() => import("./private/PasswordRecovery.jsx"));
   const Favorites = React.lazy(() => import("./private/Favorites.jsx"));
@@ -12,16 +11,12 @@ function App() {
   const Dashboard = React.lazy(() => import("./private/Dashboard.jsx"))
   const DeletePopUp = React.lazy(() => import("./private/DeletePopUp.jsx"))
   const MainPageS = React.lazy(() =>import("./public/MainPageS.jsx"))
-  const ServiceProviderRegistration =React.lazy(() => import("./public/ServiceProviderRegistration.jsx"))
-  const ServiceProviderProfile = React.lazy(() => import ("./private/SeviceProviderProfile.jsx"))
-  const PromoDiscount = React.lazy(() => import ("./private/PromoDiscount.jsx"))
-
-
   const ReviewsAndRatings = React.lazy(() => import("./private/ReviewsAndRatings.jsx"));
   const EmergencyServices = React.lazy(() => import("./private/EmergencyContact.jsx"));
   const UserProfile = React.lazy(() => import("./private/UserProfile.jsx"));
   const ProFixAdminDashboard  = React.lazy(() => import("./private/UserModeration.jsx"));
-  
+  const ServiceProviderRegistration =React.lazy(() => import("./public/ServiceProviderRegistration.jsx"))
+  const ServiceProviderProfile = React.lazy(() => import ("./private/SeviceProviderProfile.jsx"))
 
   return (
     <Router>
@@ -39,7 +34,6 @@ function App() {
         <Route path ="/mainpages" element={<MainPageS/>}></Route>
         <Route path = "/serviceproviderregistration" element={<ServiceProviderRegistration/>}></Route>
         <Route path = "/serviceproviderprofile" element={<ServiceProviderProfile/>}></Route>
-        <Route path = "/promodiscount" element ={<PromoDiscount/>}></Route>
 
 
         
@@ -50,9 +44,10 @@ function App() {
       </Routes>
       </Suspense>
     </Router>
-
   );
-   
 }
 
-export default App
+export default App;
+
+
+
