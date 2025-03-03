@@ -11,7 +11,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: url('../pictures/backgroundplaceholdercopy.jpg') center/cover no-repeat;
+    /* background: url('../pictures/backgroundplaceholdercopy.jpg') center/cover no-repeat; */
+    background: url('../pictures/bg.jpg')  ;
     background-attachment: fixed;
 }
 
@@ -27,11 +28,12 @@ body {
 
 .navbtn {
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .bt {
     font-size: 18px;
+    width: 130px;
     color: white;
     cursor: pointer;
     padding: 10px 20px;
@@ -41,6 +43,20 @@ body {
 }
 
 .bt:hover {
+    background-color: #392c2b;
+}
+
+.bt3 {
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: none;
+}
+
+.bt3:hover {
     background-color: #392c2b;
 }
 
@@ -98,7 +114,45 @@ body {
     font-size: 14px;
     color: #666;
 }
-
+/* Style for the button container */
+.review-actions {
+    display: flex;
+    gap: 10px; /* Adjust the gap between buttons */
+  }
+  
+  /* Style for the button 1 (Edit) */
+  .bt1 {
+    color: white;
+    width: 70px;
+    padding: 10px 20px;
+    border: none;
+    margin-left: 580px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .bt1:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  /* Style for the button 2 (Delete) */
+  .bt2 {
+    color: white;
+    padding: 10px 20px;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .bt2:hover {
+    background-color: #e53935; /* Darker red on hover */
+  }
+  
 
 .modal-bg {
     display: flex;

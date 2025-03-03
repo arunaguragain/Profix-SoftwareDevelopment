@@ -100,7 +100,8 @@ const UserProfile = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/userLogin");
+    window.location.reload();
   };
 
   const handleDeleteAccount = async () => {
@@ -109,7 +110,8 @@ const UserProfile = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       localStorage.removeItem("token");
-      navigate("/register");
+      navigate("/userRegistration");
+       window.location.reload();
     } catch (err) {
       console.error("Error deleting account:", err);
     }
@@ -219,7 +221,6 @@ const UserProfile = () => {
     </div>
   </div>
 </div>
-
     </div>
   );
 };
