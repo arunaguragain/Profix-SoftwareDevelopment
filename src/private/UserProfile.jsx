@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "../style/UserProfile.css";
 
 const UserProfile = () => {
@@ -13,9 +15,11 @@ const UserProfile = () => {
     photo: "",
   });
   const [isEditing, setIsEditing] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const token = localStorage.getItem("token");
 
-  // Fetch user profile on component mount
+  // ✅ Fetch user profile including profile picture
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -27,58 +31,52 @@ const UserProfile = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        // Ensure profile.photo has the correct full URL
-        const updatedProfile = {
+        setProfile({
           ...res.data,
-          photo: res.data.photo
-            ? `http://localhost:5001/uploads/${res.data.photo}`
+          photo: res.data.profilePicture
+            ? `http://localhost:5001/${res.data.profilePicture.replace(/\\/g, "/")}`
             : "",
-        };
-        setProfile(updatedProfile);
+        });
       })
       .catch((err) => {
         console.error("Error fetching profile:", err);
       });
   }, [token, navigate]);
 
-  // Handle Profile Picture Upload
+ 
   const handlePhotoUpload = async (event) => {
     const file = event.target.files[0];
-    if (!file) {
-      console.error("No file selected!");
-      return;
-    }
+    if (!file) return;
 
     const formData = new FormData();
-    formData.append("profilePic", file); // Ensure this matches backend field name
+    formData.append("profilePic", file);
 
     try {
-      const res = await axios.put("http://localhost:5001/users/profile/picture", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.put(
+        "http://localhost:5001/users/profile/Picture",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-      console.log("Upload Success:", res.data);
-
-      // Ensure the backend response includes the correct full image URL
+      // Update profile with new image URL
       setProfile((prevProfile) => ({
         ...prevProfile,
-        photo: `http://localhost:5001/uploads/${res.data.profilePictureUrl}`,
+        photo: `http://localhost:5001/${response.data.profilePictureUrl.replace(/\\/g, "/")}`,
       }));
     } catch (err) {
-      console.error("Error uploading photo:", err.response ? err.response.data : err.message);
+      console.error("Error uploading profile picture:", err);
     }
   };
 
-  // Enable Edit Mode
   const handleEdit = () => setIsEditing(true);
-
-  // Cancel Edit Mode
   const handleCancelEdit = () => setIsEditing(false);
 
-  // Save Profile Changes
+  // ✅ Save profile changes (name, email, etc.)
   const handleSaveProfile = async (event) => {
     event.preventDefault();
     try {
@@ -100,6 +98,23 @@ const UserProfile = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      await axios.delete("http://localhost:5001/users/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      localStorage.removeItem("token");
+      navigate("/register");
+    } catch (err) {
+      console.error("Error deleting account:", err);
+    }
+  };
+
   return (
     <div className="main">
       <nav className="navbar">
@@ -118,12 +133,12 @@ const UserProfile = () => {
             {profile.photo ? (
               <img
                 src={profile.photo}
-                alt="Profile Preview"
+                alt="Profile"
                 className="photo-preview"
-                onError={(e) => (e.target.style.display = "none")} // Hide if image fails to load
+                onError={(e) => (e.target.style.display = "none")}
               />
             ) : (
-              <p></p>
+              <p>No Profile Picture</p>
             )}
           </div>
 
@@ -158,8 +173,53 @@ const UserProfile = () => {
           <button className="history-btn">⏳</button>
           <button className="appointments-btn">📅</button>
           <button className="favourite-btn" onClick={() => navigate("/favorites")}>⭐</button>
+          <button className="logout-btn btn btn-light" onClick={() => setShowLogoutModal(true)}>
+            <i className="bi bi-box-arrow-right"></i>
+          </button>
+          <button className="delete-btn btn btn-light" onClick={() => setShowDeleteModal(true)}>
+            <i className="bi bi-trash"></i>
+          </button>
         </div>
       </div>
+
+     {/* Logout Confirmation Modal */}
+<div className={`modal fade ${showLogoutModal ? "show d-block" : ""}`} tabIndex="-1">
+  <div className="modal-dialog modal-dialog-centered modal-sm">
+    <div className="modal-content custom-modal">
+      <div className="modal-header">
+        <h5 className="modal-title">Confirm Logout</h5>
+        <button type="button" className="btn-close" onClick={() => setShowLogoutModal(false)}></button>
+      </div>
+      <div className="modal-body">
+        <p>Are you sure you want to log out?</p>
+      </div>
+      <div className="modal-footer">
+        <button className="btn btn-secondary" onClick={() => setShowLogoutModal(false)}>Cancel</button>
+        <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{/* Delete Account Confirmation Modal */}
+<div className={`modal fade ${showDeleteModal ? "show d-block" : ""}`} tabIndex="-1">
+  <div className="modal-dialog modal-dialog-centered modal-sm">
+    <div className="modal-content custom-modal">
+      <div className="modal-header">
+        <h5 className="modal-title">Confirm Deletion</h5>
+        <button type="button" className="btn-close" onClick={() => setShowDeleteModal(false)}></button>
+      </div>
+      <div className="modal-body">
+        <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+      </div>
+      <div className="modal-footer">
+        <button className="btn btn-secondary" onClick={() => setShowDeleteModal(false)}>Cancel</button>
+        <button className="btn btn-danger" onClick={handleDeleteAccount}>Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
   );
 };

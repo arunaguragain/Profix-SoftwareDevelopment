@@ -171,4 +171,21 @@ const updateProfilePicture = async (req, res) => {
     }
 };
 
-module.exports = { registerUser, loginUser, getProfile, updateProfile, updateProfilePicture };
+const deleteAccount = async (req, res) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const decoded = jwt.verify(token, 'your_jwt_secret_key');
+
+        const user = await User.findOne({ where: { userId: decoded.userId } });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        await user.destroy();
+        res.status(200).json({ message: 'Account deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ message: 'Error deleting account', error: err.message });
+    }
+};
+
+module.exports = { registerUser, loginUser, getProfile, updateProfile, updateProfilePicture, deleteAccount };
