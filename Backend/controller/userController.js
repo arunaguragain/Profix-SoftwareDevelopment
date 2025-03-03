@@ -111,26 +111,63 @@ const updateProfile = async (req, res) => {
 };
 
 // Update profile picture
+// const updateProfilePicture = async (req, res) => {
+//     try {
+//         const token = req.headers.authorization.split(' ')[1];
+//         const decoded = jwt.verify(token, 'your_jwt_secret_key');
+
+//         const user = await User.findOne({ where: { userId: decoded.userId } });
+//         if (!user) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
+
+//         if (!req.file) {
+//             return res.status(400).json({ message: 'No file uploaded' });
+//         }
+
+//         user.profilePicture = req.file.path;
+//         await user.save();
+
+//         res.status(200).json({ message: 'Profile picture updated successfully', profilePictureUrl: user.profilePicture });
+//     } catch (err) {
+//         res.status(500).json({ message: 'Error updating profile picture', error: err.message });
+//     }
+// };
+
 const updateProfilePicture = async (req, res) => {
     try {
+        // Get the token from Authorization header
         const token = req.headers.authorization.split(' ')[1];
-        const decoded = jwt.verify(token, 'your_jwt_secret_key');
+        const decoded = jwt.verify(token, 'your_jwt_secret_key'); 
 
+        // Find user in the database using the decoded userId
         const user = await User.findOne({ where: { userId: decoded.userId } });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
+        // Check if file exists in the request
         if (!req.file) {
             return res.status(400).json({ message: 'No file uploaded' });
         }
 
-        user.profilePicture = req.file.path;
+        // Assuming the image is uploaded via multer
+        const profilePictureUrl = req.file.path; // File path saved by multer
+
+        // Update user's profile picture URL in the database
+        user.profilePicture = profilePictureUrl;
         await user.save();
 
-        res.status(200).json({ message: 'Profile picture updated successfully', profilePictureUrl: user.profilePicture });
+        // Return the updated profile picture URL
+        res.status(200).json({
+            message: 'Profile picture updated successfully',
+            profilePictureUrl,
+        });
     } catch (err) {
-        res.status(500).json({ message: 'Error updating profile picture', error: err.message });
+        res.status(500).json({
+            message: 'Error updating profile picture',
+            error: err.message,
+        });
     }
 };
 

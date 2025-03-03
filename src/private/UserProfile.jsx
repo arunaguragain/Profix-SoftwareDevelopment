@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import '../style/UserProfile.css';
+import "../style/UserProfile.css";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -10,34 +10,48 @@ const UserProfile = () => {
     address: "",
     email: "",
     contact: "",
-    photo: null,
+    photo: "",
   });
   const [isEditing, setIsEditing] = useState(false);
   const token = localStorage.getItem("token");
 
+  // Fetch user profile on component mount
   useEffect(() => {
     if (!token) {
       navigate("/login");
       return;
     }
+
     axios
       .get("http://localhost:5001/users/profile", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        setProfile(res.data);
+        // Ensure profile.photo has the correct full URL
+        const updatedProfile = {
+          ...res.data,
+          photo: res.data.photo
+            ? `http://localhost:5001/uploads/${res.data.photo}`
+            : "",
+        };
+        setProfile(updatedProfile);
       })
       .catch((err) => {
         console.error("Error fetching profile:", err);
       });
   }, [token, navigate]);
 
+  // Handle Profile Picture Upload
   const handlePhotoUpload = async (event) => {
     const file = event.target.files[0];
-    if (!file) return;
+    if (!file) {
+      console.error("No file selected!");
+      return;
+    }
 
     const formData = new FormData();
-    formData.append("profilePicture", file);
+    formData.append("profilePic", file); // Ensure this matches backend field name
+
     try {
       const res = await axios.put("http://localhost:5001/users/profile/picture", formData, {
         headers: {
@@ -45,15 +59,26 @@ const UserProfile = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      setProfile((prevProfile) => ({ ...prevProfile, photo: res.data.profilePictureUrl }));
+
+      console.log("Upload Success:", res.data);
+
+      // Ensure the backend response includes the correct full image URL
+      setProfile((prevProfile) => ({
+        ...prevProfile,
+        photo: `http://localhost:5001/uploads/${res.data.profilePictureUrl}`,
+      }));
     } catch (err) {
-      console.error("Error uploading photo:", err);
+      console.error("Error uploading photo:", err.response ? err.response.data : err.message);
     }
   };
 
+  // Enable Edit Mode
   const handleEdit = () => setIsEditing(true);
+
+  // Cancel Edit Mode
   const handleCancelEdit = () => setIsEditing(false);
 
+  // Save Profile Changes
   const handleSaveProfile = async (event) => {
     event.preventDefault();
     try {
@@ -63,9 +88,11 @@ const UserProfile = () => {
         email: event.target.email.value,
         contact: event.target.contact.value,
       };
+
       await axios.put("http://localhost:5001/users/profile", updatedData, {
         headers: { Authorization: `Bearer ${token}` },
       });
+
       setProfile((prevProfile) => ({ ...prevProfile, ...updatedData }));
       setIsEditing(false);
     } catch (err) {
@@ -81,7 +108,6 @@ const UserProfile = () => {
       <div className="main-layout">
         <div className="content-section">
           <div className="photo-box">
-            <label htmlFor="photo-upload" className="photo-upload-label"></label>
             <input
               type="file"
               id="photo-upload"
@@ -89,13 +115,16 @@ const UserProfile = () => {
               accept="image/*"
               onChange={handlePhotoUpload}
             />
-            <div className="photo-preview-container">
-              {profile.photo ? (
-                <img src={profile.photo} alt="Profile Preview" className="photo-preview" />
-              ) : (
-                <span className="no-photo-message">No photo uploaded</span>
-              )}
-            </div>
+            {profile.photo ? (
+              <img
+                src={profile.photo}
+                alt="Profile Preview"
+                className="photo-preview"
+                onError={(e) => (e.target.style.display = "none")} // Hide if image fails to load
+              />
+            ) : (
+              <p></p>
+            )}
           </div>
 
           {isEditing ? (
