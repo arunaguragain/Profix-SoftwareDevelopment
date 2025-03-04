@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/ProfilesAndListings.css';
 import logo from '../pictures/logo.png';
@@ -7,35 +7,25 @@ const ProfilesAndListings = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [providers, setProviders] = useState([
-    {
-      id: 1,
-      name: "John's Plumbing",
-      category: "plumbing",
-      rating: 4.5,
-      reviews: 128,
-      image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
-      verified: true
-    },
-    {
-      id: 2,
-      name: "ElectricPro Services",
-      category: "electrical",
-      rating: 4.8,
-      reviews: 93,
-      image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
-      verified: true
-    },
-    {
-      id: 3,
-      name: "WoodCraft Carpentry",
-      category: "carpentry",
-      rating: 4.7,
-      reviews: 76,
-      image: "https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
-      verified: true
-    }
-  ]);
+  const [providers, setProviders] = useState([]); // Start with an empty array
+
+  // Fetch service providers from the backend
+  useEffect(() => {
+    const fetchProviders = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/serviceproviders');
+        if (!response.ok) {
+          throw new Error('Failed to fetch providers');
+        }
+        const data = await response.json();
+        setProviders(data);
+      } catch (error) {
+        console.error('Error fetching providers:', error);
+      }
+    };
+
+    fetchProviders();
+  }, []);
 
   const categories = [
     { id: 'all', name: 'All Services' },
@@ -44,12 +34,13 @@ const ProfilesAndListings = () => {
     { id: 'carpentry', name: 'Carpentry' }
   ];
 
+  // Filter providers by category and search query
   const filteredProviders = providers
     .filter(provider => 
       selectedCategory === 'all' || provider.category === selectedCategory)
     .filter(provider =>
       searchQuery === '' || 
-      provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      provider.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       provider.category.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
@@ -78,15 +69,6 @@ const ProfilesAndListings = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="search-input"
             />
-            {/* <div className="popular-searches">
-              <p className="text-sm mb-2">Popular searches:</p>
-              <div className="popular-tags">
-                <button onClick={() => setSearchQuery('Plumber')}>Plumber</button>
-                <button onClick={() => setSearchQuery('Electrician')}>Electrician</button>
-                <button onClick={() => setSearchQuery('Carpenter')}>Carpenter</button>
-                <button onClick={() => setSearchQuery('Painter')}>Painter</button>
-              </div>
-            </div> */}
           </div>
 
           <div className="categories-container">
@@ -104,25 +86,29 @@ const ProfilesAndListings = () => {
           </div>
 
           <div className="providers-grid">
-            {filteredProviders.map(provider => (
-              <div key={provider.id} className="provider-card">
-                <div className="provider-image">
-                  <img src={provider.image} alt={provider.name} />
-                  {provider.verified && (
-                    <span className="verified-badge">✓ Verified</span>
-                  )}
-                </div>
-                <div className="provider-info">
-                  <h3>{provider.name}</h3>
-                  <div className="rating">
-                    <span className="stars">{'★'.repeat(Math.floor(provider.rating))}</span>
-                    <span className="rating-number">{provider.rating}</span>
-                    <span className="reviews-count">({provider.reviews} reviews)</span>
+            {filteredProviders.length > 0 ? (
+              filteredProviders.map(provider => (
+                <div key={provider.id} className="provider-card">
+                  <div className="provider-image">
+                    <img src={provider.profilePicture || "https://via.placeholder.com/150"} alt={provider.fullName} />
+                    {provider.verified && (
+                      <span className="verified-badge">✓ Verified</span>
+                    )}
                   </div>
-                  <button className="contact-btn">Book Appointment</button>
+                  <div className="provider-info">
+                    <h3>{provider.fullName}</h3>
+                    <p>{provider.category}</p>
+                    <div className="rating">
+                      <span className="stars">{'★'.repeat(4)}</span> {/* Placeholder rating */}
+                      <span className="reviews-count">(No reviews yet)</span>
+                    </div>
+                    <button className="contact-btn" onClick={() => navigate('/appointment')}>Book Appointment</button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="text-center">No service providers found.</p>
+            )}
           </div>
         </div>
       </section>

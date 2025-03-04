@@ -21,12 +21,14 @@ const Inquiry = sequelize.define('Inquiry', {
     subject: {
         type: DataTypes.STRING,
         allowNull: false
+
     },
     message: {
         type: DataTypes.TEXT,
         allowNull: false
-    }
-}, {
+    },
+},
+ {
     tableName: 'Inquiries',
     timestamps: true  // This will add createdAt and updatedAt automatically
 });

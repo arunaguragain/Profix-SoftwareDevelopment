@@ -1,35 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/MyAppointment.css";
 
 const SAppointmentList = () => {
   const navigate = useNavigate();
-  const [appointments, setAppointments] = useState([
-    {
-      id: 1,
-      phone: "123-456-7890",
-      date: "2025-03-10",
-      time: "10:00 AM",
-      address: "123 Main St",
-      problem: "Leaky faucet",
-    },
-    {
-      id: 2,
-      phone: "987-654-3210",
-      date: "2025-03-12",
-      time: "02:00 PM",
-      address: "456 Elm St",
-      problem: "Electrical issue",
-    },
-  ]);
-  const [formData, setFormData] = useState({ phone: "", date: "", time: "", address: "", problem: "" });
+  const [appointments, setAppointments] = useState([]);
+
+  // Fetch appointments from the backend
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const response = await fetch("http://localhost:5001/api/appointments");
+        if (!response.ok) throw new Error("Failed to fetch appointments");
+        const data = await response.json();
+        setAppointments(data);
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    };
+    fetchAppointments();
+  }, []);
 
   return (
     <>
       <div className="nav">
         <div className="logo"></div>
         <div className="navbtn">
-          <button onClick={() => navigate('/dashboard')} className="bt nav-link">Home</button>
+          <button onClick={() => navigate('/serviceproviderprofile')} className="bt nav-link">Home</button>
           <button onClick={() => navigate('/contact')} className="bt nav-link">Contact</button>
           <button onClick={() => navigate('/aboutus')} className="bt nav-link">About us</button>
         </div>
@@ -41,18 +38,17 @@ const SAppointmentList = () => {
         ) : (
           <ul className="appointment-list">
             {appointments.map((appointment) => (
-              <li key={appointment.id} className="appointment-item">
-                <p><strong>Phone:</strong> {appointment.phone}</p>
-                <p><strong>Date:</strong> {appointment.date}</p>
-                <p><strong>Time:</strong> {appointment.time}</p>
-                <p><strong>Address:</strong> {appointment.address}</p>
-                <p><strong>Problem:</strong> {appointment.problem}</p>
+              <li key={appointment.appointmentId} className="appointment-item">
+                <p><strong>Phone:</strong> {appointment.phoneNumber}</p>
+                <p><strong>Date:</strong> {appointment.appointmentDate}</p>
+                <p><strong>Time:</strong> {appointment.appointmentTime}</p>
+                <p><strong>Address:</strong> {appointment.Address}</p>
+                <p><strong>Problem:</strong> {appointment.describeProblem}</p>
               </li>
             ))}
           </ul>
         )}
       </div>
-
     </>
   );
 };
