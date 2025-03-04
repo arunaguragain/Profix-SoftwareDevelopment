@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import '../style/MainPageS.css'; // Import the CSS file
-=======
 import React, { useState } from "react";
 import "../style/MainPageS.css";
->>>>>>> 02408b016559382c71bdd12c45358bc792d70d96
 
 const MainPage = () => {
   const [modalType, setModalType] = useState(null);
