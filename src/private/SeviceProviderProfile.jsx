@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Use useNavigate for navigation
 import "../style/seviceproviderprofile.css"; // Corrected typo in import
-
 
 const Profile = () => {
   const [photo, setPhoto] = useState(null);
@@ -9,6 +9,8 @@ const Profile = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [historyMessage, setHistoryMessage] = useState("");
   const [pendingMessage, setPendingMessage] = useState("");
+
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   // Handle Photo Upload
   const handlePhotoUpload = (e) => {
@@ -23,6 +25,11 @@ const Profile = () => {
   // Close notification dropdown when clicking outside
   const closeNotifications = () => {
     if (showNotifications) setShowNotifications(false);
+  };
+
+  // Navigate to /deletepopup when delete icon is clicked
+  const handleDeleteClick = () => {
+    navigate('/deletepopup'); // Navigate to /deletepopup using useNavigate
   };
 
   return (
@@ -43,7 +50,10 @@ const Profile = () => {
           >
             <i className="notification-icon">🔔</i>
           </button>
-          <button className="icon-button delete-btn">
+          <button 
+            className="icon-button delete-btn"
+            onClick={handleDeleteClick} // Attach the delete handler here
+          >
             <i className="delete-icon">🗑️</i>
           </button>
         </div>

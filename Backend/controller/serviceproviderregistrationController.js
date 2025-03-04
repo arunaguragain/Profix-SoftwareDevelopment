@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const ServiceProvider = require('../model/ServiceproviderRegistration');
 
 /**
@@ -6,7 +7,7 @@ const ServiceProvider = require('../model/ServiceproviderRegistration');
  * @route POST /serviceproviders/register
  */
 exports.registerServiceProvider = async (req, res) => {
-  const { fullName, address, email, contact, password, profilePicture } = req.body;
+  const { fullName, address, email, contact, password } = req.body;
 
   if (!fullName || !address || !email || !contact || !password) {
     return res.status(400).json({ error: 'All fields are required' });
@@ -23,13 +24,48 @@ exports.registerServiceProvider = async (req, res) => {
       email,
       contact,
       password: hashedPassword,
-      profilePicture,   
+        
     });
 
     res.status(201).json({ message: 'Registration successful', serviceProvider: newServiceProvider });
   } catch (error) {
     console.error('❌ Error registering service provider:', error);
     res.status(500).json({ error: 'Error registering service provider' });
+  }
+};
+
+/**
+ * @desc Login a Service Provider
+ * @route POST /serviceproviders/login
+ */
+exports.loginServiceProvider = async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password are required' });
+  }
+
+  try {
+    // Check if the service provider exists
+    const serviceProvider = await ServiceProvider.findOne({ where: { email } });
+
+    if (!serviceProvider) {
+      return res.status(404).json({ error: 'Service provider not found' });
+    }
+
+    // Compare password
+    const isPasswordValid = await bcrypt.compare(password, serviceProvider.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Generate a JWT token
+    const token = jwt.sign({ id: serviceProvider.serviceProviderId, email: serviceProvider.email }, "your_secret_key", { expiresIn: '1h' });
+
+    res.status(200).json({ message: 'Login successful', token, serviceProvider });
+  } catch (error) {
+    console.error('❌ Error logging in service provider:', error);
+    res.status(500).json({ error: 'Error logging in service provider' });
   }
 };
 
@@ -63,9 +99,6 @@ exports.updateServiceProvider = async (req, res) => {
     res.status(500).json({ error: 'Error updating service provider' });
   }
 };
-
-
-
 
 /**
  * @desc Get all Service Providers

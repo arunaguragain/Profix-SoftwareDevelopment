@@ -81,7 +81,7 @@ const ServiceProviderSignUp = () => {
         contact,
         password,
         confirmPassword,
-        profilePicture,
+        // profilePicture,
       });
   
       // Success message and redirect

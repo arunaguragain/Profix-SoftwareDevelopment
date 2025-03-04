@@ -41,8 +41,10 @@ function DeletePopup() {
 
   return (
     <div>
-      <button onClick={showDeletePopup}>Delete Account</button>
+      {/* Styled Delete Account Button */}
+      <button className="delete-account-button" onClick={showDeletePopup}>Delete Account</button>
 
+      {/* Popup for confirmation */}
       {isPopupVisible && (
         <div className="delete-popup" id="deletePopup">
           <p>Are you sure you want to delete your account?</p>
