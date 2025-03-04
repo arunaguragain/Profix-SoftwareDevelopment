@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../style/ProfilesAndListings.css';
+import logo from '../pictures/logo.png';
 
 const ProfilesAndListings = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [providers, setProviders] = useState([
     {
       id: 1,
@@ -40,54 +44,90 @@ const ProfilesAndListings = () => {
     { id: 'carpentry', name: 'Carpentry' }
   ];
 
-  const filteredProviders = selectedCategory === 'all' 
-    ? providers 
-    : providers.filter(provider => provider.category === selectedCategory);
+  const filteredProviders = providers
+    .filter(provider => 
+      selectedCategory === 'all' || provider.category === selectedCategory)
+    .filter(provider =>
+      searchQuery === '' || 
+      provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      provider.category.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
   return (
-    <section className="profiles-listings py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">Service Providers</h2>
-        
-        <div className="categories-filter mb-8">
-          {categories.map(category => (
-            <button
-              key={category.id}
-              className={`category-btn ${selectedCategory === category.id ? 'active' : ''}`}
-              onClick={() => setSelectedCategory(category.id)}
-            >
-              {category.name}
-            </button>
-          ))}
+    <div className="main-container">
+      <div className="nav">
+        <div className="logo">
+          <img src={logo} alt="Profix Logo" className="logo-img" />
         </div>
-
-        <div className="providers-grid">
-          {filteredProviders.map(provider => (
-            <div key={provider.id} className="provider-card">
-              <div className="provider-image">
-                <img src={provider.image} alt={provider.name} />
-                {provider.verified && (
-                  <span className="verified-badge">✓ Verified</span>
-                )}
-              </div>
-              <div className="provider-info">
-                <h3>{provider.name}</h3>
-                <div className="rating">
-                  <span className="stars">{'★'.repeat(Math.floor(provider.rating))}</span>
-                  <span className="rating-number">{provider.rating}</span>
-                  <span className="reviews-count">({provider.reviews} reviews)</span>
-                </div>
-                <button className="contact-btn">Contact Provider</button>
-              </div>
-            </div>
-          ))}
+        <div className="navbtn">
+          <button onClick={() => navigate('/dashboard')} className="bt nav-link">Home</button>
+          <button onClick={() => navigate('/contact')} className="bt nav-link">Contact</button>
+          <button onClick={() => navigate('/aboutus')} className="bt nav-link">About us</button>
         </div>
       </div>
-    </section>
+
+      <section className="profiles-listings py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8">Service Providers</h2>
+          
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Search for services..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+            {/* <div className="popular-searches">
+              <p className="text-sm mb-2">Popular searches:</p>
+              <div className="popular-tags">
+                <button onClick={() => setSearchQuery('Plumber')}>Plumber</button>
+                <button onClick={() => setSearchQuery('Electrician')}>Electrician</button>
+                <button onClick={() => setSearchQuery('Carpenter')}>Carpenter</button>
+                <button onClick={() => setSearchQuery('Painter')}>Painter</button>
+              </div>
+            </div> */}
+          </div>
+
+          <div className="categories-container">
+            <div className="categories-filter">
+              {categories.map(category => (
+                <button
+                  key={category.id}
+                  className={`category-btn ${selectedCategory === category.id ? 'active' : ''}`}
+                  onClick={() => setSelectedCategory(category.id)}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="providers-grid">
+            {filteredProviders.map(provider => (
+              <div key={provider.id} className="provider-card">
+                <div className="provider-image">
+                  <img src={provider.image} alt={provider.name} />
+                  {provider.verified && (
+                    <span className="verified-badge">✓ Verified</span>
+                  )}
+                </div>
+                <div className="provider-info">
+                  <h3>{provider.name}</h3>
+                  <div className="rating">
+                    <span className="stars">{'★'.repeat(Math.floor(provider.rating))}</span>
+                    <span className="rating-number">{provider.rating}</span>
+                    <span className="reviews-count">({provider.reviews} reviews)</span>
+                  </div>
+                  <button className="contact-btn">Book Appointment</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
 export default ProfilesAndListings;
-
-
-
