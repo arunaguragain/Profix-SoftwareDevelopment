@@ -50,7 +50,8 @@ const Appointment = () => {
           describeProblem: "",
         });
         setIsOpen(false);
-        navigate("/myappointment");  // Redirect after success
+        navigate("/myappointment");
+        window.location.reload();  // Redirect after success
       } else {
         alert(`Error: ${data.error || "Something went wrong."}`);
       }
@@ -62,11 +63,11 @@ const Appointment = () => {
 
   return (
     <div className="container">
-      <button onClick={() => setIsOpen(true)} className="open-popup-btn">
+      {/* <button onClick={() => setIsOpen(true)} className="open-popup-btn">
         Book Appointment
       </button>
 
-      {isOpen && (
+      {isOpen && ( */}
         <div className="popup active">
           <form onSubmit={handleSubmit}>
             <h1>Book Appointment</h1>
@@ -132,7 +133,7 @@ const Appointment = () => {
             </div>
           </form>
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 };

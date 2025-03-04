@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/FAQs.css';
 import logo from '../pictures/logo.png';
-import api from '../services/api';
+// import api from '../services/api';
 
 const FAQs = () => {
   const navigate = useNavigate();
@@ -23,6 +23,19 @@ const FAQs = () => {
     subject: '',
     message: ''
   });
+
+  // Initialize submittedInquiries from local storage on component mount
+  useEffect(() => {
+    const storedInquiries = localStorage.getItem('submittedInquiries');
+    if (storedInquiries) {
+      setSubmittedInquiries(JSON.parse(storedInquiries));
+    }
+  }, []);
+
+  // Save submittedInquiries to local storage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('submittedInquiries', JSON.stringify(submittedInquiries));
+  }, [submittedInquiries]);
 
   const faqData = [
     {
@@ -84,14 +97,14 @@ const FAQs = () => {
     }
 
     try {
-      const response = await api.createInquiry(formData);
-      
-      // Add new inquiry to the list
-      setSubmittedInquiries(prev => [...prev, {
+      const newInquiry = {
         ...formData,
         id: Date.now(),
         timestamp: new Date().toLocaleString()
-      }]);
+      };
+
+      // Add new inquiry to the list
+      setSubmittedInquiries(prev => [...prev, newInquiry]);
 
       setSubmittedData(formData);
       setShowConfirmation(true);
@@ -121,8 +134,9 @@ const FAQs = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this inquiry?')) {
       try {
-        await api.deleteInquiry(id);
-        setSubmittedInquiries(prev => prev.filter(inquiry => inquiry.id !== id));
+        // Filter out the inquiry to be deleted
+        const updatedInquiries = submittedInquiries.filter(inquiry => inquiry.id !== id);
+        setSubmittedInquiries(updatedInquiries);
       } catch (error) {
         alert('Failed to delete inquiry');
       }
@@ -131,14 +145,17 @@ const FAQs = () => {
 
   const handleEditSubmit = async (id) => {
     try {
-      await api.updateInquiry(id, editFormData);
-      setSubmittedInquiries(prev => prev.map(inquiry => 
+      // Update the inquiry in the list
+      const updatedInquiries = submittedInquiries.map(inquiry => 
         inquiry.id === id ? { ...inquiry, ...editFormData } : inquiry
-      ));
+      );
+      setSubmittedInquiries(updatedInquiries);
       setEditingId(null);
     } catch (error) {
       alert('Failed to update inquiry');
     }
+
+  
   };
 
   return (
