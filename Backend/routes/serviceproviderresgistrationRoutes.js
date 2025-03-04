@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { 
   registerServiceProvider,
+  loginServiceProvider,
   getAllServiceProviders,
   getServiceProviderById,
   updateServiceProvider,
@@ -10,6 +11,8 @@ const {
 
 // Register a new service provider
 router.post('/register', registerServiceProvider);
+
+router.post('/login', loginServiceProvider );
 
 // Get all service providers
 router.get('/', getAllServiceProviders);  // ✅ Fix this function reference
