@@ -161,9 +161,7 @@ describe("✅ Inquiry Controller API Tests", () => {
         expect(response.body.message).toBe("Inquiry deleted successfully");
     });
 
-    /**
-     * 🔴 **Test: Delete Non-Existing Inquiry**
-     */
+    
     test("Should return error when deleting a non-existing inquiry", async () => {
         const response = await request(app).delete("/inquiries/999");
 
