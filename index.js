@@ -5,6 +5,7 @@ const sequelize = require('./Backend/database/db.js');  // Importing database
 const userRoute = require('./Backend/routes/userRoutes.js');  // Importing user route
 const reviewRoute = require('./Backend/routes/revieweRoutes.js'); // Fixed typo
 const serviceProviderRoute = require('./Backend/routes/serviceproviderresgistrationRoutes.js'); // Fixed typo
+const inquiryRoutes = require('./Backend/routes/inquiryRoutes.js')
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 app.use('/users', userRoute);
 app.use('/reviews', reviewRoute);
 app.use('/serviceproviders', serviceProviderRoute);
+app.use('/inquiries', inquiryRoutes);
 app.use('/uploads', express.static('uploads'));
 
 app.listen(PORT, () => {
