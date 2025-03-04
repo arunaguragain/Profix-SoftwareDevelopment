@@ -3,59 +3,13 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const serviceProviderRoutes = require("../routes/serviceproviderregistrationRoutes");
-const ServiceProvider = require("../model/ServiceproviderRegistration");
 
 // Mock Express App
 const app = express();
 app.use(express.json());
 app.use("/serviceproviders", serviceProviderRoutes);
 
-// Mock `ServiceProvider` Model
-jest.mock("../model/ServiceproviderRegistration", () => ({
-    create: jest.fn().mockImplementation(async (data) => ({
-        serviceProviderId: 1,
-        fullName: data.fullName,
-        email: data.email,
-        contact: data.contact,
-        address: data.address,
-        password: await bcrypt.hash(data.password, 10),
-    })),
-    findOne: jest.fn().mockImplementation(async ({ where }) => {
-        if (where.email === "existing@example.com") {
-            return {
-                serviceProviderId: 1,
-                email: "existing@example.com",
-                password: await bcrypt.hash("password123", 10),
-            };
-        }
-        return null;
-    }),
-    findByPk: jest.fn().mockImplementation(async (id) => {
-        if (id === "1") {
-            return {
-                serviceProviderId: 1,
-                fullName: "John Doe",
-                email: "johndoe@example.com",
-                contact: "9800000000",
-                address: "Kathmandu, Nepal",
-                update: jest.fn().mockResolvedValue(true),
-                destroy: jest.fn().mockResolvedValue(true),
-            };
-        }
-        return null;
-    }),
-    findAll: jest.fn().mockResolvedValue([
-        {
-            serviceProviderId: 1,
-            fullName: "John Doe",
-            email: "johndoe@example.com",
-            contact: "9800000000",
-            address: "Kathmandu, Nepal",
-        },
-    ]),
-}));
-
-// Mock bcrypt
+// Correct way to mock bcrypt
 jest.mock("bcryptjs", () => ({
     hash: jest.fn(async (password) => `hashed-${password}`),
     compare: jest.fn(async (password, hash) => hash === `hashed-${password}`),
@@ -66,6 +20,55 @@ jest.mock("jsonwebtoken", () => ({
     sign: jest.fn(() => "mocked-jwt-token"),
     verify: jest.fn(() => ({ serviceProviderId: 1 })),
 }));
+
+// Mock ServiceProvider Model - Move inside jest.mock()
+jest.mock("../model/ServiceproviderRegistration", () => {
+    const bcrypt = require("bcryptjs"); // Move bcrypt inside jest.mock()
+
+    return {
+        create: jest.fn().mockImplementation(async (data) => ({
+            serviceProviderId: 1,
+            fullName: data.fullName,
+            email: data.email,
+            contact: data.contact,
+            address: data.address,
+            password: await bcrypt.hash(data.password, 10),
+        })),
+        findOne: jest.fn().mockImplementation(async ({ where }) => {
+            if (where.email === "existing@example.com") {
+                return {
+                    serviceProviderId: 1,
+                    email: "existing@example.com",
+                    password: await bcrypt.hash("password123", 10),
+                };
+            }
+            return null;
+        }),
+        findByPk: jest.fn().mockImplementation(async (id) => {
+            if (id === "1") {
+                return {
+                    serviceProviderId: 1,
+                    fullName: "John Doe",
+                    email: "johndoe@example.com",
+                    contact: "9800000000",
+                    address: "Kathmandu, Nepal",
+                    update: jest.fn().mockResolvedValue(true),
+                    destroy: jest.fn().mockResolvedValue(true),
+                };
+            }
+            return null;
+        }),
+        findAll: jest.fn().mockResolvedValue([
+            {
+                serviceProviderId: 1,
+                fullName: "John Doe",
+                email: "johndoe@example.com",
+                contact: "9800000000",
+                address: "Kathmandu, Nepal",
+            },
+        ]),
+    };
+});
 
 describe("✅ Service Provider Routes API Tests", () => {
     test("Should register a new service provider successfully", async () => {

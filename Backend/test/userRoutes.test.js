@@ -1,67 +1,16 @@
 const request = require("supertest");
 const express = require("express");
 const userRoutes = require("../routes/userRoutes");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 
 // Mock Express App
 const app = express();
 app.use(express.json());
 app.use("/users", userRoutes);
 
-// Mock User Model
-jest.mock("../model/User", () => ({
-    create: jest.fn().mockImplementation(async (data) => {
-        if (data.email === "existing@example.com") {
-            const error = new Error();
-            error.name = "SequelizeUniqueConstraintError"; // Simulate DB unique constraint error
-            throw error;
-        }
-        return {
-            userId: 1,
-            fullName: data.fullName,
-            email: data.email,
-            password: await bcrypt.hash(data.password, 10),
-            contact: data.contact,
-            address: data.address,
-            profilePic: "profile.jpg",
-        };
-    }),
-    findOne: jest.fn().mockImplementation(async ({ where }) => {
-        if (where.email === "johndoe@example.com") {
-            return {
-                userId: 1,
-                email: "johndoe@example.com",
-                password: await bcrypt.hash("password123", 10),
-            };
-        }
-        return null;
-    }),
-    findByPk: jest.fn().mockImplementation(async (id) => {
-        if (id === 1) {
-            return {
-                userId: 1,
-                fullName: "John Doe",
-                email: "johndoe@example.com",
-                contact: "9800000000",
-                address: "Kathmandu, Nepal",
-                profilePic: "profile.jpg",
-                save: jest.fn().mockResolvedValue(true),
-                destroy: jest.fn().mockResolvedValue(true),
-            };
-        }
-        return null;
-    }),
-    findAll: jest.fn().mockResolvedValue([
-        {
-            userId: 1,
-            fullName: "John Doe",
-            email: "johndoe@example.com",
-            contact: "9800000000",
-            address: "Kathmandu, Nepal",
-            profilePic: "profile.jpg",
-        },
-    ]),
+// Correct way to mock bcrypt
+jest.mock("bcryptjs", () => ({
+    hash: jest.fn(async (password) => `hashed-${password}`),
+    compare: jest.fn(async (password, hash) => hash === `hashed-${password}`),
 }));
 
 // Mock JWT
@@ -70,11 +19,64 @@ jest.mock("jsonwebtoken", () => ({
     verify: jest.fn(() => ({ userId: 1 })),
 }));
 
-// Mock bcrypt
-jest.mock("bcryptjs", () => ({
-    hash: jest.fn(async (password) => `hashed-${password}`),
-    compare: jest.fn(async (password, hash) => hash === `hashed-${password}`),
-}));
+// Mock User Model - Move inside jest.mock()
+jest.mock("../model/User", () => {
+    const bcrypt = require("bcryptjs"); // Move bcrypt inside jest.mock()
+
+    return {
+        create: jest.fn().mockImplementation(async (data) => {
+            if (data.email === "existing@example.com") {
+                const error = new Error();
+                error.name = "SequelizeUniqueConstraintError"; // Simulate DB unique constraint error
+                throw error;
+            }
+            return {
+                userId: 1,
+                fullName: data.fullName,
+                email: data.email,
+                password: await bcrypt.hash(data.password, 10),
+                contact: data.contact,
+                address: data.address,
+                profilePic: "profile.jpg",
+            };
+        }),
+        findOne: jest.fn().mockImplementation(async ({ where }) => {
+            if (where.email === "johndoe@example.com") {
+                return {
+                    userId: 1,
+                    email: "johndoe@example.com",
+                    password: await bcrypt.hash("password123", 10),
+                };
+            }
+            return null;
+        }),
+        findByPk: jest.fn().mockImplementation(async (id) => {
+            if (id === 1) {
+                return {
+                    userId: 1,
+                    fullName: "John Doe",
+                    email: "johndoe@example.com",
+                    contact: "9800000000",
+                    address: "Kathmandu, Nepal",
+                    profilePic: "profile.jpg",
+                    save: jest.fn().mockResolvedValue(true),
+                    destroy: jest.fn().mockResolvedValue(true),
+                };
+            }
+            return null;
+        }),
+        findAll: jest.fn().mockResolvedValue([
+            {
+                userId: 1,
+                fullName: "John Doe",
+                email: "johndoe@example.com",
+                contact: "9800000000",
+                address: "Kathmandu, Nepal",
+                profilePic: "profile.jpg",
+            },
+        ]),
+    };
+});
 
 describe("✅ User Routes API Tests", () => {
     test("Should register a new user successfully", async () => {
@@ -88,6 +90,7 @@ describe("✅ User Routes API Tests", () => {
 
         expect(response.status).toBe(201);
         expect(response.body.message).toBe("User registered successfully");
+        expect(response.body.user.email).toBe("newuser@example.com");
     });
 
     test("Should return 400 if user already exists", async () => {
@@ -116,7 +119,7 @@ describe("✅ User Routes API Tests", () => {
 
     test("Should return 401 for incorrect login credentials", async () => {
         const response = await request(app).post("/users/login").send({
-            email: "wrongemail@example.com",
+            email: "existing@example.com",
             password: "wrongpassword",
         });
 
