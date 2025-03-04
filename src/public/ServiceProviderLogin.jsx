@@ -17,7 +17,7 @@ const ServiceProviderLogin = () => {
     
     if (email === "provider@example.com" && password === "password123") {
       alert("Login successful!");
-      window.location.href = "dashboard.html"; // Redirect to the dashboard
+      window.location.href = "/serviceproviderprofile"; // Redirect to the dashboard
     } else {
       alert("Invalid email or password.");
     }
