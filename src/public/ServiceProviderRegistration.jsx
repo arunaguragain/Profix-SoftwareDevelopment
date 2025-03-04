@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "../style/ServiceProviderRegistration.css";
+import axios from "axios"; // Import Axios
+
+
 
 const ServiceProviderSignUp = () => {
   const navigate = useNavigate(); // Initialize navigate function
@@ -28,7 +31,7 @@ const ServiceProviderSignUp = () => {
     }
   };
 
-  const validateForm = (e) => {
+  const validateForm = async(e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
@@ -70,9 +73,18 @@ const ServiceProviderSignUp = () => {
       return;
     }
 
-    // Form submission success
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await axios.post("http://localhost:5001/serviceproviders/register", {
+        fullName,
+        address,
+        email,
+        contact,
+        password,
+        confirmPassword,
+        // profilePicture,
+      });
+  
+      // Success message and redirect
       alert("Registration successful! Redirecting to login...");
       setFormData({
         fullName: "",
@@ -81,10 +93,16 @@ const ServiceProviderSignUp = () => {
         contact: "",
         password: "",
         confirmPassword: "",
+        profilePicture:"",
       });
       setErrors({});
-      navigate("/serviceproviderlogin"); // Navigate to service provider login
-    }, 1500);
+      navigate("/serviceproviderlogin");
+    } catch (error) {
+      console.error("Error:", error.response ? error.response.data : error.message);
+      alert("Registration failed! Email or contact may already exist.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

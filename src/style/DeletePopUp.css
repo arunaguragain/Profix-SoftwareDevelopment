@@ -1,36 +1,103 @@
-.delete-popup {
+/* DeletePopup.css */
+:root {
+    --primary-color: #3a1c71;
+    --secondary-color: #d76d77;
+    --accent-color: #ffaf7b;
+    --text-dark: #333;
+    --text-light: #fff;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --border-radius: 12px;
+  }
+  
+  .delete-popup {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    width: 350px;
     text-align: center;
     z-index: 1000;
-    display: block; /* Show the popup when triggered */
-}
-
-.delete-popup .buttons {
-    margin-top: 15px;
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .delete-popup .buttons {
+    margin-top: 1.5rem;
     display: flex;
     justify-content: space-between;
-}
-
-.delete-popup button {
+  }
+  
+  .delete-popup button {
     padding: 10px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
     cursor: pointer;
-}
-
-#confirmDelete {
+    width: 48%;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  #confirmDelete {
     background-color: #ff4d4d;
     color: white;
-}
-
-#cancelDelete {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  #confirmDelete:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  #cancelDelete {
     background-color: #ccc;
-}
+    color: var(--text-dark);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #cancelDelete:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Fade-in animation for the popup */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Delete Account Button Styles */
+.delete-account-button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: inline-block;
+  }
+  
+  .delete-account-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .delete-account-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(215, 109, 119, 0.3);
+  }
+  
+  

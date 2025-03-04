@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../style/SeviceProviderProfile.css"; // Import CSS file
+import { useNavigate } from "react-router-dom"; // Use useNavigate for navigation
+import "../style/seviceproviderprofile.css"; // Corrected typo in import
 
 const Profile = () => {
   const [photo, setPhoto] = useState(null);
@@ -8,6 +9,8 @@ const Profile = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [historyMessage, setHistoryMessage] = useState("");
   const [pendingMessage, setPendingMessage] = useState("");
+
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   // Handle Photo Upload
   const handlePhotoUpload = (e) => {
@@ -19,50 +22,136 @@ const Profile = () => {
     }
   };
 
+  // Close notification dropdown when clicking outside
+  const closeNotifications = () => {
+    if (showNotifications) setShowNotifications(false);
+  };
+
+  // Navigate to /deletepopup when delete icon is clicked
+  const handleDeleteClick = () => {
+    navigate('/deletepopup'); // Navigate to /deletepopup using useNavigate
+  };
+
   return (
-    <div className="main">
+    <div className="profile-container" onClick={closeNotifications}>
       {/* Navbar */}
-      <nav className="navbar">
-        <div className="logo"></div>
-        <h1>Your Profile</h1>
-        <div className="nav-buttons">
-          <button className="notification-btn" onClick={() => setShowNotifications(!showNotifications)}>🔔</button>
-          <button className="delete-btn">🗑️</button>
+      <nav className="profile-navbar">
+        <div className="navbar-left">
+          <div className="profile-logo"></div>
+          <h1 className="profile-title">Your Profile</h1>
         </div>
-        {showNotifications && <div className="notification-dropdown">No new notifications</div>}
+        <div className="navbar-right">
+          <button 
+            className="icon-button notification-btn" 
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowNotifications(!showNotifications);
+            }}
+          >
+            <i className="notification-icon">🔔</i>
+          </button>
+          <button 
+            className="icon-button delete-btn"
+            onClick={handleDeleteClick} // Attach the delete handler here
+          >
+            <i className="delete-icon">🗑️</i>
+          </button>
+        </div>
+        {showNotifications && (
+          <div className="notification-panel">
+            <div className="notification-header">
+              <h3>Notifications</h3>
+            </div>
+            <div className="notification-content">
+              <p>No new notifications</p>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Main Layout */}
-      <div className="main-layout">
-        <div className="content-section">
-          {/* Photo Upload */}
-          <div className="photo-box" style={{ backgroundImage: photo ? `url(${photo})` : "none" }}>
-            <label className="photo-upload-label">
-              Upload Photo
-              <input type="file" onChange={handlePhotoUpload} className="photo-upload-input" />
-            </label>
+      <div className="profile-content">
+        <div className="profile-card">
+          <div className="profile-header">
+            <div 
+              className="profile-photo" 
+              style={{ backgroundImage: photo ? `url(${photo})` : "none" }}
+            >
+              {!photo && <span className="photo-placeholder">+</span>}
+              <label className="photo-upload-label">
+                <input 
+                  type="file" 
+                  onChange={handlePhotoUpload} 
+                  className="photo-upload-input" 
+                  accept="image/*"
+                />
+              </label>
+            </div>
+            <div className="profile-info">
+              <div className="profile-rating">
+                {[1, 2, 3, 4, 5].map((num) => (
+                  <span 
+                    key={num} 
+                    className={`rating-star ${num <= rating ? "active" : ""}`} 
+                    onClick={() => setRating(num)}
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+              <span className="rating-text">{rating > 0 ? `${rating}.0/5.0` : "Rate Yourself"}</span>
+            </div>
           </div>
 
-          {/* Rating System */}
-          <div className="rating">
-            {[1, 2, 3, 4, 5].map((num) => (
-              <span key={num} className={num <= rating ? "active" : ""} onClick={() => setRating(num)}>★</span>
-            ))}
-          </div>
-
-          {/* Description Box */}
-          <div className="description-box">
-            <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter description here..."></textarea>
+          <div className="profile-description">
+            <h3 className="section-title">About Me</h3>
+            <textarea 
+              value={description} 
+              onChange={(e) => setDescription(e.target.value)} 
+              placeholder="Describe your services, experience, and expertise..."
+              className="description-textarea"
+            ></textarea>
           </div>
         </div>
 
-        {/* Side Buttons */}
-        <div className="side-buttons">
-          <button onClick={() => setHistoryMessage("You have no history records.")}>⏳</button>
-          <button onClick={() => setPendingMessage("No pending appointments.")}>📅</button>
+        {/* Action Panel */}
+        <div className="action-panel">
+          <div className="action-buttons">
+            <button 
+              className="action-button history-btn" 
+              onClick={() => setHistoryMessage("You have no history records.")}
+            >
+              <i className="action-icon">⏳</i>
+              <span className="action-text">History</span>
+            </button>
+            
+            <button 
+              className="action-button appointments-btn" 
+              onClick={() => setPendingMessage("No pending appointments.")}
+            >
+              <i className="action-icon">📅</i>
+              <span className="action-text">Appointments</span>
+            </button>
+            
+            <button className="action-button settings-btn">
+              <i className="action-icon">⚙️</i>
+              <span className="action-text">Settings</span>
+            </button>
+          </div>
 
-          {historyMessage && <div className="message-container">{historyMessage}</div>}
-          {pendingMessage && <div className="message-container">{pendingMessage}</div>}
+          {historyMessage && (
+            <div className="message-panel">
+              <h3 className="panel-title">History</h3>
+              <p className="panel-message">{historyMessage}</p>
+            </div>
+          )}
+          
+          {pendingMessage && (
+            <div className="message-panel">
+              <h3 className="panel-title">Appointments</h3>
+              <p className="panel-message">{pendingMessage}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
