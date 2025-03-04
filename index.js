@@ -6,6 +6,7 @@ const userRoute = require('./Backend/routes/userRoutes.js');  // Importing user 
 const reviewRoute = require('./Backend/routes/revieweRoutes.js'); // Fixed typo
 const serviceProviderRoute = require('./Backend/routes/serviceproviderresgistrationRoutes.js'); // Fixed typo
 const inquiryRoute = require('./Backend/routes/inquiryRoutes.js')
+const appointmentRoutes = require ('./Backend/routes/appointmentRoutes.js');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -23,6 +24,7 @@ app.use('/reviews', reviewRoute);
 app.use('/serviceproviders', serviceProviderRoute);
 app.use('/inquiry', inquiryRoute)
 app.use('/uploads', express.static('uploads'));
+app.use('/api/appointments', appointmentRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);  // Fixed missing backticks

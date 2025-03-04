@@ -181,6 +181,7 @@ function Dashboard() {
               className={`button-card ${activeButton === 'services' ? 'active' : ''}`}
               onMouseEnter={() => handleButtonHover('services')}
               onMouseLeave={handleButtonLeave}
+              onClick={() => window.location.href = '/profilesandlistings'}
             >
               <div className="button-icon">
                 <svg viewBox="0 0 24 24" className="feature-icon">
@@ -197,6 +198,7 @@ function Dashboard() {
               className={`button-card ${activeButton === 'faqs' ? 'active' : ''}`}
               onMouseEnter={() => handleButtonHover('faqs')}
               onMouseLeave={handleButtonLeave}
+              onClick={() => window.location.href = '/faqs'}
             >
               <div className="button-icon">
                 <svg viewBox="0 0 24 24" className="feature-icon">
