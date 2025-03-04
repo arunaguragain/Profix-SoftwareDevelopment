@@ -21,7 +21,7 @@ jest.mock("jsonwebtoken", () => ({
     verify: jest.fn(() => ({ serviceProviderId: 1 })),
 }));
 
-// Mock ServiceProvider Model - Move inside jest.mock()
+
 jest.mock("../model/ServiceproviderRegistration", () => {
     const bcrypt = require("bcryptjs"); // Move bcrypt inside jest.mock()
 
