@@ -164,6 +164,7 @@ function Dashboard() {
               className={`button-card ${activeButton === 'profile' ? 'active' : ''}`}
               onMouseEnter={() => handleButtonHover('profile')}
               onMouseLeave={handleButtonLeave}
+              onClick={() => window.location.href = '/userprofile'}
             >
               <div className="button-icon">
                 <svg viewBox="0 0 24 24" className="feature-icon">
