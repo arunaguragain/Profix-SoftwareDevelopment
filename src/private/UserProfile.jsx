@@ -173,8 +173,12 @@ const UserProfile = () => {
         </div>
         <div className="side-buttons">
           <button className="history-btn">⏳</button>
-          <button className="appointments-btn">📅</button>
-          <button className="favourite-btn" onClick={() => navigate("/favorites")}>⭐</button>
+          <button className="appointments-btn"onClick={() => { navigate("/Myappointment");
+          setTimeout(() => {
+          window.location.reload();
+          }, 100); // Delay to allow navigation to take effect
+          }}>📅</button>
+          <button className="favourite-btn" onClick={() => navigate("/favorites") }>⭐</button>
           <button className="logout-btn btn btn-light" onClick={() => setShowLogoutModal(true)}>
             <i className="bi bi-box-arrow-right"></i>
           </button>

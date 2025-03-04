@@ -10,6 +10,7 @@ function App() {
   const EmergencyServices = React.lazy(() => import("./private/EmergencyContact.jsx"));
   const UserProfile = React.lazy(() => import("./private/UserProfile.jsx"));
   const ProFixAdminDashboard = React.lazy(() => import("./private/UserModeration.jsx"));
+  const MyAppointment = React.lazy(() => import("./private/MyAppointment.jsx"))
 
   const ServiceProviderRegistration = React.lazy(() => import("./public/ServiceProviderRegistration.jsx"));
   const ServiceProviderProfile = React.lazy(() => import("./private/SeviceProviderProfile.jsx"));
@@ -40,6 +41,7 @@ function App() {
           <Route path="/userregistration" element={<UserRegistration />} />
           <Route path="/passwordrecovery" element={<PasswordRecovery />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/myappointment" element={<MyAppointment />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/dashboard" element={<Dashboard />} />
