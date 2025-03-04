@@ -17,13 +17,33 @@ const Appointment = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Appointment Details:", formData);
-    alert("Appointment successfully submitted!");
-    setFormData({ phone: "", date: "", time: "", address: "", problem: "" });
-    setIsOpen(false);
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/appointments/book", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        alert("Appointment successfully submitted!");
+        setFormData({ phone: "", date: "", time: "", address: "", problem: "" });
+        setIsOpen(false);
+      } else {
+        alert(`Error: ${data.message}`);
+      }
+    } catch (error) {
+      console.error("❌ Error submitting appointment:", error);
+      alert("Something went wrong. Please try again.");
+    }
   };
+  
 
   return (
     <div className="container">
