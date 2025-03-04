@@ -25,11 +25,6 @@ const Inquiry = sequelize.define('Inquiry', {
     message: {
         type: DataTypes.TEXT,
         allowNull: false
-    },
-    status: {
-        type: DataTypes.ENUM('pending', 'responded', 'closed'),
-        defaultValue: 'pending',
-        allowNull: false
     }
 }, {
     tableName: 'Inquiries',
