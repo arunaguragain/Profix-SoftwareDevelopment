@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Use useNavigate for navigation
-import "../style/seviceproviderprofile.css"; // Corrected typo in import
+import { useNavigate } from "react-router-dom";
+import "../style/seviceproviderprofile.css";
 
 const Profile = () => {
   const [photo, setPhoto] = useState(null);
@@ -9,8 +9,9 @@ const Profile = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [historyMessage, setHistoryMessage] = useState("");
   const [pendingMessage, setPendingMessage] = useState("");
+  const [showSettingsDropdown, setShowSettingsDropdown] = useState(false); // State for settings dropdown
 
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const navigate = useNavigate();
 
   // Handle Photo Upload
   const handlePhotoUpload = (e) => {
@@ -27,9 +28,23 @@ const Profile = () => {
     if (showNotifications) setShowNotifications(false);
   };
 
-  // Navigate to /deletepopup when delete icon is clicked
+  // Navigate to delete popup
   const handleDeleteClick = () => {
-    navigate('/deletepopup'); // Navigate to /deletepopup using useNavigate
+    navigate('/deletepopup');
+  };
+
+  // Navigate to Appointments page
+  const handleAppointmentsClick = () => {
+    navigate('/sappointment');
+  };
+
+  // Logout function
+  const handleLogout = () => {
+    // Clear local storage or session storage if needed
+    localStorage.removeItem("token");
+    navigate('/mainpageS'); 
+    // Redirect to login page after logout
+    window.location.reload();
   };
 
   return (
@@ -52,7 +67,7 @@ const Profile = () => {
           </button>
           <button 
             className="icon-button delete-btn"
-            onClick={handleDeleteClick} // Attach the delete handler here
+            onClick={handleDeleteClick}
           >
             <i className="delete-icon">🗑️</i>
           </button>
@@ -127,16 +142,33 @@ const Profile = () => {
             
             <button 
               className="action-button appointments-btn" 
-              onClick={() => setPendingMessage("No pending appointments.")}
+              onClick={handleAppointmentsClick} // Navigate to Appointments Page
             >
               <i className="action-icon">📅</i>
               <span className="action-text">Appointments</span>
             </button>
             
-            <button className="action-button settings-btn">
-              <i className="action-icon">⚙️</i>
-              <span className="action-text">Settings</span>
-            </button>
+            <div className="settings-dropdown-container">
+              <button 
+                className="action-button settings-btn" 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowSettingsDropdown(!showSettingsDropdown);
+                }}
+              >
+                <i className="action-icon">⚙️</i>
+                <span className="action-text">Settings</span>
+              </button>
+
+              {/* Dropdown Menu for Settings */}
+              {showSettingsDropdown && (
+                <div className="settings-dropdown">
+                  <button className="dropdown-item logout-btn" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           {historyMessage && (
