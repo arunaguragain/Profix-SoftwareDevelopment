@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 app.use('/users', userRoute);
 app.use('/reviews', reviewRoute);
 app.use('/serviceproviders', serviceProviderRoute);
-app.use('/inquiryRoute', inquiryRoute)
+app.use('/inquiryRoute', inquiryRouteswitch)
 app.use('/uploads', express.static('uploads'));
 
 app.listen(PORT, () => {
