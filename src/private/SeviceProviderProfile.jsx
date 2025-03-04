@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../style/ServiceProviderProfile"; // Import CSS file
+import "../style/SeviceProviderProfile.css"; // Import CSS file
 
 const Profile = () => {
   const [photo, setPhoto] = useState(null);

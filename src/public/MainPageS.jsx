@@ -1,59 +1,81 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import '../style/MainPageS.css'; // Import the CSS file
+=======
+import React, { useState } from "react";
+import "../style/MainPageS.css";
+>>>>>>> 02408b016559382c71bdd12c45358bc792d70d96
 
-function MainPage() {
-    const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
+const MainPage = () => {
+  const [modalType, setModalType] = useState(null);
 
-    const showDeletePopup = () => {
-        setDeletePopupVisible(true);
-    };
+  const openModal = (type) => setModalType(type);
+  const closeModal = () => setModalType(null);
 
-    const hideDeletePopup = () => {
-        setDeletePopupVisible(false);
-    };
+  const handleRedirect = (path) => {
+    closeModal();
+    window.location.href = path;
+  };
 
-    return (
-        <div className="main">
-            <div className="content">
-                <h1>Locals who nail it every time.</h1>
-                <button className="btn1" id="button" onClick={showDeletePopup}>
-                    Login
-                </button>
+  return (
+    <div className="container">
+      <header>
+        <div className="logo">
+          <span className="logo-icon">🛠️</span>
+          <h1>ProFix</h1>
+        </div>
+      </header>
+
+      <main>
+        <div className="hero-content">
+          <h2>Professional Home Services</h2>
+          <div className="services">
+            <div className="service">
+              <span className="service-icon">🔨</span>
+              <h3>Carpentry</h3>
             </div>
-            <div className="bottom-right">
-                <p>Don't have an account? </p>
-                <button className="btn" id="button">
-                    SignUp
-                </button>
+            <div className="service">
+              <span className="service-icon">🚰</span>
+              <h3>Plumbing</h3>
             </div>
+            <div className="service">
+              <span className="service-icon">💡</span>
+              <h3>Electrical</h3>
+            </div>
+          </div>
+        </div>
 
-            {isDeletePopupVisible && (
-                <DeletePopup onCancel={hideDeletePopup} />
+        <div className="buttons">
+          <button className="btn btn-login" onClick={() => openModal("login")}>Login</button>
+          <button className="btn btn-signup" onClick={() => openModal("signup")}>Sign Up</button>
+        </div>
+      </main>
+
+      <footer>
+        <p>© 2025 ProFix - Your Local Service Experts</p>
+      </footer>
+
+      {modalType && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h2>{modalType === "login" ? "Login As" : "Sign Up As"}</h2>
+            {modalType === "login" ? (
+              <>
+                <button className="modal-btn" onClick={() => handleRedirect(" /userlogin")}>User Login</button>
+                <button className="modal-btn" onClick={() => handleRedirect("/serviceproviderlogin ")}>Service Provider Login</button>
+              </>
+            ) : (
+              <>
+                <button className="modal-btn" onClick={() => handleRedirect("/userregistration")}>User Sign Up</button>
+                <button className="modal-btn" onClick={() => handleRedirect("/serviceproviderregistration")}>Service Provider Sign Up</button>
+              </>
             )}
+            <button className="modal-close" onClick={closeModal}>X</button>
+          </div>
         </div>
-    );
-}
-
-// DeletePopup Component
-function DeletePopup({ onCancel }) {
-    const handleConfirmDelete = () => {
-        alert('Your account will be deleted!'); // Placeholder action
-        onCancel();
-    };
-
-    return (
-        <div className="delete-popup">
-            <p>Are you sure you want to delete your account?</p>
-            <div className="buttons">
-                <button id="confirmDelete" onClick={handleConfirmDelete}>
-                    Yes, Delete
-                </button>
-                <button id="cancelDelete" onClick={onCancel}>
-                    Cancel
-                </button>
-            </div>
-        </div>
-    );
-}
+      )}
+    </div>
+  );
+};
 
 export default MainPage;

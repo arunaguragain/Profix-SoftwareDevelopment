@@ -8,14 +8,14 @@
   align-items: center;
 }
 
-h1{
+/* h1{
   font-family: 'Times New Roman', Times, serif;
   font-size: 24px;
   margin-right: 102px;
   margin-top: 15px;
   font-style: bold;
   color: white;
-}
+} */
 
 .navbar {
   display: flex;
@@ -36,33 +36,6 @@ h1{
   background-blend-mode:lighten;
 }
 
-
-.navbar .notification-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  position: relative;
-}
-
-.notification-dropdown {
-  display: none;
-  position: absolute;
-  top: 3rem;
-  right: 1rem;
-  background-color: white;
-  color: black;
-  border: 1px solid #ddd;
-  padding: 1rem;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  z-index: 1000;
-}
-
-.notification-btn:hover + .notification-dropdown {
-  display: block;
-}
 
 .main-layout {
   display: flex;
@@ -85,16 +58,32 @@ h1{
 }
 
 .photo-box {
-  width: 100px;
-  height: 100px;
-  border: 2px solid black;
-  border-radius: 8px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
   position: relative;
   overflow: hidden;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.photo-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* File Input (Hidden) */
+.photo-upload-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
   cursor: pointer;
 }
 
@@ -160,82 +149,31 @@ form input{
   color: white;
 }
 
-.no-photo-message {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 14px;
-  color: black;
-  margin-top: 10px;
+.custom-modal {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+}
+
+.modal-body p {
+  margin: 0;
   text-align: center;
+  font-size: 14px;
 }
 
-
-.photo-box {
+.modal-footer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  height: 100px;
-  border: 2px dashed #ccc;
-  border-radius: 10px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  background-color: #f9f9f9;
-  border-radius: 50%;
+  justify-content: space-around;
 }
 
-
-.photo-preview {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-
-.photo-upload-input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.photo-preview-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-#security-questions-form button {
-  background-color: rgba(57, 24, 24, 0.829); 
-  color: white;
+.btn-close {
+  outline: none;
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 5px;
 }
-
-#security-questions-box {
-  background: rgba(93, 92, 92, 0.6); 
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 350px;
-  height: 230px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-
 
 @media (max-width: 768px) {
 .content {

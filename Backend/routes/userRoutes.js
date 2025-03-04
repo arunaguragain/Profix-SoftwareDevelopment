@@ -7,13 +7,13 @@ const {
     loginUser, 
     getProfile, 
     updateProfile, 
-    updateProfilePicture 
+    updateProfilePicture, 
+    deleteAccount 
 } = require('../controller/userController.js');
 
 router.post('/register', registerUser);  
 
 router.post('/login', loginUser);  
-
 
 router.get('/profile', authMiddleware(), getProfile);
 
@@ -21,9 +21,6 @@ router.put('/profile', authMiddleware(), upload.single('profilePic'), updateProf
 
 router.put('/profile/picture', authMiddleware(), upload.single('profilePic'), updateProfilePicture);
 
-// // ✅ Admin Dashboard (Restricted to Admin Role)
-// router.get('/admin-dashboard', authMiddleware(['admin']), (req, res) => {
-//     res.json({ message: 'Welcome Admin!' });
-// });
+router.delete('/profile', authMiddleware(), deleteAccount);  // Added delete account route
 
 module.exports = router;
