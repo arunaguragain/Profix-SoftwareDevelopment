@@ -172,7 +172,7 @@ const Review = () => {
       <div className="nav">
         <div className="logo"></div>
         <div className="navbtn">
-          <button onClick={() => navigate('/')} className="bt nav-link">Home</button>
+          <button onClick={() => navigate('/dashboard')} className="bt nav-link">Home</button>
           <button onClick={() => navigate('/contact')} className="bt nav-link">Contact</button>
           <button onClick={() => navigate('/aboutus')} className="bt nav-link">About us</button>
         </div>
