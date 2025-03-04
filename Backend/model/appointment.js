@@ -9,19 +9,33 @@ const Appointment = sequelize.define('Appointment', {
     },
     userId: {  // Assuming you have a User model
         type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    serviceProviderId: {  // Refers to the ServiceProvider model
-        type: DataTypes.INTEGER,
         allowNull: true,
+    },
+    // serviceProviderId: {  // Refers to the ServiceProvider model
+    //     type: DataTypes.INTEGER,
+    //     allowNull: true,
+    // },
+    phoneNumber: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     appointmentDate: {
         type: DataTypes.DATE,
         allowNull: false,
     },
-    status: {
+
+    appointmentTime: {
+        type: DataTypes.TIME,
+        allowNull: false,
+    },
+
+    Address: {
         type: DataTypes.STRING,
         allowNull: true, // Can be pending, confirmed, cancelled, etc.
+    },
+    describeProblem: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     createdAt: {
         type: DataTypes.DATE,
@@ -38,6 +52,6 @@ const Appointment = sequelize.define('Appointment', {
 
 // Establish relationships (if needed)
 // For example, one-to-many relationship with ServiceProvider
-Appointment.belongsTo(ServiceProvider, { foreignKey: 'serviceProviderId' });
+// Appointment.belongsTo(ServiceProvider, { foreignKey: 'serviceProviderId' });
 
 module.exports = Appointment;

@@ -1,49 +1,64 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../style/Appointment.css";
 
 const Appointment = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
-    phone: "",
-    date: "",
-    time: "",
-    address: "",
-    problem: "",
+    phoneNumber: "",
+    appointmentDate: "",
+    appointmentTime: "",
+    Address: "",  // Changed to 'address' (to match the backend)
+    describeProblem: "",
   });
+
+  const navigate = useNavigate();
 
   // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    // Format formData before sending it to the backend
+    const formattedFormData = {
+      ...formData,
+    };
+
+    console.log("Formatted Form Data:", formattedFormData);
+
     try {
-      const response = await fetch("http://localhost:5000/api/appointments/book", {
+      const response = await fetch("http://localhost:5001/api/appointments/book", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formattedFormData),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         alert("Appointment successfully submitted!");
-        setFormData({ phone: "", date: "", time: "", address: "", problem: "" });
+        setFormData({
+          phoneNumber: "",
+          appointmentDate: "",
+          appointmentTime: "",
+          Address: "",
+          describeProblem: "",
+        });
         setIsOpen(false);
+        navigate("/myappointment");  // Redirect after success
       } else {
-        alert(`Error: ${data.message}`);
+        alert(`Error: ${data.error || "Something went wrong."}`);
       }
     } catch (error) {
       console.error("❌ Error submitting appointment:", error);
       alert("Something went wrong. Please try again.");
     }
   };
-  
 
   return (
     <div className="container">
@@ -56,59 +71,62 @@ const Appointment = () => {
           <form onSubmit={handleSubmit}>
             <h1>Book Appointment</h1>
 
-            <label htmlFor="phone">Phone Number:</label>
+            <label htmlFor="phoneNumber">Phone Number:</label>
             <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
+              type="text"  // Changed to 'text' to allow number input as string
+              id="phoneNumber"
+              name="phoneNumber"
+              value={formData.phoneNumber}
               onChange={handleChange}
-              placeholder="e.g., (100) 000-0000"
+              placeholder="e.g., 987652544"
               required
             />
 
-            <label htmlFor="date">Preferred Appointment Date:</label>
+            <label htmlFor="appointmentDate">Preferred Appointment Date:</label>
             <input
               type="date"
-              id="date"
-              name="date"
-              value={formData.date}
+              id="appointmentDate"
+              name="appointmentDate"
+              value={formData.appointmentDate}
               onChange={handleChange}
               required
             />
 
-            <label htmlFor="time">Preferred Appointment Time:</label>
+            <label htmlFor="appointmentTime">Preferred Appointment Time:</label>
             <input
               type="time"
-              id="time"
-              name="time"
-              value={formData.time}
+              id="appointmentTime"
+              name="appointmentTime"
+              value={formData.appointmentTime}
               onChange={handleChange}
               required
             />
 
-            <label htmlFor="address">Address:</label>
+            <label htmlFor="Address">Address:</label>
             <input
               type="text"
-              id="address"
-              name="address"
+              id="Address"
+              name="Address"
               value={formData.address}
               onChange={handleChange}
-              required
             />
 
-            <label htmlFor="problem">Describe Your Problem:</label>
+            <label htmlFor="describeProblem">Describe Your Problem:</label>
             <textarea
-              id="problem"
-              name="problem"
-              value={formData.problem}
+              id="describeProblem"
+              name="describeProblem"
+              value={formData.describeProblem}
               onChange={handleChange}
               required
             />
 
             <div className="buttons">
               <button type="submit" className="btn">Submit</button>
-              <button type="button" className="btn btn-secondary" onClick={() => setIsOpen(false)}>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => setIsOpen(false)}
+              >
                 Cancel
               </button>
             </div>
