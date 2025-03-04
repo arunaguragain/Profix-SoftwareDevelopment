@@ -15,7 +15,7 @@ jest.mock("bcryptjs", () => ({
     compare: jest.fn(async (password, hash) => hash === `hashed-${password}`),
 }));
 
-// Mock JWT
+
 jest.mock("jsonwebtoken", () => ({
     sign: jest.fn(() => "mocked-jwt-token"),
     verify: jest.fn(() => ({ serviceProviderId: 1 })),
