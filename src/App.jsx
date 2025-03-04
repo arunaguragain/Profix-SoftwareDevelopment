@@ -10,6 +10,7 @@ function App() {
   const EmergencyServices = React.lazy(() => import("./private/EmergencyContact.jsx"));
   const UserProfile = React.lazy(() => import("./private/UserProfile.jsx"));
   const ProFixAdminDashboard = React.lazy(() => import("./private/UserModeration.jsx"));
+
   const ServiceProviderRegistration = React.lazy(() => import("./public/ServiceProviderRegistration.jsx"));
   const ServiceProviderProfile = React.lazy(() => import("./private/SeviceProviderProfile.jsx"));
   const AboutUs = React.lazy(() => import("./public/AboutUs.jsx"));
@@ -17,6 +18,8 @@ function App() {
   const Dashboard = React.lazy(() => import("./private/Dashboard.jsx"));
   const DeletePopUp = React.lazy(() => import("./private/DeletePopUp.jsx"));
   const MainPageS = React.lazy(() => import("./public/MainPageS.jsx"));
+  const LoginSignupModal = React.lazy (() => import ("./public/LoginSignupModal.jsx"));
+
   const ServiceProviderLogin = React.lazy(() => import("./public/ServiceProviderLogin.jsx"));
   const UserLogin = React.lazy(() => import("./public/UserLogin.jsx"));
   const Contact = React.lazy(() => import("./public/Contact.jsx"));
@@ -45,6 +48,7 @@ function App() {
           <Route path="/serviceproviderlogin" element={<ServiceProviderLogin />} />
           <Route path="/serviceproviderregistration" element={<ServiceProviderRegistration />} />
           <Route path="/serviceproviderprofile" element={<ServiceProviderProfile />} />
+          <Route path= "/loginsignupmodal" element= {<LoginSignupModal/>}></Route>
           <Route path="/userlogin" element={<UserLogin />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/communitybuilding" element={<CommunityBuilding />} />

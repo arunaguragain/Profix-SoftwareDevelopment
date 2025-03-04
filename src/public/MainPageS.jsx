@@ -56,8 +56,8 @@ const MainPage = () => {
             <h2>{modalType === "login" ? "Login As" : "Sign Up As"}</h2>
             {modalType === "login" ? (
               <>
-                <button className="modal-btn" onClick={() => handleRedirect(" ")}>User Login</button>
-                <button className="modal-btn" onClick={() => handleRedirect(" ")}>Service Provider Login</button>
+                <button className="modal-btn" onClick={() => handleRedirect(" /userlogin")}>User Login</button>
+                <button className="modal-btn" onClick={() => handleRedirect("/serviceproviderlogin ")}>Service Provider Login</button>
               </>
             ) : (
               <>

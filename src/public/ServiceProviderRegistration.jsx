@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "../style/ServiceProviderRegistration.css";
 
 const ServiceProviderSignUp = () => {
+  const navigate = useNavigate(); // Initialize navigate function
+
   const [formData, setFormData] = useState({
     fullName: "",
     address: "",
@@ -20,7 +23,6 @@ const ServiceProviderSignUp = () => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
     
-    // Clear error when user types
     if (errors[id]) {
       setErrors({ ...errors, [id]: "" });
     }
@@ -33,7 +35,6 @@ const ServiceProviderSignUp = () => {
     const newErrors = {};
     const { fullName, address, email, contact, password, confirmPassword } = formData;
 
-    // Validation checks
     if (!fullName.trim()) newErrors.fullName = "Full Name is required";
     if (!address.trim()) newErrors.address = "Address is required";
     if (!email.trim()) newErrors.email = "Email is required";
@@ -71,9 +72,8 @@ const ServiceProviderSignUp = () => {
 
     // Form submission success
     setTimeout(() => {
-      // Simulating API call delay
       setIsSubmitting(false);
-      alert("Registration successful! Welcome aboard.");
+      alert("Registration successful! Redirecting to login...");
       setFormData({
         fullName: "",
         address: "",
@@ -83,15 +83,8 @@ const ServiceProviderSignUp = () => {
         confirmPassword: "",
       });
       setErrors({});
+      navigate("/serviceproviderlogin"); // Navigate to service provider login
     }, 1500);
-  };
-
-  const togglePasswordVisibility = (field) => {
-    if (field === 'password') {
-      setShowPassword(!showPassword);
-    } else {
-      setShowConfirmPassword(!showConfirmPassword);
-    }
   };
 
   return (
@@ -169,6 +162,9 @@ const ServiceProviderSignUp = () => {
             </div>
           </div>
 
+          
+        
+
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <div className="input-container">
@@ -181,10 +177,6 @@ const ServiceProviderSignUp = () => {
                 onChange={handleChange}
                 className={errors.password ? "error-input" : ""}
               />
-              <i 
-                className={`password-toggle fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`} 
-                onClick={() => togglePasswordVisibility('password')}
-              ></i>
             </div>
             {errors.password && <div className="error-message">{errors.password}</div>}
           </div>
@@ -201,17 +193,8 @@ const ServiceProviderSignUp = () => {
                 onChange={handleChange}
                 className={errors.confirmPassword ? "error-input" : ""}
               />
-              <i 
-                className={`password-toggle fas ${showConfirmPassword ? "fa-eye-slash" : "fa-eye"}`} 
-                onClick={() => togglePasswordVisibility('confirm')}
-              ></i>
             </div>
             {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
-          </div>
-
-          <div className="terms-container">
-            <input type="checkbox" id="terms" required />
-            <label htmlFor="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
           </div>
 
           <button 
