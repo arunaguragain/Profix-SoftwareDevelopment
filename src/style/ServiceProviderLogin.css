@@ -3,7 +3,7 @@
     width:100%;
     display: flex;
     /* flex-direction: column; */
-    background-image: url("Login.png.jpg");
+    background-image: url("../pictures/LoginSignupbackground.jpg.png");
     background-size: contain;
     background-position: center;
     background-attachment: fixed;
