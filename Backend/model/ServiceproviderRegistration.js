@@ -1,19 +1,47 @@
-const pool = require('../database/db');
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../database/db.js');
 
-const createServiceProviderTable = async () => {
-  const query = `
-    CREATE TABLE IF NOT EXISTS service_providers (
-      id SERIAL PRIMARY KEY,
-      full_name VARCHAR(255) NOT NULL,
-      address TEXT NOT NULL,
-      email VARCHAR(255) UNIQUE NOT NULL,
-      contact VARCHAR(10) UNIQUE NOT NULL,
-      password TEXT NOT NULL
-    );
-  `;
-  await pool.query(query);
-};
+const ServiceProvider = sequelize.define('ServiceProvider', {  
+    serviceProviderId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    fullName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+            isEmail: true,
+        },
+    },
+    contact: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+            isNumeric: true,
+        },
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    profilePicture: {  // ✅ Keeping this field
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+}, {
+    tableName: 'service_providers',  
+    timestamps: false,
+});
 
-createServiceProviderTable();
-
-module.exports = pool;
+module.exports = ServiceProvider;

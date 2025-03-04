@@ -80,6 +80,8 @@ const ServiceProviderSignUp = () => {
         email,
         contact,
         password,
+        confirmPassword,
+        profilePicture,
       });
   
       // Success message and redirect
@@ -91,6 +93,7 @@ const ServiceProviderSignUp = () => {
         contact: "",
         password: "",
         confirmPassword: "",
+        profilePicture:"",
       });
       setErrors({});
       navigate("/serviceproviderlogin");
