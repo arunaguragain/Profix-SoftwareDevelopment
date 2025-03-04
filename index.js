@@ -5,6 +5,7 @@ const sequelize = require('./Backend/database/db.js');  // Importing database
 const userRoute = require('./Backend/routes/userRoutes.js');  // Importing user route
 const reviewRoute = require('./Backend/routes/revieweRoutes.js'); // Fixed typo
 const serviceProviderRoute = require('./Backend/routes/serviceproviderresgistrationRoutes.js'); // Fixed typo
+const inquiryRoute = require('./Backend/routes/inquiryRoutes.js')
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 app.use('/users', userRoute);
 app.use('/reviews', reviewRoute);
 app.use('/serviceproviders', serviceProviderRoute);
+app.use('/inquiryRoute', inquiryRoute)
 app.use('/uploads', express.static('uploads'));
 
 app.listen(PORT, () => {
@@ -29,4 +31,4 @@ app.listen(PORT, () => {
 // Sync database (uncomment this if you want to update tables on startup)
 sequelize.sync({ alter: true })  
   .then(() => console.log("Database synchronized successfully."))
-  .catch(err => console.error("Error syncing database:", err));
+  .catch(err => console.error("Error syncing database:", err));
