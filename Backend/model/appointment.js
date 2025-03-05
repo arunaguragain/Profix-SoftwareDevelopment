@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../database/db.js'); // Ensure this path is correct
+const sequelize = require('../database/db.js'); 
 
 const Appointment = sequelize.define('Appointment', {
     appointmentId: {
@@ -7,14 +7,11 @@ const Appointment = sequelize.define('Appointment', {
         primaryKey: true,
         autoIncrement: true,
     },
-    userId: {  // Assuming you have a User model
+    userId: {  
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    // serviceProviderId: {  // Refers to the ServiceProvider model
-    //     type: DataTypes.INTEGER,
-    //     allowNull: true,
-    // },
+  
     phoneNumber: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -31,7 +28,7 @@ const Appointment = sequelize.define('Appointment', {
 
     Address: {
         type: DataTypes.STRING,
-        allowNull: true, // Can be pending, confirmed, cancelled, etc.
+        allowNull: true, 
     },
     describeProblem: {
         type: DataTypes.STRING,
@@ -46,12 +43,8 @@ const Appointment = sequelize.define('Appointment', {
         defaultValue: Sequelize.NOW,
     },
 }, {
-    tableName: 'appointments',  // The name of your table
-    timestamps: true,  // If you want automatic `createdAt` and `updatedAt` fields
+    tableName: 'appointments', 
+    timestamps: true,  
 });
-
-// Establish relationships (if needed)
-// For example, one-to-many relationship with ServiceProvider
-// Appointment.belongsTo(ServiceProvider, { foreignKey: 'serviceProviderId' });
 
 module.exports = Appointment;

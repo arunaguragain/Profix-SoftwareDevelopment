@@ -1,9 +1,5 @@
-const Appointment = require('../model/appointment'); // Adjust the import
+const Appointment = require('../model/appointment'); 
 
-/**
- * @desc Book a new appointment
- * @route POST /appointments/book
- */
 exports.bookAppointment = async (req, res) => {
   try {
     const { phoneNumber, appointmentDate, appointmentTime, Address, describeProblem } = req.body;
@@ -12,7 +8,6 @@ exports.bookAppointment = async (req, res) => {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    // Create a new appointment in the database
     const newAppointment = await Appointment.create({
       phoneNumber,
       appointmentDate,
@@ -31,10 +26,6 @@ exports.bookAppointment = async (req, res) => {
   }
 };
 
-/**
- * @desc Get all appointments
- * @route GET /appointments
- */
 exports.getAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.findAll();
@@ -45,22 +36,16 @@ exports.getAppointments = async (req, res) => {
   }
 };
 
-/**
- * @desc Edit an appointment
- * @route PUT /appointments/:id
- */
 exports.editAppointment = async (req, res) => {
   try {
     const { id } = req.params;
     const { phoneNumber, appointmentDate, appointmentTime, Address, describeProblem } = req.body;
 
-    // Check if the appointment exists
     const appointment = await Appointment.findByPk(id);
     if (!appointment) {
       return res.status(404).json({ error: "Appointment not found" });
     }
 
-    // Update the appointment details
     appointment.phoneNumber = phoneNumber || appointment.phoneNumber;
     appointment.appointmentDate = appointmentDate || appointment.appointmentDate;
     appointment.appointmentTime = appointmentTime || appointment.appointmentTime;
@@ -79,21 +64,15 @@ exports.editAppointment = async (req, res) => {
   }
 };
 
-/**
- * @desc Delete an appointment
- * @route DELETE /appointments/:id
- */
 exports.deleteAppointment = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Check if the appointment exists
     const appointment = await Appointment.findByPk(id);
     if (!appointment) {
       return res.status(404).json({ error: "Appointment not found" });
     }
 
-    // Delete the appointment
     await appointment.destroy();
 
     res.status(200).json({
@@ -104,3 +83,5 @@ exports.deleteAppointment = async (req, res) => {
     res.status(500).json({ error: "Error deleting appointment" });
   }
 };
+
+

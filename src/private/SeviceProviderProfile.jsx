@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../style/seviceproviderprofile.css";
+import { useNavigate } from "react-router-dom"; 
+import "../style/seviceproviderprofile.css"; `  1`
 
 const Profile = () => {
   const [photo, setPhoto] = useState(null);
@@ -11,9 +11,8 @@ const Profile = () => {
   const [pendingMessage, setPendingMessage] = useState("");
   const [showSettingsDropdown, setShowSettingsDropdown] = useState(false); // State for settings dropdown
 
-  const navigate = useNavigate();
-
-  // Handle Photo Upload
+  const navigate = useNavigate(); 
+  
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -23,28 +22,12 @@ const Profile = () => {
     }
   };
 
-  // Close notification dropdown when clicking outside
   const closeNotifications = () => {
     if (showNotifications) setShowNotifications(false);
   };
 
-  // Navigate to delete popup
   const handleDeleteClick = () => {
-    navigate('/deletepopup');
-  };
-
-  // Navigate to Appointments page
-  const handleAppointmentsClick = () => {
-    navigate('/sappointment');
-  };
-
-  // Logout function
-  const handleLogout = () => {
-    // Clear local storage or session storage if needed
-    localStorage.removeItem("token");
-    navigate('/mainpageS'); 
-    // Redirect to login page after logout
-    window.location.reload();
+    navigate('/deletepopup'); 
   };
 
   return (

@@ -3,15 +3,12 @@ import "../style/MainPageS.css";
 
 const MainPage = () => {
   const [modalType, setModalType] = useState(null);
-
   const openModal = (type) => setModalType(type);
   const closeModal = () => setModalType(null);
-
   const handleRedirect = (path) => {
     closeModal();
     window.location.href = path;
   };
-
   return (
     <div className="container">
       <header>
@@ -20,7 +17,6 @@ const MainPage = () => {
           <h1>ProFix</h1>
         </div>
       </header>
-
       <main>
         <div className="hero-content">
           <h2>Professional Home Services</h2>
