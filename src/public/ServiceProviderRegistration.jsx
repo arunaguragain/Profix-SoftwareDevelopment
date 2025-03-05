@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "../style/ServiceProviderRegistration.css";
 import axios from "axios"; // Import Axios
 
-
-
 const ServiceProviderSignUp = () => {
   const navigate = useNavigate(); // Initialize navigate function
 
@@ -16,7 +14,6 @@ const ServiceProviderSignUp = () => {
     password: "",
     confirmPassword: "",
   });
-
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -30,7 +27,6 @@ const ServiceProviderSignUp = () => {
       setErrors({ ...errors, [id]: "" });
     }
   };
-
   const validateForm = async(e) => {
     e.preventDefault();
     setIsSubmitting(true);

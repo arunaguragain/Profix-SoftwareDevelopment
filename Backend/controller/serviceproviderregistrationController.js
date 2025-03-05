@@ -2,10 +2,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const ServiceProvider = require('../model/ServiceproviderRegistration');
 
-/**
- * @desc Register a new Service Provider
- * @route POST /serviceproviders/register
- */
 exports.registerServiceProvider = async (req, res) => {
   const { fullName, address, email, contact, password } = req.body;
 
@@ -14,10 +10,8 @@ exports.registerServiceProvider = async (req, res) => {
   }
 
   try {
-    // Hash the password before storing it
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create a new Service Provider
     const newServiceProvider = await ServiceProvider.create({
       fullName,
       address,
@@ -34,10 +28,6 @@ exports.registerServiceProvider = async (req, res) => {
   }
 };
 
-/**
- * @desc Login a Service Provider
- * @route POST /serviceproviders/login
- */
 exports.loginServiceProvider = async (req, res) => {
   const { email, password } = req.body;
 
@@ -46,20 +36,17 @@ exports.loginServiceProvider = async (req, res) => {
   }
 
   try {
-    // Check if the service provider exists
     const serviceProvider = await ServiceProvider.findOne({ where: { email } });
 
     if (!serviceProvider) {
       return res.status(404).json({ error: 'Service provider not found' });
     }
 
-    // Compare password
     const isPasswordValid = await bcrypt.compare(password, serviceProvider.password);
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    // Generate a JWT token
     const token = jwt.sign({ id: serviceProvider.serviceProviderId, email: serviceProvider.email }, "your_secret_key", { expiresIn: '1h' });
 
     res.status(200).json({ message: 'Login successful', token, serviceProvider });
@@ -69,10 +56,6 @@ exports.loginServiceProvider = async (req, res) => {
   }
 };
 
-/**
- * @desc Update a Service Provider
- * @route PUT /serviceproviders/:id
- */
 exports.updateServiceProvider = async (req, res) => {
   const { id } = req.params;
   const { fullName, address, email, contact, profilePicture } = req.body;
@@ -84,7 +67,6 @@ exports.updateServiceProvider = async (req, res) => {
       return res.status(404).json({ error: 'Service provider not found' });
     }
 
-    // Update the service provider details
     await serviceProvider.update({
       fullName: fullName || serviceProvider.fullName,
       address: address || serviceProvider.address,
@@ -100,10 +82,6 @@ exports.updateServiceProvider = async (req, res) => {
   }
 };
 
-/**
- * @desc Get all Service Providers
- * @route GET /serviceproviders
- */
 exports.getAllServiceProviders = async (req, res) => {
   try {
     const serviceProviders = await ServiceProvider.findAll();
@@ -114,10 +92,6 @@ exports.getAllServiceProviders = async (req, res) => {
   }
 };
 
-/**
- * @desc Get a Single Service Provider by ID
- * @route GET /serviceproviders/:id
- */
 exports.getServiceProviderById = async (req, res) => {
   const { id } = req.params;
 
@@ -135,10 +109,6 @@ exports.getServiceProviderById = async (req, res) => {
   }
 };
 
-/**
- * @desc Delete a Service Provider
- * @route DELETE /serviceproviders/:id
- */
 exports.deleteServiceProvider = async (req, res) => {
   const { id } = req.params;
 

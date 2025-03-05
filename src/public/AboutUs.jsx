@@ -1,105 +1,93 @@
+import React from 'react';
+import '../style/aboutus.css';
+
 const AboutUs = () => {
-    return (
-      <div>
-        <style>
-          {`
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-  
-            body {
-                font-family: 'Times New Roman', Times, serif;
-                line-height: 1.6;
-                color: #333;
-                background-color: #f9f9f9;
-            }
-  
-            header {
-                background-color: #0a2c61;
-                color: white;
-                padding: 1rem 0;
-                text-align: center;
-            }
-  
-            header h1 {
-                margin: 0;
-                font-size: 2.5rem;
-            }
-  
-            .breadcrumb {
-                background-color: #ecf0f1;
-                padding: 10px 15px;
-                text-align: center;
-                font-size: 0.9rem;
-            }
-  
-            .breadcrumb a {
-                color: #5b5e63;
-                text-decoration: none;
-            }
-  
-            .about-section {
-                background-color: #5b5e63;
-                color: white;
-                padding: 2rem;
-                text-align: center;
-            }
-  
-            .about-section h2 {
-                font-size: 2rem;
-            }
-  
-            .about-section p {
-                margin: 1rem 0;
-                font-size: 1.1rem;
-            }
-  
-            footer {
-                background-color: #0a2c61;
-                color: white;
-                text-align: center;
-                padding: 1rem 0;
-                margin-top: 2rem;
-            }
-          `}
-        </style>
-        
-        <header>
-          <h1>About Us</h1>
-        </header>
-  
-        <div className="breadcrumb">
-          <a href="#">Home</a>
+  return (
+    <div className="about-container">
+      <header className="about-header">
+        <div className="header-content">
+          <h1>About Profix</h1>
+          <p className="header-subtitle">Connecting Homes with Professional Services</p>
         </div>
-  
-        <section className="about-section">
-          <p>
-            Profix is your trusted platform for booking home repair services such
-            as carpentry, plumbing, and electrical work. We are dedicated to
-            connecting local service providers with customers who need reliable
-            and efficient solutions for their home repair needs.
-          </p>
-          <p>
-            Our mission is to empower local service providers by offering them a
-            platform to showcase their skills and connect with a broader audience.
-            At the same time, we aim to make it easier for homeowners to access
-            professional repair services at their convenience.
-          </p>
-          <p>
-            At Profix, we believe in supporting local talent and building a
-            community of trusted service professionals. Your home repair solutions
-            are just a click away!
-          </p>
-        </section>
-  
-        <footer>
+      </header>
+
+      <nav className="breadcrumb">
+        <a href="/" className="breadcrumb-link">Home</a>
+        <span className="breadcrumb-separator">/</span>
+        <span className="current-page">About Us</span>
+      </nav>
+
+      <section className="about-section">
+        <div className="about-content">
+          <div className="about-mission">
+            <h2>Our Mission</h2>
+            <p>
+              Profix is your trusted platform for booking home repair services, 
+              bridging the gap between skilled local service providers and 
+              homeowners seeking reliable, efficient solutions.
+            </p>
+          </div>
+
+          <div className="about-values">
+            <h2>What We Stand For</h2>
+            <ul>
+              <li>
+                <strong>Local Empowerment:</strong> We provide a platform for local 
+                service professionals to showcase their skills and expand their reach.
+              </li>
+              <li>
+                <strong>Convenience:</strong> Seamless booking of carpentry, 
+                plumbing, and electrical services at your fingertips.
+              </li>
+              <li>
+                <strong>Quality Assurance:</strong> Connecting you with vetted, 
+                professional service providers you can trust.
+              </li>
+            </ul>
+          </div>
+
+          <div className="about-commitment">
+            <h2>Our Commitment</h2>
+            <p>
+              At Profix, we're more than just a service platform. We're building 
+              a community of trusted professionals dedicated to maintaining and 
+              improving homes across the region. Your home repair solutions are 
+              just a click away!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="service-highlights">
+        <h2>Services We Cover</h2>
+        <div className="service-icons">
+          <div className="service-item">
+            <i className="icon-carpentry"></i>
+            <span>Carpentry</span>
+          </div>
+          <div className="service-item">
+            <i className="icon-plumbing"></i>
+            <span>Plumbing</span>
+          </div>
+          <div className="service-item">
+            <i className="icon-electrical"></i>
+            <span>Electrical</span>
+          </div>
+        </div>
+      </section>
+
+      <footer className="about-footer">
+        <div className="footer-content">
           <p>&copy; 2025 Profix. All rights reserved.</p>
-        </footer>
-      </div>
-    );
-  };
-  
-  export default AboutUs;
-  
+          <div className="footer-links">
+            <a href="">Privacy Policy</a>
+            <a href="">Terms of Service</a>
+            <a href="/contact">Contact Us</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default AboutUs;

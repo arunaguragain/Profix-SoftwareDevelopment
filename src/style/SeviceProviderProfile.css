@@ -1,6 +1,3 @@
-/* ServiceProviderProfile.css */
-
-/* General Styles */
 :root {
   --primary-color: #3a1c71;
   --secondary-color: #d76d77;
@@ -31,7 +28,6 @@ body, html {
   position: relative;
 }
 
-/* Navbar */
 .profile-navbar {
   display: flex;
   justify-content: space-between;

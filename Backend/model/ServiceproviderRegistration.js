@@ -35,7 +35,7 @@ const ServiceProvider = sequelize.define('ServiceProvider', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    profilePicture: {  // ✅ Keeping this field
+    profilePicture: {  
         type: DataTypes.STRING,
         allowNull: true,
     },

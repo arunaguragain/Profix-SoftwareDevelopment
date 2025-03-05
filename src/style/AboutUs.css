@@ -1,0 +1,234 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #27ae60;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --background-light: #f4f6f7;
+    --white: #ffffff;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--background-light);
+  }
+  
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--white);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .about-container:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+  }
+  
+  .about-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .about-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    transform: skewY(-6deg);
+    transform-origin: top left;
+  }
+  
+  .header-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    position: relative;
+    letter-spacing: -1px;
+    opacity: 0;
+    animation: fadeInUp 0.8s forwards;
+  }
+  
+  .header-subtitle {
+    font-size: 1.4rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeInUp 0.8s forwards 0.3s;
+  }
+  
+  .breadcrumb {
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+  }
+  
+  .breadcrumb-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .breadcrumb-link:hover {
+    color: var(--accent-color);
+  }
+  
+  .breadcrumb-separator {
+    margin: 0 10px;
+    color: #adb5bd;
+  }
+  
+  .about-section {
+    padding: 60px 20px;
+    background-color: var(--white);
+  }
+  
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  
+  .about-mission,
+  .about-values,
+  .about-commitment {
+    background-color: var(--background-light);
+    padding: 30px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .about-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .about-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--secondary-color);
+  }
+  
+  .about-values ul {
+    list-style-type: none;
+  }
+  
+  .about-values li {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: var(--white);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .about-values li:hover {
+    transform: translateX(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .service-highlights {
+    background-color: var(--background-light);
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .service-icons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+  }
+  
+  .service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+  .service-item i {
+    font-size: 3.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  .service-item:hover {
+    transform: translateY(-10px);
+  }
+  
+  .service-item:hover i {
+    color: var(--accent-color);
+    transform: scale(1.1);
+  }
+  
+  .about-footer {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 30px 20px;
+    text-align: center;
+  }
+  
+  .footer-links {
+    margin-top: 15px;
+  }
+  
+  .footer-links a {
+    color: var(--white);
+    text-decoration: none;
+    margin: 0 15px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    opacity: 1;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .about-content {
+      grid-template-columns: 1fr;
+    }
+  
+    .service-icons {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
