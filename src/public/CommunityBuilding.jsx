@@ -1,5 +1,5 @@
 import React from 'react';
-import './ProfixCommunity.css';
+import '../style/CommunityBuilding.css';
 
 const ProfixCommunity = () => {
     return (
