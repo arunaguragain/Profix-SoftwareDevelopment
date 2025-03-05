@@ -8,13 +8,13 @@ const Appointment = () => {
     phoneNumber: "",
     appointmentDate: "",
     appointmentTime: "",
-    Address: "",  // Changed to 'address' (to match the backend)
+    Address: "",  
     describeProblem: "",
   });
 
   const navigate = useNavigate();
 
-  // Handle input change
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -22,7 +22,7 @@ const Appointment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Format formData before sending it to the backend
+   
     const formattedFormData = {
       ...formData,
     };
@@ -139,3 +139,4 @@ const Appointment = () => {
 };
 
 export default Appointment;
+

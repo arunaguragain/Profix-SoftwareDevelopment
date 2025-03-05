@@ -1,12 +1,20 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+<<<<<<< HEAD
 const sequelize = require('./Backend/database/db.js');  // Importing database
 const userRoute = require('./Backend/routes/userRoutes.js');  // Importing user route
 const reviewRoute = require('./Backend/routes/revieweRoutes.js'); // Fixed typo
 const serviceProviderRoute = require('./Backend/routes/serviceproviderresgistrationRoutes.js'); // Fixed typo
 const inquiryRoutes = require('./Backend/routes/inquiryRoutes.js');
 const appointmentRoutes = require('./Backend/routes/appointmentRoutes.js')
+=======
+const sequelize = require('./Backend/database/db.js');  
+const userRoute = require('./Backend/routes/userRoutes.js');  
+const reviewRoute = require('./Backend/routes/revieweRoutes.js'); 
+const serviceProviderRoute = require('./Backend/routes/serviceproviderresgistrationRoutes.js'); 
+const appointmentRoutes = require ('./Backend/routes/appointmentRoutes.js');
+>>>>>>> fa324d00bb8cd5f5f30c19d3b02073000339aa32
 
 const app = express();
 const PORT = process.env.PORT || 5001;

@@ -3,7 +3,7 @@ const { bookAppointment, getAppointments, editAppointment, deleteAppointment } =
 
 const router = express.Router();
 
-router.post("/book", bookAppointment); // Book an appointment
+router.post("/book", bookAppointment); 
 router.get("/", getAppointments);
 router.put("/:id" , editAppointment ); 
 router.delete ("/:id",deleteAppointment );
