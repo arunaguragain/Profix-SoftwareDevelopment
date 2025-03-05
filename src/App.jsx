@@ -25,7 +25,7 @@ function App() {
   const ServiceProviderLogin = React.lazy(() => import("./public/ServiceProviderLogin.jsx"));
   const UserLogin = React.lazy(() => import("./public/UserLogin.jsx"));
   const Contact = React.lazy(() => import("./public/Contact.jsx"));
-  const CommunityBuilding = React.lazy(() => import("./private/CommunityBuilding.jsx"));
+  const CommunityBuilding = React.lazy(() => import("./public/CommunityBuilding.jsx"));
   const RealTimeSupport = React.lazy(() => import("./private/RealTimeSupport.jsx"));
   const TranparencyAndTrust = React.lazy(() => import("./private/TranparencyAndTrust.jsx")); 
   const Notification = React.lazy(() => import("./private/Notification.jsx"));
